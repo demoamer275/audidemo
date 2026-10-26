@@ -1,0 +1,107 @@
+/* cards-stats: key-figure tiles (Audi EditorialColumns "numbers" mode) */
+
+/* panel: tiles separated by 1px gaps that reveal the page background */
+.cards-stats > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.cards-stats > ul > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: 0;
+  margin: 0;
+  padding: 24px 28px;
+  background-color: rgb(252 252 253 / 15%);
+  text-align: left;
+}
+
+.cards-stats p {
+  margin: 0;
+}
+
+.cards-stats .cards-stats-eyebrow,
+.cards-stats .cards-stats-unit,
+.cards-stats .cards-stats-caption {
+  color: var(--text-color-secondary);
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+  font-weight: 400;
+  font-stretch: var(--body-font-stretch);
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.cards-stats .cards-stats-eyebrow {
+  padding-bottom: 16px;
+}
+
+.cards-stats .cards-stats-figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: left;
+  gap: 0 16px;
+  padding-bottom: 4px;
+}
+
+.cards-stats .cards-stats-value {
+  color: var(--text-color);
+  font-size: 36px;
+  line-height: 52px;
+  font-weight: 400;
+  font-stretch: var(--heading-font-stretch);
+  letter-spacing: 0;
+}
+
+.cards-stats .cards-stats-unit {
+  padding-bottom: 12px;
+}
+
+.cards-stats sup {
+  font-size: 0.583em;
+  line-height: inherit;
+  vertical-align: 0.68em;
+}
+
+.cards-stats sup a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* tablet: two tiles per row, odd last tile spans the full width */
+@media (width >= 600px) {
+  .cards-stats > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards-stats > ul > li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .cards-stats .cards-stats-value {
+    font-size: var(--heading-font-size-xxl);
+    line-height: var(--heading-line-height-xxl);
+  }
+}
+
+/* desktop: one row of tiles */
+@media (width >= 900px) {
+  .cards-stats > ul {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: none;
+  }
+
+  .cards-stats > ul > li:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+}

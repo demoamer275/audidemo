@@ -61,6 +61,10 @@
         "cards-teaser",
         "cards-image-overlay",
         "columns-media-text",
+        "hero-video",
+        "cards-stats",
+        "carousel-cards",
+        "columns-gallery",
         "fragment"
       ]
     }

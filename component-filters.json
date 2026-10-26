@@ -18,6 +18,10 @@
       "cards-teaser",
       "cards-image-overlay",
       "columns-media-text",
+      "hero-video",
+      "cards-stats",
+      "carousel-cards",
+      "columns-gallery",
       "fragment"
     ]
   },
@@ -25,6 +29,12 @@
     "id": "cards-image-overlay",
     "components": [
       "cards-image-overlay-card"
+    ]
+  },
+  {
+    "id": "cards-stats",
+    "components": [
+      "cards-stats-card"
     ]
   },
   {
@@ -37,6 +47,18 @@
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel-cards",
+    "components": [
+      "carousel-cards-slide"
+    ]
+  },
+  {
+    "id": "columns-gallery",
+    "components": [
+      "column"
     ]
   },
   {

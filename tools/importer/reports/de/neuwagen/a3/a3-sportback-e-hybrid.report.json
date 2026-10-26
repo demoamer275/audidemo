@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/a3/a3-sportback-e-hybrid/",
+  "path": "de/neuwagen/a3/a3-sportback-e-hybrid",
+  "timestamp": "2026-10-26T22:01:51.540Z",
+  "title": "A3 Sportback e-hybrid Highlights | Audi Deutschland",
+  "template": "neuwagen-model",
+  "blocks": [
+    "hero-video",
+    "cards-stats",
+    "carousel-cards",
+    "columns-gallery",
+    "columns-media-text",
+    "cards-teaser"
+  ],
+  "livechatWidgetsRemoved": 1,
+  "damAssets": "{\"A3_Sportback_TFSIe_PA2_Alpha_A_1_000_Dark-S.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:8e916e8b-5037-453a-9c8a-7ea88648d926/original/as/A3_Sportback_TFSIe_PA2_Alpha_A_1_000_Dark-S.png\",\"A3_Sportback_TFSIe_PA2_Alpha_A_4_000_Dark-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:72520718-33bd-49c4-be50-af504655094c/original/as/A3_Sportback_TFSIe_PA2_Alpha_A_4_000_Dark-L.png\",\"A3_Sportback_TFSIe_PA2_Alpha_A_2_001-L-new.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:7f879602-4435-4ce1-a61c-935e949fb4dc/original/as/A3_Sportback_TFSIe_PA2_Alpha_A_2_001-L-new.png\",\"A3_Sportback_TFSIe_PA2_Alpha_C_2_006-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:10ef2a16-8696-465b-9c2c-8b501076ad1d/original/as/A3_Sportback_TFSIe_PA2_Alpha_C_2_006-L.png\",\"Q7_2023_5393_1-S.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:54a60912-4a53-43de-8267-74d9cd2503b2/original/as/Q7_2023_5393_1-S.png\",\"Q3eh_2025_8078_DE-S.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:e3fdaf0b-f64d-4712-a678-2c856a7a67f8/original/as/Q3eh_2025_8078_DE-S.png\",\"A3_Sportback_TFSIe_PA2_Alpha_C_2_003-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:91300a8f-3aa3-48b9-8189-060eccbcced2/original/as/A3_Sportback_TFSIe_PA2_Alpha_C_2_003-L.png\",\"A3_Sportback_TFSIe_PA2_Alpha_A_1_000-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:8eb9836d-b283-45e0-a0e1-0a553b0ad365/original/as/A3_Sportback_TFSIe_PA2_Alpha_A_1_000-L.png\",\"A3_Sportback_TFSIe_PA2_Alpha_C_2_007-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:de34b04c-668c-439b-a924-9d0d2c3f244d/original/as/A3_Sportback_TFSIe_PA2_Alpha_C_2_007-L.png\",\"A3_sb_2026_9379-L-new.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:9aa8a66e-98bc-4be3-b8ed-a79eee5354ef/original/as/A3_sb_2026_9379-L-new.jpg\",\"A3_Sportback_TFSIe_PA2_Alpha_A_4_001-L-new.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:d47175ed-0e8c-4534-bf46-b85433b384e0/original/as/A3_Sportback_TFSIe_PA2_Alpha_A_4_001-L-new.png\",\"A3_Sportback_TFSIe_PA2_Alpha_A_6_000-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:558e2a93-9bd4-4ea6-80ff-0d3e294fc9e5/original/as/A3_Sportback_TFSIe_PA2_Alpha_A_6_000-L.png\",\"A5_E_2024_7741_1-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:af9228bb-1d44-4af0-8337-99d91b198c8a/original/as/A5_E_2024_7741_1-L.jpg\",\"A6eh_2024_7668_1-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:eeeb5cd4-30d4-49b6-af55-bcb1051fb04e/original/as/A6eh_2024_7668_1-L.jpg\",\"Q5_2024_6865_1_withoutCast-L-2.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:75397c66-00ab-4e55-8557-e3ea08f189ea/original/as/Q5_2024_6865_1_withoutCast-L-2.jpg\",\"A3_PA2_Sportback_TFSIe_HeaderAnimation_L.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:23cefb6c-d666-44d7-82b5-00739ea65127/original/as/A3_PA2_Sportback_TFSIe_HeaderAnimation_L.mp4\",\"A3_PA2_Sportback_TFSIe_SignatureCollection_S.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:a30aa55e-1026-4b6b-8707-a8ef2b65a3d6/original/as/A3_PA2_Sportback_TFSIe_SignatureCollection_S.mp4\"}"
+}

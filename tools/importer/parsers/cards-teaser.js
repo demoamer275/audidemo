@@ -123,32 +123,58 @@ function buildCard(teaser, document) {
   }
 
   const legal = textArea.querySelector('[class*="LegalInfoContainer"]');
-  const bodyParas = [...textArea.querySelectorAll('p')]
-    .filter((p) => !(legal && legal.contains(p)) && cleanText(p.textContent));
-  if (bodyParas.length) {
-    const ps = bodyParas.map((p) => copyInline(p, document.createElement('p')));
-    textNodes.push(hinted(document, 'text_body', ps));
+  const legalParas = legal
+    ? [...legal.querySelectorAll('p')].filter((p) => cleanText(p.textContent)) : [];
+  // model pages: product facts ("•\tAb 46.900,00 EUR ...") sit in the legal box -> body list
+  const isFact = (p) => /^[•·]/.test(cleanText(p.textContent));
+  const factParas = legalParas.filter(isFact);
+  const disclaimerParas = legalParas.filter((p) => !isFact(p));
+
+  const bodyNodes = [...textArea.querySelectorAll('p')]
+    .filter((p) => !(legal && legal.contains(p)) && cleanText(p.textContent))
+    .map((p) => copyInline(p, document.createElement('p')));
+  if (factParas.length) {
+    const ul = document.createElement('ul');
+    factParas.forEach((p) => {
+      const li = copyInline(p, document.createElement('li'));
+      const first = li.firstChild;
+      if (first && first.nodeType === 3) first.textContent = first.textContent.replace(/^\s*[•·]\s*/, '');
+      ul.appendChild(li);
+    });
+    bodyNodes.push(ul);
   }
 
-  const cta = textArea.querySelector('[class*="ButtonContainer"] a[href]')
-    || [...textArea.querySelectorAll('a[href]')].find((a) => !(legal && legal.contains(a))
+  // CTAs: every button link in source order; the last one fills text_link (single
+  // aem-content field), any additional ones stay as link paragraphs in the rich text body.
+  let ctas = [...textArea.querySelectorAll('[class*="ButtonContainer"] a[href]')];
+  if (!ctas.length) {
+    const fallback = [...textArea.querySelectorAll('a[href]')].find((a) => !(legal && legal.contains(a))
       && !(a.getAttribute('href') || '').startsWith('#'));
-  if (cta) {
-    const a = document.createElement('a');
-    a.setAttribute('href', cta.getAttribute('href'));
-    a.textContent = cleanText(cta.textContent);
-    const p = document.createElement('p');
-    p.appendChild(a);
-    textNodes.push(hinted(document, 'text_link', [p]));
+    if (fallback) ctas = [fallback];
   }
+  const linkParas = ctas
+    .filter((cta) => cleanText(cta.textContent))
+    .map((cta) => {
+      const a = document.createElement('a');
+      a.setAttribute('href', cta.getAttribute('href'));
+      a.textContent = cleanText(cta.textContent);
+      const p = document.createElement('p');
+      p.appendChild(a);
+      return p;
+    });
+  const mainLink = linkParas.pop();
+  bodyNodes.push(...linkParas);
+
+  if (bodyNodes.length) textNodes.push(hinted(document, 'text_body', bodyNodes));
+  if (mainLink) textNodes.push(hinted(document, 'text_link', [mainLink]));
 
   const textCell = textNodes.length ? textNodes : '';
 
-  // disclaimer cell
+  // disclaimer cell (consumption / emission data)
   let disclaimerCell = '';
-  if (legal && cleanText(legal.textContent)) {
-    const paras = [...legal.querySelectorAll('p')].filter((p) => cleanText(p.textContent));
-    const out = (paras.length ? paras : [legal]).map((p) => copyInline(p, document.createElement('p')));
+  if (legal && cleanText(legal.textContent) && (disclaimerParas.length || !legalParas.length)) {
+    const out = (disclaimerParas.length ? disclaimerParas : [legal])
+      .map((p) => copyInline(p, document.createElement('p')));
     disclaimerCell = hinted(document, 'disclaimer', out);
   }
 

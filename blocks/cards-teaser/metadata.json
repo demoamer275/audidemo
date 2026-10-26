@@ -16,12 +16,25 @@
   },
   "options": [],
   "memberVariantIds": [],
-  "usage": [
-    {
-      "url": "https://www.audi.de/de/elektromobilitaet/",
-      "section": "Themen-Teaser",
-      "items": 9
-    }
-  ],
+  "usage": {
+    "pagesUsing": [
+      "/de/elektromobilitaet/index",
+      "/de/neuwagen/a3/a3-limousine/index"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-26",
+    "instances": [
+      {
+        "url": "https://www.audi.de/de/elektromobilitaet/",
+        "section": "Themen-Teaser",
+        "items": 9
+      },
+      {
+        "url": "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
+        "section": "Ähnliche Modelle im Vergleich",
+        "items": 3
+      }
+    ]
+  },
   "reuseGuidance": "Use for groups of editorial teasers (image on top, title, text, text link, optional disclaimer) linking to detail pages."
 }

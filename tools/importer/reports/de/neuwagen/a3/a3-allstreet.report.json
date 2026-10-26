@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/a3/a3-allstreet/",
+  "path": "de/neuwagen/a3/a3-allstreet",
+  "timestamp": "2026-10-26T22:01:48.260Z",
+  "title": "A3 allstreet Highlights | Audi Deutschland",
+  "template": "neuwagen-model",
+  "blocks": [
+    "hero-video",
+    "cards-stats",
+    "carousel-cards",
+    "columns-gallery",
+    "columns-media-text",
+    "cards-teaser"
+  ],
+  "livechatWidgetsRemoved": 1,
+  "damAssets": "{\"A3_allstreet_PA2_Alpha_A_1_000_Dark-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:f026cb8d-010e-4e80-9bee-516c2e51e806/original/as/A3_allstreet_PA2_Alpha_A_1_000_Dark-L.png\",\"A3_allstreet_PA2_Alpha_A_2_000_Dark-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:8e84eec1-e42c-496a-8e2f-f38ca7bb7975/original/as/A3_allstreet_PA2_Alpha_A_2_000_Dark-L.png\",\"A3_Allstreet_PA2_Alpha_C_2_006-L-new.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:3a318896-9cb8-460b-865c-cfba4c2f5262/original/as/A3_Allstreet_PA2_Alpha_C_2_006-L-new.png\",\"Q7_2023_5393_1-S.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:54a60912-4a53-43de-8267-74d9cd2503b2/original/as/Q7_2023_5393_1-S.png\",\"Q3eh_2025_8078_DE-S.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:e3fdaf0b-f64d-4712-a678-2c856a7a67f8/original/as/Q3eh_2025_8078_DE-S.png\",\"A3_Allstreet_PA2_Alpha_C_2_003-L-new.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:b504f192-4605-42e8-8d73-092008655bcc/original/as/A3_Allstreet_PA2_Alpha_C_2_003-L-new.png\",\"A3_all_2026_9436-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:e4d8258d-eb50-4c49-9734-040eb3d134c6/original/as/A3_all_2026_9436-L.jpg\",\"A3_allstreet_PA2_Alpha_A_1_000-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:33b4ebb3-9b6e-4a81-8af4-84ace30c51ef/original/as/A3_allstreet_PA2_Alpha_A_1_000-L.png\",\"A3_allstreet_PA2_Alpha_A_3_000-L-new.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:f903aba2-c2e6-4ed4-ad46-687cdf2d9983/original/as/A3_allstreet_PA2_Alpha_A_3_000-L-new.png\",\"A3_Allstreet_PA2_Alpha_C_1_000-L-new.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:60014fb6-29ab-42ee-9533-18bfc6e4d4f7/original/as/A3_Allstreet_PA2_Alpha_C_1_000-L-new.png\",\"A3_allstreet_PA2_Alpha_A_6_000-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:a4ef65be-5123-44e1-87fe-2d6a2b921caa/original/as/A3_allstreet_PA2_Alpha_A_6_000-L.png\",\"Q3_2025_8058_Cast-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:e15c6a3d-7dcb-4593-a630-92d44f138936/original/as/Q3_2025_8058_Cast-L.jpg\",\"Q4_e_tron_PA_SUV_AU316_Alpha_A_3_000_3D3D_Light-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:e7f9218f-f858-4bae-9f42-7fe4d0a90446/original/as/Q4_e_tron_PA_SUV_AU316_Alpha_A_3_000_3D3D_Light-L.png\",\"Q5_2024_6815_2_withoutCast-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:2a88f953-4588-4f11-859e-deb07e3877da/original/as/Q5_2024_6815_2_withoutCast-L.jpg\",\"A3_PA2_allstreet_HeaderAnimation_L.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:dbc45f0f-891c-456a-8413-973ff6f3390e/original/as/A3_PA2_allstreet_HeaderAnimation_L.mp4\",\"A3_PA2_allstreet_SignatureCollection_S.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:185a9e03-deec-4949-a7e2-26ab5e04dfe1/original/as/A3_PA2_allstreet_SignatureCollection_S.mp4\",\"A3_PA2_allstreet_SeatingBallet_S.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:191d5877-566e-4f43-bc1e-2daf94b4d615/original/as/A3_PA2_allstreet_SeatingBallet_S.mp4\"}"
+}

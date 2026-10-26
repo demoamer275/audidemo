@@ -1,0 +1,203 @@
+/*
+ * carousel-cards: horizontal multi-card slider (source: audi.de fa-carousel)
+ * The block spans the full viewport width so cards bleed past both page gutters
+ * while slide 1 and the copy stay aligned with --page-padding.
+ */
+.carousel-cards {
+  position: relative;
+  margin: 44px calc(-1 * var(--page-padding)) 0;
+  padding-bottom: 28px;
+}
+
+.carousel-cards .carousel-cards-track {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--page-padding);
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(560px, 80vw);
+  gap: 16px;
+  overflow-x: auto;
+  scroll-padding-inline: var(--page-padding);
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  color: var(--text-color);
+}
+
+.carousel-cards .carousel-cards-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-cards .carousel-cards-track:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: -2px;
+}
+
+.carousel-cards .carousel-cards-slide {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+/* media: square, 20px radius (images and videos) */
+.carousel-cards .carousel-cards-media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 20px;
+  line-height: 0;
+}
+
+.carousel-cards .carousel-cards-media p {
+  margin: 0;
+}
+
+.carousel-cards .carousel-cards-media picture,
+.carousel-cards .carousel-cards-media img,
+.carousel-cards .carousel-cards-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-cards .carousel-cards-media .carousel-cards-poster {
+  position: absolute;
+  inset: 0;
+}
+
+.carousel-cards .carousel-cards-video {
+  position: relative;
+}
+
+/* copy */
+.carousel-cards .carousel-cards-body {
+  max-width: 549px;
+  padding-top: 24px;
+}
+
+.carousel-cards .carousel-cards-body h2,
+.carousel-cards .carousel-cards-body h3,
+.carousel-cards .carousel-cards-body h4 {
+  margin: 0 0 8px;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-stretch: var(--heading-font-stretch);
+  font-weight: 400;
+  line-height: var(--heading-line-height-l);
+  letter-spacing: 0;
+}
+
+.carousel-cards .carousel-cards-body p {
+  margin: 0 0 16px;
+  color: var(--text-color-secondary);
+  font-size: var(--body-font-size-m);
+  font-stretch: var(--body-font-stretch);
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.carousel-cards .carousel-cards-body sup {
+  font-size: 0.583em;
+  line-height: 0;
+  vertical-align: 0.68em;
+}
+
+.carousel-cards .carousel-cards-body sup a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.carousel-cards .carousel-cards-body sup a:hover {
+  color: var(--text-color-secondary);
+}
+
+/* pagination arrows: bottom right */
+.carousel-cards .carousel-cards-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-right: var(--page-padding);
+  padding: 24px 0;
+}
+
+.carousel-cards .carousel-cards-nav[hidden] {
+  display: none;
+}
+
+.carousel-cards .carousel-cards-nav button {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgb(101 112 129 / 0%);
+  border-radius: 999px;
+  background: var(--button-background-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition-property: color, box-shadow, border-color, background;
+  transition-duration: 250ms;
+  transition-timing-function: var(--audi-easing);
+}
+
+.carousel-cards .carousel-cards-nav button::before {
+  content: '';
+  width: 24px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23000' d='M10 16.5 14.5 12 10 7.5'/%3E%3C/svg%3E") center / 24px 24px no-repeat;
+}
+
+.carousel-cards .carousel-cards-nav .carousel-cards-prev::before {
+  transform: scaleX(-1);
+}
+
+.carousel-cards .carousel-cards-nav button:disabled {
+  background: rgb(77 87 102 / 50%);
+  color: rgb(154 163 177 / 30%);
+  cursor: not-allowed;
+}
+
+.carousel-cards .carousel-cards-nav button:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+/* source hover: button turns transparent, 24px dark disc behind the icon */
+.carousel-cards .carousel-cards-nav button:hover:not(:disabled),
+.carousel-cards .carousel-cards-nav button:active:not(:disabled) {
+  background: radial-gradient(circle at center, var(--light-color) 11.5px, rgb(44 52 63 / 0%) 12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-cards .carousel-cards-track {
+    scroll-behavior: auto;
+  }
+
+  .carousel-cards .carousel-cards-nav button {
+    transition: none;
+  }
+}
+
+@media (width >= 600px) {
+  .carousel-cards .carousel-cards-nav {
+    margin-right: calc(2 * var(--page-padding));
+    padding-top: 32px;
+  }
+}
+
+@media (width >= 1200px) {
+  .carousel-cards {
+    margin-top: 48px;
+    padding-bottom: 32px;
+  }
+}

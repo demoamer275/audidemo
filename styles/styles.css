@@ -157,7 +157,8 @@ a:focus-visible {
 
 /* buttons */
 p.button-wrapper {
-  margin: 24px 0 0;
+  display: inline-block;
+  margin: 24px 12px 0 0;
 }
 
 a.button:any-link,
@@ -206,11 +207,11 @@ button.button.primary:focus-visible {
   color: var(--text-color);
 }
 
-/* secondary (italic link): outlined pill */
+/* secondary (italic link): Audi dark pill with a thin ring */
 a.button.secondary,
 button.button.secondary {
-  border-color: var(--text-color);
-  background-color: transparent;
+  background-color: #181d25;
+  box-shadow: inset 0 0 0 1px var(--light-color);
   color: var(--text-color);
 }
 
@@ -218,8 +219,9 @@ a.button.secondary:hover,
 a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
-  border-color: var(--text-color-secondary);
-  color: var(--text-color-secondary);
+  background-color: var(--light-color);
+  box-shadow: inset 0 0 0 1px rgb(219 223 230 / 20%);
+  color: var(--text-color);
 }
 
 /* accent (bold + italic link): white pill */

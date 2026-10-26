@@ -1,0 +1,14 @@
+{
+  "templates": [
+    {
+      "name": "neuwagen-model",
+      "urls": [
+        "https://www.audi.de/de/neuwagen/a3/a3-limousine/"
+      ],
+      "representativeUrl": "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
+      "description": "Audi car model page (e.g. A3 Limousine)",
+      "blocks": [],
+      "urlPattern": "/de/neuwagen/*/*/"
+    }
+  ]
+}

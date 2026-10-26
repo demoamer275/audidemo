@@ -100,6 +100,187 @@
           ]
         }
       ]
+    },
+    {
+      "name": "neuwagen-model",
+      "urls": [
+        "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
+        "https://www.audi.de/de/neuwagen/a3/a3-allstreet/",
+        "https://www.audi.de/de/neuwagen/a3/a3-sportback-e-hybrid/",
+        "https://www.audi.de/de/neuwagen/a3/a3-sportback/",
+        "https://www.audi.de/de/neuwagen/a2-e-tron/a2-e-tron/",
+        "https://www.audi.de/de/neuwagen/q5/q5-suv/",
+        "https://www.audi.de/de/neuwagen/q5/q5-suv-e-hybrid/",
+        "https://www.audi.de/de/neuwagen/q5/q5-sportback/",
+        "https://www.audi.de/de/neuwagen/q5/q5-sportback-e-hybrid/"
+      ],
+      "representativeUrl": "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
+      "description": "Audi car model page (e.g. A3 Limousine)",
+      "blocks": [
+        {
+          "name": "hero-video",
+          "instances": [
+            "[class*='StageContainer__StageContainerWrap']"
+          ]
+        },
+        {
+          "name": "cards-stats",
+          "instances": [
+            "[class*='EditorialColumns-style__EditorialColumnsContainer']:has([class*='NumbersMode-style'])"
+          ]
+        },
+        {
+          "name": "carousel-cards",
+          "instances": [
+            ".faCarousel"
+          ]
+        },
+        {
+          "name": "columns-gallery",
+          "instances": [
+            "[class*='StyledEditorialMediaContainer']"
+          ]
+        },
+        {
+          "name": "columns-media-text",
+          "instances": [
+            "[class*='BasicTeaser__StyledContainer']"
+          ]
+        },
+        {
+          "name": "cards-teaser",
+          "instances": [
+            "feature-app:has([class*='EditorialTeaserContainer'])",
+            "[class*='EditorialTeaserContainer']"
+          ]
+        }
+      ],
+      "urlPattern": "/de/neuwagen/*/*/",
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Stage / Hero mit Video",
+          "selector": [
+            "feature-app[id^='5d9c657e']"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-video"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Produktbild",
+          "selector": [
+            "feature-app[id^='737220be']"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "feature-app[id^='737220be'] img"
+          ]
+        },
+        {
+          "id": "section-3",
+          "name": "Key Facts",
+          "selector": [
+            "feature-app[id^='55e1dd15']"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-stats"
+          ],
+          "defaultContent": [
+            "feature-app[id^='92c3930b'] a"
+          ]
+        },
+        {
+          "id": "section-4",
+          "name": "Fakten, die begeistern",
+          "selector": [
+            "feature-app[data-heading-for='3f189a36']",
+            "feature-app[id^='3f189a36']"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-cards"
+          ],
+          "defaultContent": [
+            "feature-app[data-heading-for='3f189a36'] h2",
+            "feature-app[data-heading-for='3f189a36'] p",
+            "feature-app[id^='92c3930b'] a"
+          ]
+        },
+        {
+          "id": "section-5",
+          "name": "Design-Galerie",
+          "selector": [
+            "feature-app[id^='42bb6519']"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-gallery"
+          ],
+          "defaultContent": [
+            "feature-app[id^='42bb6519'] img"
+          ]
+        },
+        {
+          "id": "section-6",
+          "name": "Konfigurator-Teaser",
+          "selector": [
+            "feature-app[id^='4017639b']"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-media-text"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-6b",
+          "name": "Händlerbestand (Vehicle Stock Teaser)",
+          "selector": [
+            "feature-app[id^='fa9786fe']"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            "feature-app[id^='fa9786fe'] img",
+            "feature-app[id^='fa9786fe'] h2",
+            "feature-app[id^='fa9786fe'] a"
+          ]
+        },
+        {
+          "id": "section-7",
+          "name": "Ähnliche Modelle im Vergleich",
+          "selector": [
+            "feature-app[data-heading-for='a68d1551']",
+            "feature-app[id^='a68d1551']"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-teaser"
+          ],
+          "defaultContent": [
+            "feature-app[data-heading-for='a68d1551'] h2"
+          ]
+        },
+        {
+          "id": "section-8",
+          "name": "Fußnoten",
+          "selector": [
+            ".audi-footnote-engine",
+            "feature-app:has(.audi-footnote-engine)"
+          ],
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": [
+            ".audi-footnote-engine ul"
+          ]
+        }
+      ]
     }
   ]
 }

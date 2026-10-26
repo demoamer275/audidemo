@@ -234,6 +234,75 @@ export default function transform(hookName, element, payload) {
     removeFeatureApps(element, '#skip-to-content-link');
     removeFeatureApps(element, '[class*="popup-group__"]');
     removeFeatureApps(element, '[class*="Spacer__StyledSpacer"]');
+
+    // Headline apps (e7de798a…) sit in their own wrapper: tag each with the app that
+    // follows it in document order so sections can group heading + block.
+    const apps = [...element.querySelectorAll('feature-app[id]')];
+    apps.forEach((app, i) => {
+      if (!app.id.startsWith('e7de798a')) return;
+      const next = apps.slice(i + 1).find((a) => !a.id.startsWith('970c9160'));
+      if (next) app.setAttribute('data-heading-for', next.id.slice(0, 8));
+    });
+    // Embedded car configurator app (out of scope) and its headline
+    removeFeatureApps(element, 'feature-app[data-heading-for="7f5cb958"]');
+    removeFeatureApps(element, 'feature-app[id^="7f5cb958"]');
+    // Sticky model sub-navigation repeated on every model page (page chrome)
+    removeFeatureApps(element, 'feature-app[id^="0d76e233"]');
+
+    // Vehicle stock teaser app (fa9786fe…): live dealer stock counts come from an API and
+    // cannot be authored. Rebuild it from the app's own German fallback configuration
+    // (data-content): fallback image, headline, new/used car search buttons — no counts.
+    element.querySelectorAll('feature-app[id^="fa9786fe"]').forEach((app) => {
+      let fields = {};
+      try { fields = JSON.parse(app.getAttribute('data-content') || '{}').fields || {}; } catch (e) { /* keep empty */ }
+      const wrap = document.createElement('div');
+      const img = fields.fallbackImageUrl && fields.fallbackImageUrl.path;
+      if (img) {
+        const pic = document.createElement('p');
+        const im = document.createElement('img');
+        im.setAttribute('src', img);
+        im.setAttribute('alt', fields.fallbackImageUrl.title || '');
+        pic.append(im);
+        wrap.append(pic);
+      }
+      if (fields.headLine) {
+        const h2 = document.createElement('h2');
+        h2.textContent = fields.headLine;
+        wrap.append(h2);
+      }
+      [['Neuwagen', fields.newCarsCtaFallbackUrl, 'strong'], ['Gebrauchtwagen', fields.usedCarsCtaFallbackUrl, 'em']].forEach(([label, href, tag]) => {
+        if (!href) return;
+        const para = document.createElement('p');
+        const fmt = document.createElement(tag);
+        const a = document.createElement('a');
+        a.setAttribute('href', href);
+        a.textContent = label;
+        fmt.append(a);
+        para.append(fmt);
+        wrap.append(para);
+      });
+      app.replaceChildren(wrap);
+    });
+
+    // Button group apps (92c3930b…): one paragraph per button so EDS decorates them.
+    // Audi: first button of a group = primary (grey pill, <strong>), others and single
+    // buttons = secondary (dark pill, <em>).
+    element.querySelectorAll('feature-app[id^="92c3930b"]').forEach((app) => {
+      const links = [...app.querySelectorAll('a[href]')];
+      if (!links.length) return;
+      const wrap = document.createElement('div');
+      links.forEach((a, i) => {
+        const link = document.createElement('a');
+        link.setAttribute('href', a.getAttribute('href'));
+        link.textContent = a.textContent.trim();
+        const fmt = document.createElement(links.length > 1 && i === 0 ? 'strong' : 'em');
+        fmt.append(link);
+        const para = document.createElement('p');
+        para.append(fmt);
+        wrap.append(para);
+      });
+      app.replaceChildren(wrap);
+    });
     [...element.querySelectorAll('a')]
       .filter((a) => /Spring zum Inhalt/i.test(a.textContent))
       .forEach((a) => a.remove());

@@ -1,0 +1,50 @@
+{
+  "definitions": [
+    {
+      "title": "Columns Gallery",
+      "id": "columns-gallery",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/columns/v1/columns",
+            "template": {
+              "name": "Columns Gallery",
+              "filter": "columns-gallery",
+              "columns": "2",
+              "rows": "1"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-gallery",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "",
+          "label": "Spalten"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "",
+          "label": "Zeilen"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns-gallery",
+      "components": [
+        "column"
+      ]
+    }
+  ]
+}

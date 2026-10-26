@@ -1,0 +1,30 @@
+{
+  "variantName": "columns-gallery",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Editoriale Bildreihe: zwei Bild+Bildunterschrift-Spalten im Verhältnis 1:2",
+    "layout": "1:2 grid from 600px, stacked on mobile",
+    "image": "rounded corners, caption below"
+  },
+  "contentPattern": {
+    "structure": "columns container (one row, two cells); each cell: image (with alt) + caption paragraph as default content"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "/de/neuwagen/a3/a3-limousine/index"
+    ],
+    "reuseCount": 0,
+    "lastUsed": "2026-10-26",
+    "instances": [
+      {
+        "url": "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
+        "section": "Design-Galerie",
+        "items": 2
+      }
+    ]
+  },
+  "reuseGuidance": "Use for a fixed pair of image+caption items side by side at unequal widths; for image beside text use columns-media-text."
+}
