@@ -1,0 +1,31 @@
+{
+  "variantName": "hero-video",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Vollflächige Bühne mit Hintergrundvideo, H1, Preis, CTAs und Verbrauchsangaben",
+    "layout": "full-viewport stage, content bottom-left over gradient",
+    "media": "autoplay muted loop playsinline video; poster image as fallback and for prefers-reduced-motion",
+    "cta": "pill buttons"
+  },
+  "contentPattern": {
+    "structure": "row 1: video link (MP4 in DAM, e.g. /content/dam/audidemo/<file>.mp4); row 2: poster image (with alt); row 3: H1 title, price paragraph, CTA links; row 4: consumption/emission disclaimer (rich text)"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "/de/neuwagen/a3/a3-limousine/index"
+    ],
+    "reuseCount": 0,
+    "lastUsed": "2026-10-26",
+    "instances": [
+      {
+        "url": "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
+        "section": "Stage / Hero mit Video",
+        "items": 1
+      }
+    ]
+  },
+  "reuseGuidance": "Use for a page stage with a background video; for a still-image stage use hero."
+}

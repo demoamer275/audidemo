@@ -1,0 +1,31 @@
+{
+  "variantName": "cards-stats",
+  "baseBlock": "cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "purpose": "Kennzahlen-Kacheln ohne Bild (Dachzeile, große Zahl, Einheit, Beschreibung)",
+    "layout": "3-up in a rounded grey panel, stacked on mobile",
+    "image": "none"
+  },
+  "contentPattern": {
+    "structure": "cell 1: eyebrow; cell 2: value; cell 3: unit; cell 4: caption (all plain text)",
+    "itemCount": "1..n (typically 3)"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "/de/neuwagen/a3/a3-limousine/index"
+    ],
+    "reuseCount": 0,
+    "lastUsed": "2026-10-26",
+    "instances": [
+      {
+        "url": "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
+        "section": "Technische Highlights",
+        "items": 3
+      }
+    ]
+  },
+  "reuseGuidance": "Use for 2-4 key figures (performance, acceleration, volume); not for image teasers."
+}

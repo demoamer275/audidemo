@@ -1,0 +1,206 @@
+/*
+ * hero-video: Audi model stage.
+ * Values from www.audi.de StageContainer computed styles
+ * (375 / 768 / 1024 / 1440 viewports).
+ */
+
+/* full-bleed stage directly below the header */
+main > .section.hero-video-container {
+  padding: 0;
+}
+
+main > .section > .hero-video-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hero-video {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  isolation: isolate;
+}
+
+/* .hero-video-content only groups text + disclaimer; let both join the grid */
+.hero-video .hero-video-content {
+  display: contents;
+}
+
+/* stage media: viewport height minus header, min 568px (mobile) */
+.hero-video .hero-video-media {
+  position: relative;
+  grid-area: 1 / 1;
+  z-index: 0;
+  height: calc(100vh - var(--nav-height));
+  min-height: 568px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.hero-video .hero-video-media picture,
+.hero-video .hero-video-media img,
+.hero-video .hero-video-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* headline, price and CTAs overlay the bottom of the stage */
+.hero-video .hero-video-text {
+  position: relative;
+  grid-area: 1 / 1;
+  align-self: end;
+  z-index: 4;
+  overflow: hidden;
+  padding: 28px var(--page-padding) 36px;
+}
+
+.hero-video .hero-video-text h1 {
+  margin: 0 0 8px;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: 28px;
+  font-stretch: var(--heading-font-stretch);
+  font-weight: 400;
+  line-height: 40px;
+}
+
+.hero-video .hero-video-text > p {
+  margin: 0;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+  font-stretch: var(--heading-font-stretch);
+  line-height: var(--body-line-height);
+}
+
+.hero-video .hero-video-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px 8px;
+  margin: 24px 0 4px;
+}
+
+.hero-video .hero-video-actions p.hero-video-cta {
+  margin: 0;
+}
+
+/* Audi stage CTAs: first = grey pill, following = dark outlined pill */
+main .hero-video a.button:any-link {
+  min-height: 48px;
+  border: 0;
+  padding: 12px 24px;
+  font-size: var(--body-font-size-s);
+  font-stretch: var(--body-font-stretch);
+  line-height: 20px;
+  transition:
+    color 0.25s var(--audi-easing),
+    background-color 0.25s var(--audi-easing),
+    box-shadow 0.25s var(--audi-easing);
+}
+
+main .hero-video a.button.primary:any-link {
+  background-color: var(--button-background-color);
+  box-shadow: inset 0 0 0 1px rgb(101 112 129 / 0%);
+  color: var(--text-color);
+}
+
+main .hero-video a.button.secondary:any-link,
+main .hero-video .hero-video-cta + .hero-video-cta a.button:any-link {
+  background-color: rgb(24 29 37);
+  box-shadow: inset 0 0 0 1px var(--button-hover-background-color);
+  color: var(--text-color);
+}
+
+main .hero-video .hero-video-actions a.button:any-link:hover,
+main .hero-video .hero-video-actions a.button:any-link:focus-visible {
+  background-color: var(--button-hover-background-color);
+  box-shadow: inset 0 0 0 1px rgb(219 223 230 / 20%);
+  color: var(--text-color);
+}
+
+/* consumption disclaimer sits below the stage */
+.hero-video .hero-video-disclaimer {
+  grid-area: 2 / 1;
+  padding: 0 var(--page-padding) 28px;
+}
+
+.hero-video .hero-video-disclaimer p {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: var(--body-font-size-xs);
+  font-stretch: var(--body-font-stretch);
+  line-height: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video .hero-video-video {
+    display: none;
+  }
+
+  .hero-video .hero-video-media:not(:has(picture)) .hero-video-video {
+    display: block;
+  }
+}
+
+/* tablet: CTAs in a row, shader gradient behind the copy */
+@media (width >= 600px) {
+  .hero-video .hero-video-media {
+    min-height: 728px;
+  }
+
+  .hero-video .hero-video-text {
+    background: linear-gradient(rgb(255 255 255 / 0%) 0%, rgb(0 0 0 / 20%) 10%, rgb(0 0 0 / 40%) 30%, rgb(0 0 0 / 30%) 60%, rgb(255 255 255 / 0%) 100%);
+  }
+
+  .hero-video .hero-video-actions {
+    flex-direction: row;
+  }
+
+  .hero-video .hero-video-disclaimer {
+    padding-top: 24px;
+  }
+}
+
+/* desktop */
+@media (width >= 900px) {
+  .hero-video .hero-video-media {
+    min-height: 568px;
+  }
+
+  .hero-video .hero-video-text {
+    padding-bottom: 28px;
+  }
+
+  .hero-video .hero-video-text h1 {
+    font-size: 36px;
+    line-height: 52px;
+  }
+}
+
+@media (width >= 1200px) {
+  .hero-video .hero-video-text {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .hero-video .hero-video-text h1 {
+    font-size: 40px;
+    line-height: 60px;
+  }
+
+  .hero-video .hero-video-text > p {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .hero-video .hero-video-disclaimer {
+    padding-bottom: 32px;
+  }
+}

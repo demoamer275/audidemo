@@ -1,0 +1,32 @@
+{
+  "variantName": "carousel-cards",
+  "baseBlock": "carousel",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "purpose": "Horizontaler Slider mit Bild- oder Video-Karten, Titel und Text",
+    "layout": "~3 cards visible on desktop, ~2.2 on tablet, 1.25 on mobile; scroll-snap",
+    "media": "image or looping muted video (plays while visible)",
+    "controls": "round prev/next buttons bottom-right, keyboard arrows on focused track"
+  },
+  "contentPattern": {
+    "structure": "cell 1: image (with alt, optional); cell 2: video link (MP4 in DAM, optional, replaces image); cell 3: title (h3) + text",
+    "itemCount": "1..n"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "/de/neuwagen/a3/a3-limousine/index"
+    ],
+    "reuseCount": 0,
+    "lastUsed": "2026-10-26",
+    "instances": [
+      {
+        "url": "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
+        "section": "Fakten, die begeistern",
+        "items": 7
+      }
+    ]
+  },
+  "reuseGuidance": "Use for feature sliders with more items than fit in a row; for a static grid use a cards variant."
+}

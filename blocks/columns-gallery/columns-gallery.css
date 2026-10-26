@@ -1,0 +1,119 @@
+/* columns-gallery: editorial image + caption columns (Audi EditorialMedia, alpha layout) */
+
+/* mobile: cells stack, images keep their natural ratio */
+.columns-gallery .columns-gallery-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px 16px;
+}
+
+.columns-gallery .columns-gallery-row + .columns-gallery-row {
+  margin-top: 28px;
+}
+
+.columns-gallery .columns-gallery-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.columns-gallery .columns-gallery-item > :first-child {
+  margin-top: 0;
+}
+
+.columns-gallery .columns-gallery-image {
+  margin: 0;
+  line-height: 0;
+}
+
+.columns-gallery .columns-gallery-item picture {
+  display: block;
+}
+
+.columns-gallery .columns-gallery-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* caption (LegalInfo caption) */
+.columns-gallery .columns-gallery-item p:not(.columns-gallery-image) {
+  margin: 24px 0;
+  padding: 8px 0 16px;
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: var(--body-line-height);
+  letter-spacing: 0;
+  color: var(--text-color-secondary);
+}
+
+.columns-gallery sup {
+  font-size: 9px;
+  line-height: normal;
+  vertical-align: 0.68em;
+}
+
+.columns-gallery sup a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* full-width gallery image + caption authored as default content after the block */
+main .section.columns-gallery-container > .columns-gallery-wrapper + .default-content-wrapper {
+  margin-top: 56px;
+}
+
+main .section.columns-gallery-container > .default-content-wrapper p:has(> picture) {
+  margin: 0;
+  line-height: 0;
+}
+
+main .section.columns-gallery-container > .default-content-wrapper picture {
+  display: block;
+}
+
+main .section.columns-gallery-container > .default-content-wrapper p > picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+main .section.columns-gallery-container > .default-content-wrapper p:has(> picture) + p {
+  margin: 24px 0;
+  padding: 8px 0 16px;
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+  color: var(--text-color-secondary);
+}
+
+/* desktop: cells side by side, 16px gap */
+@media (width >= 900px) {
+  .columns-gallery .columns-gallery-row {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  /* 1:2 split; both images share one height (source assets 9:10 and 9:5) */
+  .columns-gallery.columns-gallery-2-cols .columns-gallery-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  }
+
+  .columns-gallery.columns-gallery-2-cols .columns-gallery-item:first-child img {
+    aspect-ratio: 9 / 10;
+  }
+
+  .columns-gallery.columns-gallery-2-cols .columns-gallery-item:last-child img {
+    aspect-ratio: 9 / 5;
+  }
+}
+
+@media (width >= 1200px) {
+  main .section.columns-gallery-container > .columns-gallery-wrapper + .default-content-wrapper {
+    margin-top: 64px;
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
+  "path": "de/neuwagen/a3/a3-limousine",
+  "timestamp": "2026-10-26T22:01:43.472Z",
+  "title": "A3 Limousine Highlights | Audi Deutschland",
+  "template": "neuwagen-model",
+  "blocks": [
+    "hero-video",
+    "cards-stats",
+    "carousel-cards",
+    "columns-gallery",
+    "columns-media-text",
+    "cards-teaser"
+  ],
+  "livechatWidgetsRemoved": 1,
+  "damAssets": "{\"A3_Limousine_PA2_Alpha_A_1_000_Dark-S.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1a6b351c-5813-48dc-abf0-d33159736dab/original/as/A3_Limousine_PA2_Alpha_A_1_000_Dark-S.png\",\"A3_Limousine_PA2_Alpha_A_2_000_Dark-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:ef39d2d2-1e05-461d-ba5a-18550f55f4b3/original/as/A3_Limousine_PA2_Alpha_A_2_000_Dark-L.png\",\"A3_Limousine_PA2_Alpha_C_2_006-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:b9560ef9-3c99-4863-92f2-c2a78273d440/original/as/A3_Limousine_PA2_Alpha_C_2_006-L.png\",\"Q7_2023_5393_1-S.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:54a60912-4a53-43de-8267-74d9cd2503b2/original/as/Q7_2023_5393_1-S.png\",\"Q3eh_2025_8078_DE-S.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:e3fdaf0b-f64d-4712-a678-2c856a7a67f8/original/as/Q3eh_2025_8078_DE-S.png\",\"A3_Limousine_PA2_Alpha_C_2_003-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:1edbc0fa-0cc9-497b-aea4-5ab953bab657/original/as/A3_Limousine_PA2_Alpha_C_2_003-L.png\",\"A3_2026_9406-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:baec1f92-d001-4238-a774-4373de9ece5f/original/as/A3_2026_9406-L.jpg\",\"A3_Limousine_PA2_Alpha_A_1_000-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:c52e0527-819d-4b84-8277-a7b0157a2404/original/as/A3_Limousine_PA2_Alpha_A_1_000-L.png\",\"A3_Limousine_PA2_Alpha_C_2_001-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:74fc179b-be4f-4e28-a121-b3b6dc308a84/original/as/A3_Limousine_PA2_Alpha_C_2_001-L.png\",\"A3_Limousine_PA2_Alpha_C_2_014-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:6aa9ffb7-2e0b-4a6f-9698-5443b2227c3d/original/as/A3_Limousine_PA2_Alpha_C_2_014-L.png\",\"A3_Limousine_PA2_Alpha_A_6_000-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:ec3b6e4d-8f3d-491e-a351-83799b01e027/original/as/A3_Limousine_PA2_Alpha_A_6_000-L.png\",\"A5_2023_6207-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:69257d68-2f05-40d3-84a6-65352584186a/original/as/A5_2023_6207-L.jpg\",\"A6_2024_7589_1-S.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:84b70a8c-6a74-4687-ab97-7a5d0f86c416/original/as/A6_2024_7589_1-S.jpg\",\"Q5_2024_7162_V2-S-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:2fcb6204-16ac-4536-b54c-1afdbe16622b/original/as/Q5_2024_7162_V2-S-L.jpg\",\"A3_PA2_Limousine_HeaderAnimation_L.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:4ff9f68b-eab8-43b5-b6a0-3a29ca9de1b1/original/as/A3_PA2_Limousine_HeaderAnimation_L.mp4\",\"A3_PA2_Limousine_SignatureCollection_S.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:fc3bdd56-779b-45ba-b084-a51421dc8d74/original/as/A3_PA2_Limousine_SignatureCollection_S.mp4\",\"A3_PA2_Limousine_SeatingBallet_S.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:8d0c216b-09cc-4f9f-b0df-64c74b6b9fdf/original/as/A3_PA2_Limousine_SeatingBallet_S.mp4\"}"
+}

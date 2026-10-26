@@ -216,6 +216,39 @@
     ]
   },
   {
+    "id": "cards-stats-card",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Dachzeile",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "value",
+        "label": "Wert",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "unit",
+        "label": "Einheit",
+        "value": "",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "caption",
+        "label": "Beschreibung",
+        "value": "",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "cards-teaser-card",
     "fields": [
       {
@@ -308,6 +341,85 @@
     ]
   },
   {
+    "id": "carousel-cards-slide",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Bild",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alternativtext",
+        "value": ""
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "video",
+        "label": "Video (MP4, ersetzt das Bild)",
+        "description": "Optionaler Link auf ein MP4-Video im DAM, z. B. /content/dam/audidemo/video.mp4"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_title",
+        "label": "Titel",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "name": "content_titleType",
+        "label": "Titel-Ebene",
+        "value": "h3",
+        "options": [
+          {
+            "name": "H2",
+            "value": "h2"
+          },
+          {
+            "name": "H3",
+            "value": "h3"
+          },
+          {
+            "name": "H4",
+            "value": "h4"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content_text",
+        "label": "Text",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "columns-gallery",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "columns",
+        "value": "",
+        "label": "Spalten"
+      },
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "rows",
+        "value": "",
+        "label": "Zeilen"
+      }
+    ]
+  },
+  {
     "id": "columns-media-text",
     "fields": [
       {
@@ -352,6 +464,46 @@
         "component": "aem-content",
         "name": "reference",
         "label": "Reference"
+      }
+    ]
+  },
+  {
+    "id": "hero-video",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "video",
+        "label": "Hintergrundvideo (MP4)",
+        "description": "Link auf ein MP4-Video im DAM, z. B. /content/dam/audidemo/video.mp4"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Posterbild / Fallback",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alternativtext",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (Überschrift, Preis, Buttons)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "disclaimer",
+        "label": "Verbrauchs- und Emissionsangaben",
+        "value": ""
       }
     ]
   },
