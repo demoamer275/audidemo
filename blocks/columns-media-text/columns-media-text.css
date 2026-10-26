@@ -1,0 +1,147 @@
+/* layout: media stacked above text on mobile/tablet */
+.columns-media-text .columns-media-text-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* media: 16:9 image with Audi 20px radius */
+.columns-media-text .columns-media-text-media {
+  line-height: 0;
+}
+
+.columns-media-text .columns-media-text-media picture {
+  display: block;
+}
+
+.columns-media-text .columns-media-text-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+/* text column */
+.columns-media-text .columns-media-text-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 24px;
+}
+
+.columns-media-text .columns-media-text-text > div > :first-child {
+  margin-top: 0;
+}
+
+.columns-media-text .columns-media-text-text h2 {
+  margin: 0;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.columns-media-text .columns-media-text-text p {
+  margin: 8px 0 0;
+}
+
+/* list with Audi '›' markers */
+.columns-media-text .columns-media-text-text ul {
+  position: relative;
+  margin: 16px 0;
+  padding: 0 0 0 32px;
+  list-style: none;
+}
+
+.columns-media-text .columns-media-text-text li {
+  position: relative;
+  margin: 0 0 16px;
+  font-size: var(--body-font-size-m);
+  line-height: var(--body-line-height);
+}
+
+.columns-media-text .columns-media-text-text li:last-child {
+  margin-bottom: 0;
+}
+
+.columns-media-text .columns-media-text-text li::before {
+  content: '›';
+  position: absolute;
+  top: 0;
+  left: -32px;
+  width: 16px;
+}
+
+/* call-to-action: grey Audi pill (plain link or authored button) */
+.columns-media-text .columns-media-text-text p.columns-media-text-cta {
+  margin: 24px 0 0;
+}
+
+main .columns-media-text .columns-media-text-cta a:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  min-height: 48px;
+  margin: 0;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: var(--body-font-size-s);
+  font-stretch: var(--body-font-stretch);
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.25s var(--audi-easing), background 0.25s var(--audi-easing), box-shadow 0.25s var(--audi-easing);
+}
+
+main .columns-media-text .columns-media-text-cta a:any-link:not(.secondary, .accent) {
+  background-color: var(--button-background-color);
+  color: var(--text-color);
+}
+
+main .columns-media-text .columns-media-text-cta a:any-link:not(.secondary, .accent):hover,
+main .columns-media-text .columns-media-text-cta a:any-link:not(.secondary, .accent):focus-visible {
+  background-color: var(--button-hover-background-color);
+  color: var(--text-color);
+  box-shadow: rgb(219 223 230 / 20%) 0 0 0 1px inset;
+}
+
+main .columns-media-text .columns-media-text-cta a.button.secondary:any-link {
+  border: 1px solid var(--text-color);
+}
+
+@media (width >= 600px) {
+  main .columns-media-text .columns-media-text-cta a:any-link {
+    width: auto;
+  }
+}
+
+@media (width >= 900px) {
+  .columns-media-text .columns-media-text-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .columns-media-text .columns-media-text-media {
+    align-self: start;
+  }
+
+  .columns-media-text .columns-media-text-text {
+    align-self: center;
+    padding: 0 40px;
+  }
+
+  /* side-by-side: flex column, so list and CTA margins add up (40px) */
+  .columns-media-text .columns-media-text-text > div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (width >= 1200px) {
+  .columns-media-text .columns-media-text-text {
+    padding: 0 56px;
+  }
+}

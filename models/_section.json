@@ -33,6 +33,14 @@
             {
               "name": "Highlight",
               "value": "highlight"
+            },
+            {
+              "name": "Centered",
+              "value": "centered"
+            },
+            {
+              "name": "Dark",
+              "value": "dark"
             }
           ]
         }
@@ -50,6 +58,9 @@
         "hero",
         "cards",
         "columns",
+        "cards-teaser",
+        "cards-image-overlay",
+        "columns-media-text",
         "fragment"
       ]
     }
