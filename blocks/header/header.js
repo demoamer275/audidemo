@@ -1,5 +1,10 @@
 // media query match that indicates desktop width
 const isDesktop = window.matchMedia('(width >= 900px)');
+// wide desktop: inline top-level navigation instead of the hamburger
+const isWide = window.matchMedia('(width >= 1200px)');
+
+// opens/closes the sub-layer of a top-level menu item
+const subLayerOpeners = new WeakMap();
 
 /**
  * Fetches the nav fragment. Metadata-independent: /content first (local preview),
@@ -113,6 +118,7 @@ function buildMenuLayer(section) {
         sections.classList.toggle('has-active', open);
         link.setAttribute('aria-expanded', open ? 'true' : 'false');
       };
+      subLayerOpeners.set(li, setOpen);
       link.addEventListener('click', (e) => {
         e.preventDefault();
         setOpen(true);
@@ -262,6 +268,38 @@ export default async function decorate(block) {
     if (layer) ui.toggle(menuButton, layer, { lockScroll: true, onClose: resetLayer });
   });
 
+  // wide desktop: the same top-level items inline in the bar; items with a
+  // sub-layer open the menu layer directly on that sub-layer
+  const inline = el('ul', { class: 'nav-inline' });
+  if (layer) {
+    layer.querySelectorAll('.nav-sections-list > .nav-item').forEach((li) => {
+      const link = li.querySelector(':scope > .nav-link');
+      if (!link) return;
+      const inlineLink = el('a', { href: link.getAttribute('href'), class: 'nav-inline-link' }, link.textContent.trim());
+      const setOpen = subLayerOpeners.get(li);
+      if (setOpen) {
+        inlineLink.setAttribute('aria-haspopup', 'true');
+        inlineLink.setAttribute('aria-expanded', 'false');
+        inlineLink.setAttribute('aria-controls', 'nav-layer');
+        inlineLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (ui.state.open && ui.state.open.trigger === inlineLink) {
+            ui.close();
+            return;
+          }
+          ui.open(inlineLink, layer, { lockScroll: true, onClose: resetLayer });
+          setOpen(true);
+        });
+      }
+      inline.append(el('li', {}, inlineLink));
+    });
+  }
+
+  // wide desktop: dealer link shown in the bar (copy of the menu layer's dealer row)
+  const dealerBar = el('div', { class: 'nav-dealer-bar' });
+  const dealerLink = layer && layer.querySelector('.nav-dealer a');
+  if (dealerLink) dealerBar.append(dealerLink.cloneNode(true));
+
   // tools: search overlay + popovers
   const tools = el('div', { class: 'nav-tools' });
   const overlays = [];
@@ -301,7 +339,7 @@ export default async function decorate(block) {
     });
   }
 
-  bar.append(hamburger, brand, tools);
+  bar.append(hamburger, brand, inline, dealerBar, tools);
   nav.append(bar);
   if (layer) nav.append(layer);
   nav.append(...overlays);
@@ -318,8 +356,9 @@ export default async function decorate(block) {
     const { open } = ui.state;
     if (open && open.panel.dataset.kind === 'popover' && !open.panel.contains(e.target)) ui.close();
   });
-  // crossing the desktop breakpoint resets any open panel
+  // crossing a desktop breakpoint resets any open panel
   isDesktop.addEventListener('change', () => ui.close());
+  isWide.addEventListener('change', () => ui.close());
 
   const navWrapper = el('div', { class: 'nav-wrapper' }, nav);
   block.append(navWrapper);

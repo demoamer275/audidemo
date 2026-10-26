@@ -593,6 +593,12 @@ header .nav-popover-legal a:any-link {
   color: var(--text-color);
 }
 
+/* inline top-level navigation + dealer link: wide desktop only */
+header .nav-inline,
+header .nav-dealer-bar {
+  display: none;
+}
+
 /* while the menu layer is open only the cross stays in the bar (plus search on desktop) */
 header nav.has-menu-open .nav-brand,
 header nav.has-menu-open .nav-tool {
@@ -697,3 +703,101 @@ body.nav-scroll-lock {
     line-height: 28px;
   }
 }
+
+@media (width >= 1200px) {
+  /* wide desktop: logo left, inline menu, dealer link + icons right */
+  header .nav-bar {
+    grid-template-columns: auto auto 1fr auto auto;
+  }
+
+  header .nav-hamburger {
+    display: none;
+  }
+
+  header .nav-brand {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  header .nav-inline {
+    display: flex;
+    grid-column: 2;
+    gap: 24px;
+    margin: 0 0 0 32px;
+    padding: 0;
+    list-style: none;
+  }
+
+  header .nav-inline li {
+    margin: 0;
+  }
+
+  header .nav-inline-link:any-link {
+    display: block;
+    color: var(--text-color-secondary);
+    font-size: var(--body-font-size-s);
+    font-stretch: 100%;
+    line-height: 20px;
+    text-decoration: none;
+    transition: color 0.25s var(--audi-easing);
+  }
+
+  header .nav-inline-link:hover,
+  header .nav-inline-link:focus-visible,
+  header .nav-inline-link[aria-expanded="true"] {
+    color: var(--text-color);
+  }
+
+  header .nav-dealer-bar {
+    display: block;
+    grid-column: 4;
+    margin-right: 36px;
+  }
+
+  header .nav-dealer-bar a:any-link {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--text-color);
+    font-size: var(--body-font-size-xs);
+    font-stretch: 100%;
+    font-weight: 700;
+    line-height: 20px;
+    text-decoration: none;
+    transition: color 0.25s var(--audi-easing);
+  }
+
+  header .nav-dealer-bar a:hover {
+    color: var(--text-color-secondary);
+  }
+
+  header .nav-dealer-bar img {
+    width: 24px;
+    height: 24px;
+  }
+
+  header .nav-tools {
+    grid-column: 5;
+  }
+
+  /* the bar stays complete while a sub-layer is open */
+  header nav.has-menu-open .nav-brand,
+  header nav.has-menu-open .nav-tool {
+    visibility: visible;
+  }
+
+  header nav.has-menu-open .nav-tool-popover {
+    display: block;
+  }
+
+  /* sub-layer opened from the bar: no back row, no dealer row */
+  header .nav-sublayer .nav-back,
+  header .nav-layer-inner > .nav-dealer {
+    display: none;
+  }
+
+  header .nav-groups {
+    padding-top: 48px;
+  }
+}
+
