@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/elektromobilitaet/",
+  "path": "de/elektromobilitaet",
+  "timestamp": "2026-10-26T18:05:41.040Z",
+  "title": "E-Mobilität im Alltag | Audi Deutschland",
+  "template": "elektromobilitaet",
+  "blocks": [
+    "cards-teaser",
+    "columns-media-text",
+    "cards-image-overlay"
+  ],
+  "livechatWidgetsRemoved": 1
+}

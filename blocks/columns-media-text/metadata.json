@@ -1,0 +1,25 @@
+{
+  "variantName": "columns-media-text",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Großes Bild neben Textspalte mit Überschrift, Text, Liste und Button",
+    "layout": "50/50 split on desktop, stacked on mobile (image first)",
+    "image": "rounded corners",
+    "list": "chevron bullet list",
+    "cta": "button"
+  },
+  "contentPattern": {
+    "structure": "image (with alt) | heading, paragraph, bullet list, button link. Authored as one row with two cells (image | text) or, in Universal Editor, as an image field plus a text group (title, rich text body, link)"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": [
+    {
+      "url": "https://www.audi.de/de/elektromobilitaet/",
+      "section": "Elektromobilitätsberatung",
+      "items": 1
+    }
+  ],
+  "reuseGuidance": "Use for a single fixed image/text pair side by side; for repeating items use a cards variant."
+}

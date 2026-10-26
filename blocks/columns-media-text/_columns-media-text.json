@@ -1,0 +1,50 @@
+{
+  "definitions": [
+    {
+      "title": "Columns Media Text",
+      "id": "columns-media-text",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/columns/v1/columns",
+            "template": {
+              "name": "Columns Media Text",
+              "filter": "columns-media-text",
+              "columns": "2",
+              "rows": "1"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-media-text",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "",
+          "label": "Spalten"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "",
+          "label": "Zeilen"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns-media-text",
+      "components": [
+        "column"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "xwalk",
+  "sites": {
+    "audidemo": {
+      "previewOrg": "demoamer275",
+      "previewSite": "audidemo",
+      "contentHostUrl": "author-p182083-e1919654.adobeaemcloud.com",
+      "aemSitePath": "/content/audidemo",
+      "aemAssetsFolderPath": "/content/dam/audidemo",
+      "aemSiteName": "audidemo",
+      "aemSiteTitle": "Audi Demo",
+      "libraryUrl": "https://main--sta-xwalk-boilerplate--aemysites.aem.page/tools/sidekick/library.json",
+      "botProtected": true
+    }
+  }
+}

@@ -1,0 +1,87 @@
+/* Audi brand tokens, extracted from https://www.audi.de/de/elektromobilitaet/ */
+:root {
+  /* colors */
+  --background-color: #101319;
+  --background-color-deep: #020203;
+  --light-color: #2c343f;
+  --dark-color: #020203;
+  --text-color: #fcfcfd;
+  --text-color-secondary: rgb(252 252 253 / 70%);
+  --link-color: #fcfcfd;
+  --link-hover-color: rgb(252 252 253 / 70%);
+  --button-background-color: #657081;
+  --button-hover-background-color: #2c343f;
+
+  /* fonts */
+  --body-font-family: audi-type, audi-type-fallback, arial, sans-serif;
+  --heading-font-family: audi-type, audi-type-fallback, arial, sans-serif;
+  --body-font-stretch: 105%;
+  --heading-font-stretch: 130%;
+  --heading-font-weight: 400;
+
+  /* body sizes */
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
+  --body-line-height: 24px;
+
+  /* heading sizes (mobile) */
+  --heading-font-size-xxl: 32px;
+  --heading-line-height-xxl: 40px;
+  --heading-font-size-xl: 24px;
+  --heading-line-height-xl: 36px;
+  --heading-font-size-l: 20px;
+  --heading-line-height-l: 32px;
+  --heading-font-size-m: 18px;
+  --heading-line-height-m: 28px;
+  --heading-font-size-s: 16px;
+  --heading-line-height-s: 24px;
+  --heading-font-size-xs: 14px;
+  --heading-line-height-xs: 20px;
+
+  /* spacing */
+  --page-padding: 28px;
+  --section-padding-top: 28px;
+  --section-padding-bottom: 28px;
+
+  /* motion */
+  --audi-easing: cubic-bezier(0.75, 0.02, 0.5, 1);
+
+  /* nav height */
+  --nav-height: 72px;
+}
+
+@media (width >= 600px) {
+  :root {
+    --heading-font-size-xxl: 44px;
+    --heading-line-height-xxl: 60px;
+    --page-padding: 40px;
+  }
+}
+
+@media (width >= 900px) {
+  :root {
+    --heading-font-size-xxl: 52px;
+    --heading-line-height-xxl: 76px;
+    --heading-font-size-xl: 28px;
+    --heading-line-height-xl: 40px;
+    --page-padding: 60px;
+    --section-padding-top: 32px;
+    --section-padding-bottom: 40px;
+  }
+}
+
+@media (width >= 1200px) {
+  :root {
+    --heading-font-size-xxl: 60px;
+    --heading-line-height-xxl: 84px;
+    --heading-font-size-xl: 32px;
+    --heading-line-height-xl: 44px;
+    --heading-font-size-l: 24px;
+    --heading-line-height-l: 36px;
+    --heading-font-size-m: 20px;
+    --heading-line-height-m: 32px;
+    --page-padding: 96px;
+    --section-padding-bottom: 48px;
+  }
+}

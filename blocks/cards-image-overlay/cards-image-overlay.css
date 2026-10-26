@@ -1,0 +1,148 @@
+/* cards-image-overlay: fully clickable image tiles with centered title
+ * overlay and a WLTP disclaimer below each tile.
+ * Values from audi.de content-tiles feature app. */
+
+.cards-image-overlay > ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  /* source tiles sit 25px from the viewport edge below desktop */
+  margin: 0 calc(25px - var(--page-padding));
+
+  /* source container padding-top: --spacing-relative-xl (28px, 32px >= 1440) */
+  padding: 28px 0 0;
+}
+
+.cards-image-overlay > ul > li {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 16px 0;
+}
+
+.cards-image-overlay .cards-image-overlay-tile {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 20px;
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cards-image-overlay .cards-image-overlay-card-image {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transition: transform 2000ms;
+}
+
+.cards-image-overlay .cards-image-overlay-card-image p {
+  margin: 0;
+}
+
+.cards-image-overlay .cards-image-overlay-card-image picture,
+.cards-image-overlay .cards-image-overlay-card-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cards-image-overlay .cards-image-overlay-card-image img {
+  object-fit: cover;
+  backface-visibility: hidden;
+}
+
+.cards-image-overlay .cards-image-overlay-tile:hover .cards-image-overlay-card-image,
+.cards-image-overlay .cards-image-overlay-tile:focus-visible .cards-image-overlay-card-image {
+  transform: scale(1.05);
+}
+
+.cards-image-overlay .cards-image-overlay-card-title {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 28px;
+  text-align: center;
+}
+
+.cards-image-overlay .cards-image-overlay-card-title > * {
+  margin: 0;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl);
+  font-stretch: var(--heading-font-stretch);
+  font-weight: 400;
+  line-height: var(--heading-line-height-xl);
+  letter-spacing: 0;
+}
+
+.cards-image-overlay .cards-image-overlay-card-disclaimer p {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: var(--body-font-size-xs);
+  font-stretch: var(--body-font-stretch);
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.cards-image-overlay .cards-image-overlay-card-disclaimer sup {
+  font-size: 8px;
+  line-height: inherit;
+  vertical-align: 0.68em;
+}
+
+.cards-image-overlay .cards-image-overlay-card-disclaimer a:any-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 250ms var(--audi-easing);
+}
+
+.cards-image-overlay .cards-image-overlay-card-disclaimer a:hover {
+  color: var(--text-color-secondary);
+}
+
+@media (width >= 600px) {
+  .cards-image-overlay .cards-image-overlay-tile {
+    aspect-ratio: 10 / 3;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-image-overlay > ul {
+    flex-wrap: nowrap;
+    gap: 32px;
+    margin: 0;
+    padding: 28px 16px 0;
+  }
+
+  .cards-image-overlay > ul > li {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+  }
+
+  /* source: padding-top 73.5294% of tile width (= 25 / 34) */
+  .cards-image-overlay .cards-image-overlay-tile {
+    aspect-ratio: 34 / 25;
+  }
+}
+
+@media (width >= 1440px) {
+  .cards-image-overlay > ul {
+    padding-top: 32px;
+  }
+}
+
+@media (width >= 1920px) {
+  .cards-image-overlay .cards-image-overlay-card-title > * {
+    font-size: 36px;
+    line-height: 52px;
+  }
+}

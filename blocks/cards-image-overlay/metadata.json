@@ -1,0 +1,27 @@
+{
+  "variantName": "cards-image-overlay",
+  "baseBlock": "cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "purpose": "Vollflächige, klickbare Bildkacheln mit Verlauf und zentriertem Titel, Verbrauchsangaben unter der Kachel",
+    "layout": "3-up grid (2 on tablet, 1 on mobile)",
+    "image": "full tile, rounded corners, bottom gradient",
+    "title": "centered, overlaid at the bottom",
+    "extras": "small WLTP disclaimer below the tile"
+  },
+  "contentPattern": {
+    "structure": "cell 1: image (with alt); cell 2: heading + link (the whole tile becomes the link); cell 3: consumption/emission disclaimer (rich text)",
+    "itemCount": "1..n",
+    "sourceSelector": "[data-test-id=\"styled-content-tile-container\"]"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": [
+    {
+      "url": "https://www.audi.de/de/elektromobilitaet/",
+      "section": "Testen Sie es selbst...",
+      "items": 3
+    }
+  ],
+  "reuseGuidance": "Use for clickable tool/entry tiles where the title sits on top of the image and the whole tile links to a target."
+}
