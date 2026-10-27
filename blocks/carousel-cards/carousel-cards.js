@@ -1,5 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
+import { moveInstrumentation, getDamAssetUrl } from '../../scripts/scripts.js';
 
 const VIDEO_PATTERN = /\.(mp4|webm|mov|m4v)(\?|#|$)/i;
 const LABEL_PREV = 'Vorherige Folie';
@@ -28,7 +28,7 @@ function buildVideo(link, reducedMotion) {
   video.setAttribute('controlslist', 'nodownload noplaybackrate');
   if (reducedMotion) video.preload = 'metadata';
   const source = document.createElement('source');
-  source.src = link.href;
+  source.src = getDamAssetUrl(link.href);
   source.type = 'video/mp4';
   video.append(source);
   moveInstrumentation(link, video);
