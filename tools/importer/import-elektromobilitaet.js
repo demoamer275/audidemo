@@ -6,6 +6,7 @@ import columnsMediaTextParser from './parsers/columns-media-text.js';
 import cardsImageOverlayParser from './parsers/cards-image-overlay.js';
 import audiCleanupTransformer from './transformers/audi-cleanup.js';
 import audiSectionsTransformer from './transformers/audi-sections.js';
+import audiDamAssetsTransformer from './transformers/audi-dam-assets.js';
 
 const PAGE_TEMPLATE = {
   "name": "elektromobilitaet",
@@ -176,6 +177,9 @@ export default {
     WebImporter.rules.createMetadata(main, document);
     WebImporter.rules.transformBackgroundImages(main, document);
     WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+    // Audi DAM images/videos -> project DAM folder (must run after adjustImageUrls)
+    try { audiDamAssetsTransformer('afterTransform', main, { ...payload, template: PAGE_TEMPLATE }); }
+    catch (e) { console.error('DAM asset transformer failed:', e); }
 
     const rawPath = new URL(params.originalURL).pathname
       .replace(/\/$/, '')
@@ -194,6 +198,7 @@ export default {
         template: PAGE_TEMPLATE.name,
         blocks: [...new Set(pageBlocks.map((b) => b.name))],
         livechatWidgetsRemoved,
+        damAssets: JSON.stringify(cleanupReport.damAssets || {}),
       },
     }];
   },

@@ -130,25 +130,42 @@ var CustomImportScript = (() => {
       textNodes.push(hinted(document, "text_title", [h]));
     }
     const legal = textArea.querySelector('[class*="LegalInfoContainer"]');
-    const bodyParas = [...textArea.querySelectorAll("p")].filter((p) => !(legal && legal.contains(p)) && cleanText(p.textContent));
-    if (bodyParas.length) {
-      const ps = bodyParas.map((p) => copyInline(p, document.createElement("p")));
-      textNodes.push(hinted(document, "text_body", ps));
+    const legalParas = legal ? [...legal.querySelectorAll("p")].filter((p) => cleanText(p.textContent)) : [];
+    const isFact = (p) => /^[•·]/.test(cleanText(p.textContent));
+    const factParas = legalParas.filter(isFact);
+    const disclaimerParas = legalParas.filter((p) => !isFact(p));
+    const bodyNodes = [...textArea.querySelectorAll("p")].filter((p) => !(legal && legal.contains(p)) && cleanText(p.textContent)).map((p) => copyInline(p, document.createElement("p")));
+    if (factParas.length) {
+      const ul = document.createElement("ul");
+      factParas.forEach((p) => {
+        const li = copyInline(p, document.createElement("li"));
+        const first = li.firstChild;
+        if (first && first.nodeType === 3) first.textContent = first.textContent.replace(/^\s*[•·]\s*/, "");
+        ul.appendChild(li);
+      });
+      bodyNodes.push(ul);
     }
-    const cta = textArea.querySelector('[class*="ButtonContainer"] a[href]') || [...textArea.querySelectorAll("a[href]")].find((a) => !(legal && legal.contains(a)) && !(a.getAttribute("href") || "").startsWith("#"));
-    if (cta) {
+    let ctas = [...textArea.querySelectorAll('[class*="ButtonContainer"] a[href]')];
+    if (!ctas.length) {
+      const fallback = [...textArea.querySelectorAll("a[href]")].find((a) => !(legal && legal.contains(a)) && !(a.getAttribute("href") || "").startsWith("#"));
+      if (fallback) ctas = [fallback];
+    }
+    const linkParas = ctas.filter((cta) => cleanText(cta.textContent)).map((cta) => {
       const a = document.createElement("a");
       a.setAttribute("href", cta.getAttribute("href"));
       a.textContent = cleanText(cta.textContent);
       const p = document.createElement("p");
       p.appendChild(a);
-      textNodes.push(hinted(document, "text_link", [p]));
-    }
+      return p;
+    });
+    const mainLink = linkParas.pop();
+    bodyNodes.push(...linkParas);
+    if (bodyNodes.length) textNodes.push(hinted(document, "text_body", bodyNodes));
+    if (mainLink) textNodes.push(hinted(document, "text_link", [mainLink]));
     const textCell = textNodes.length ? textNodes : "";
     let disclaimerCell = "";
-    if (legal && cleanText(legal.textContent)) {
-      const paras = [...legal.querySelectorAll("p")].filter((p) => cleanText(p.textContent));
-      const out = (paras.length ? paras : [legal]).map((p) => copyInline(p, document.createElement("p")));
+    if (legal && cleanText(legal.textContent) && (disclaimerParas.length || !legalParas.length)) {
+      const out = (disclaimerParas.length ? disclaimerParas : [legal]).map((p) => copyInline(p, document.createElement("p")));
       disclaimerCell = hinted(document, "disclaimer", out);
     }
     return [imageCell, textCell, disclaimerCell];
@@ -604,6 +621,65 @@ var CustomImportScript = (() => {
       removeFeatureApps(element, "#skip-to-content-link");
       removeFeatureApps(element, '[class*="popup-group__"]');
       removeFeatureApps(element, '[class*="Spacer__StyledSpacer"]');
+      const apps = [...element.querySelectorAll("feature-app[id]")];
+      apps.forEach((app, i) => {
+        if (!app.id.startsWith("e7de798a")) return;
+        const next = apps.slice(i + 1).find((a) => !a.id.startsWith("970c9160"));
+        if (next) app.setAttribute("data-heading-for", next.id.slice(0, 8));
+      });
+      removeFeatureApps(element, 'feature-app[data-heading-for="7f5cb958"]');
+      removeFeatureApps(element, 'feature-app[id^="7f5cb958"]');
+      removeFeatureApps(element, 'feature-app[id^="0d76e233"]');
+      element.querySelectorAll('feature-app[id^="fa9786fe"]').forEach((app) => {
+        let fields = {};
+        try {
+          fields = JSON.parse(app.getAttribute("data-content") || "{}").fields || {};
+        } catch (e) {
+        }
+        const wrap = document.createElement("div");
+        const img = fields.fallbackImageUrl && fields.fallbackImageUrl.path;
+        if (img) {
+          const pic = document.createElement("p");
+          const im = document.createElement("img");
+          im.setAttribute("src", img);
+          im.setAttribute("alt", fields.fallbackImageUrl.title || "");
+          pic.append(im);
+          wrap.append(pic);
+        }
+        if (fields.headLine) {
+          const h2 = document.createElement("h2");
+          h2.textContent = fields.headLine;
+          wrap.append(h2);
+        }
+        [["Neuwagen", fields.newCarsCtaFallbackUrl, "strong"], ["Gebrauchtwagen", fields.usedCarsCtaFallbackUrl, "em"]].forEach(([label, href, tag]) => {
+          if (!href) return;
+          const para = document.createElement("p");
+          const fmt = document.createElement(tag);
+          const a = document.createElement("a");
+          a.setAttribute("href", href);
+          a.textContent = label;
+          fmt.append(a);
+          para.append(fmt);
+          wrap.append(para);
+        });
+        app.replaceChildren(wrap);
+      });
+      element.querySelectorAll('feature-app[id^="92c3930b"]').forEach((app) => {
+        const links = [...app.querySelectorAll("a[href]")];
+        if (!links.length) return;
+        const wrap = document.createElement("div");
+        links.forEach((a, i) => {
+          const link = document.createElement("a");
+          link.setAttribute("href", a.getAttribute("href"));
+          link.textContent = a.textContent.trim();
+          const fmt = document.createElement(links.length > 1 && i === 0 ? "strong" : "em");
+          fmt.append(link);
+          const para = document.createElement("p");
+          para.append(fmt);
+          wrap.append(para);
+        });
+        app.replaceChildren(wrap);
+      });
       [...element.querySelectorAll("a")].filter((a) => /Spring zum Inhalt/i.test(a.textContent)).forEach((a) => a.remove());
       WebImporter.DOMUtils.remove(element, ["header", "footer", "nav"]);
       WebImporter.DOMUtils.remove(element, ["script", "style", "noscript", "iframe", "link", "dialog"]);
@@ -685,6 +761,63 @@ var CustomImportScript = (() => {
         }
       }
     }
+  }
+
+  // tools/importer/transformers/audi-dam-assets.js
+  var DAM_FOLDER = "/content/dam/audidemo";
+  var DAM_ASSET_RE = /^(https?:\/\/[^/]+\/adobe\/assets\/urn:[^/]+)\/(?:original\/)?as\/([^?#]+)/i;
+  function toDamPath(url, assets) {
+    const m = (url || "").trim().match(DAM_ASSET_RE);
+    if (!m) return null;
+    let file = m[2].split("/").pop();
+    try {
+      file = decodeURIComponent(file);
+    } catch (e) {
+    }
+    const safe = file.replace(/[()]/g, "").replace(/[^A-Za-z0-9._-]+/g, "-");
+    assets[safe] = `${m[1]}/original/as/${m[2]}`;
+    return `${DAM_FOLDER}/${safe}`;
+  }
+  function rewrite(root, document, origin) {
+    const report = document.excatCleanupReport || {};
+    const assets = report.damAssets || {};
+    root.querySelectorAll("img[src]").forEach((img) => {
+      const dam = toDamPath(img.getAttribute("src"), assets);
+      if (dam) img.setAttribute("src", dam);
+    });
+    root.querySelectorAll("source[srcset], img[srcset]").forEach((el) => {
+      const first = (el.getAttribute("srcset") || "").split(",")[0].trim().split(" ")[0];
+      const dam = toDamPath(first, assets);
+      if (dam) el.setAttribute("srcset", dam);
+    });
+    root.querySelectorAll("video[src], video source[src]").forEach((el) => {
+      const dam = toDamPath(el.getAttribute("src"), assets);
+      if (dam) el.setAttribute("src", dam);
+    });
+    root.querySelectorAll("a[href]").forEach((a) => {
+      const href = a.getAttribute("href");
+      const dam = toDamPath(href, assets);
+      if (!dam) return;
+      if (/^(https?:|\/)/.test(a.textContent.trim())) a.textContent = dam.split("/").pop();
+      a.setAttribute("href", origin ? `${origin}${dam}` : dam);
+      const parent = a.parentElement;
+      if (parent && !parent.closest("p, li, h1, h2, h3, h4, h5, h6")) {
+        const p = document.createElement("p");
+        a.replaceWith(p);
+        p.append(a);
+      }
+    });
+    document.excatCleanupReport = __spreadProps(__spreadValues({}, report), { damAssets: assets });
+  }
+  function transform3(hookName, element, payload) {
+    if (hookName !== "afterTransform") return;
+    const document = payload && payload.document || element.ownerDocument;
+    let origin = "";
+    try {
+      origin = new URL(payload.params.originalURL).origin;
+    } catch (e) {
+    }
+    rewrite(element, document, origin);
   }
 
   // tools/importer/import-elektromobilitaet.js
@@ -848,6 +981,11 @@ var CustomImportScript = (() => {
       WebImporter.rules.createMetadata(main, document);
       WebImporter.rules.transformBackgroundImages(main, document);
       WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
+      try {
+        transform3("afterTransform", main, __spreadProps(__spreadValues({}, payload), { template: PAGE_TEMPLATE }));
+      } catch (e) {
+        console.error("DAM asset transformer failed:", e);
+      }
       const rawPath = new URL(params.originalURL).pathname.replace(/\/$/, "").replace(/\.html?$/, "");
       const path = WebImporter.FileUtils.sanitizePath(rawPath === "" ? "/index" : rawPath);
       const cleanupReport = document.excatCleanupReport || {};
@@ -859,7 +997,8 @@ var CustomImportScript = (() => {
           title: document.title,
           template: PAGE_TEMPLATE.name,
           blocks: [...new Set(pageBlocks.map((b) => b.name))],
-          livechatWidgetsRemoved
+          livechatWidgetsRemoved,
+          damAssets: JSON.stringify(cleanupReport.damAssets || {})
         }
       }];
     }

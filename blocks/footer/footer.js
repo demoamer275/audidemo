@@ -115,10 +115,11 @@ export default async function decorate(block) {
   const footer = document.createElement('div');
   footer.className = 'footer-inner';
   [...fragment.children].forEach((section) => {
-    if (section.querySelector(':scope > h4')) decorateLinkColumns(section);
+    const links = section.querySelectorAll('a');
+    if (links.length === 1 && links[0].getAttribute('href') === '#') decorateBackToTop(section);
+    else if (section.querySelector(':scope > h4')) decorateLinkColumns(section);
     else if (section.querySelector(':scope > ul img')) decorateSocial(section);
     else if (section.querySelector(':scope > p') && section.querySelector(':scope > ul')) decorateLegal(section);
-    else if (section.querySelector('a[href="#"]')) decorateBackToTop(section);
     footer.append(section);
   });
   decorateExternalLinks(footer);

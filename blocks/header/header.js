@@ -22,7 +22,24 @@ async function fetchNav() {
   container.querySelectorAll('img[src]').forEach((img) => {
     img.src = new URL(img.getAttribute('src'), base).href;
   });
+  container.querySelectorAll('source[srcset]').forEach((source) => {
+    source.srcset = source.getAttribute('srcset').split(',')
+      .map((candidate) => {
+        const [url, ...size] = candidate.trim().split(/\s+/);
+        return [new URL(url, base).href, ...size].join(' ');
+      }).join(', ');
+  });
   return container;
+}
+
+/**
+ * Link of a list item. Edge Delivery wraps it in a paragraph when the item also has
+ * a nested list (`li > p > a`); unwrap it so both shapes behave like `li > a`.
+ */
+function itemLink(li) {
+  const wrapped = li.querySelector(':scope > p > a:only-child');
+  if (wrapped) wrapped.parentElement.replaceWith(wrapped);
+  return li.querySelector(':scope > a');
 }
 
 function el(tag, attrs = {}, ...children) {
@@ -85,7 +102,7 @@ function buildMenuLayer(section) {
   if (list) {
     list.classList.add('nav-sections-list');
     [...list.children].forEach((li) => {
-      const link = li.querySelector(':scope > a');
+      const link = itemLink(li);
       const sub = li.querySelector(':scope > ul');
       li.classList.add('nav-item');
       if (link) link.classList.add('nav-link');
@@ -133,10 +150,12 @@ function buildMenuLayer(section) {
   }
   inner.append(sections);
 
-  // dealer row: paragraph(s) after the list
-  [...section.querySelectorAll(':scope > p')].forEach((p) => {
+  // dealer row: paragraph(s) or list(s) after the menu list
+  const extras = [...section.children].filter((child) => child !== list && (child.tagName === 'P' || child.tagName === 'UL'));
+  extras.flatMap((child) => (child.tagName === 'UL' ? [...child.children] : [child])).forEach((item) => {
     const dealer = el('div', { class: 'nav-dealer' });
-    dealer.append(...p.childNodes);
+    const wrapped = item.querySelector(':scope > p');
+    dealer.append(...(wrapped || item).childNodes);
     inner.append(dealer);
   });
   layer.append(inner);
@@ -252,6 +271,12 @@ export default async function decorate(block) {
     if (link) {
       const img = link.querySelector('img');
       link.setAttribute('aria-label', img && img.alt ? img.alt : link.textContent.trim());
+      // the logo image is the visible content; the link text is only a fallback label
+      if (img) {
+        [...link.childNodes].forEach((node) => {
+          if (node.nodeType === Node.TEXT_NODE) node.remove();
+        });
+      }
       brand.append(link);
     }
   }
