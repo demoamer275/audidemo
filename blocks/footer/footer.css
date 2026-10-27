@@ -39,7 +39,8 @@ footer .footer-top {
   justify-content: flex-end;
 }
 
-footer .footer-top p {
+footer .footer-top p,
+footer .footer-top li {
   line-height: 0;
 }
 
