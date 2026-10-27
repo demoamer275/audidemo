@@ -11,6 +11,25 @@ import {
   loadCSS,
 } from './aem.js';
 
+// AEM publish tier that serves DAM binaries (e.g. videos) to the Edge Delivery site
+const AEM_PUBLISH_ORIGIN = 'https://publish-p182083-e1919654.adobeaemcloud.com';
+
+/**
+ * Returns the URL to load an AEM DAM asset (/content/dam/...) from. Edge Delivery only
+ * delivers images through its media bus, so other binaries such as videos are loaded
+ * from AEM publish. Local preview and AEM author (Universal Editor) serve /content/dam
+ * themselves, so the path is kept there.
+ * @param {string} href authored asset link
+ * @returns {string} absolute asset URL
+ */
+export function getDamAssetUrl(href) {
+  const url = new URL(href, window.location.href);
+  if (!url.pathname.startsWith('/content/dam/')) return url.href;
+  const { hostname } = window.location;
+  if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('author-')) return url.href;
+  return `${AEM_PUBLISH_ORIGIN}${url.pathname}`;
+}
+
 /**
  * Moves all the attributes from a given elmenet to another given element.
  * @param {Element} from the element to copy attributes from
