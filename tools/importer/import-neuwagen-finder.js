@@ -198,6 +198,14 @@ export default {
 
     executeTransformers('afterTransform', main, payload);
 
+    // links to migrated (AEM) pages must not end with "/" (finder pages): the cleanup emits
+    // them as https://www.audi.de/language-masters/...; post-import-dam.mjs restores the root path
+    main.querySelectorAll('a[href^="https://www.audi.de/language-masters/"]').forEach((a) => {
+      const href = a.getAttribute('href');
+      const [path, rest = ''] = href.split(/(?=[?#])/);
+      if (path.length > 'https://www.audi.de/'.length && path.endsWith('/')) a.setAttribute('href', path.replace(/\/+$/, '') + rest);
+    });
+
     main.appendChild(document.createElement('hr'));
     WebImporter.rules.createMetadata(main, document);
     WebImporter.rules.transformBackgroundImages(main, document);
