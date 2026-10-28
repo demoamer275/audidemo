@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/?bycarlinegroup=etrongt",
+  "path": "language-masters/de/neuwagen/etrongt",
+  "timestamp": "2026-10-27T20:16:49.715Z",
+  "title": "Modelle | Audi Deutschland",
+  "template": "neuwagen-finder",
+  "blocks": [
+    "fragment",
+    "cards-model"
+  ],
+  "livechatWidgetsRemoved": 1,
+  "damAssets": "{\"cards/e-tron-gt-quattro.png\":\"https://mediaservice.audi.com/media/fast/v3_1vzloG1tIiBKdppzWfxH2wcIQ-YGBgqChgYGE4zMBfkpTMCWSlMnJm5iemp-kC-uFBaTmV-aUmxvpGBkbluaklRfh4_IztUkB2ompGH4XjRqu9uj7VdK8UFWr2dj9dMP95Rw8AKNIpxPpBg0QISfL-ABIcHA5gEWZIJIk6C-EwWzAwMrBVARiQDCPDxlRblFCQWJebqpaQmlaYLahgQCYTZXVxDHD19ggEPp39D5gAAAA\",\"cards/s-e-tron-gt.png\":\"https://mediaservice.audi.com/media/fast/v3_1vzloG1tIiBKdppzWfxH2wcIQ-YGBgqChgYGE4zMBfkpTMCWSlMnJm5iemp-kC-uFBaTmV-aUmxvpGBkbluaklRfh4_IztUkB2ompGH4fw-8yOtK66VHIncNfnoyz2poa3MPgysQKMY5wMJFi0gwfcLSHB4MIBJkCWZIOIkiM9kwczAwFoBZEQygAAfX2lRTkFiUWKuXkpqUmm6oIYBkUCY3cU1xNHTJxgAS9uEpOYAAAA\",\"cards/rs-e-tron-gt.png\":\"https://mediaservice.audi.com/media/fast/v3_1vzloG1tIiBKdppzWfxH2wcIQ-YGBgqChgYGE4zMBfkpTMCWSlMnJm5iemp-kC-uFBaTmV-aUmxvpGBkbluaklRfh4_IztUkB2ompGHodbmdcCxdyuW_15yMHHCJLV5Cy3j6hhYgUYxzgcSLFpAgu8XkODwYACTIEsyQcRJEJ_JgpmBgbUCyIhkAAE-vtKinILEosRcvZTUpNJ0QQ0DIoEwu4triKOnTzAA1AXze-YAAAA\",\"cards/rs-e-tron-gt-performance.png\":\"https://mediaservice.audi.com/media/fast/v3_x2Sb2gbZRzHn37Sdl2TS3opvfbSkBu5XJwdsZc_bVIlssjAIQ6K65SxF9mz5drcaK7xcqkZ842C4BsVEWTvCjJ8oZs4Xw0nA5kKRRhMfSFDUYcvJkwRB8MpiJe9-fD78_194eH5XvxdjPV9wYmnLt6b_Xt8Yu1nhBh0hYjMikjX2xgRQrTY63bkhrMY9rMHnMDf8grOICjI7e5iyS5VCw9HT68VVhuFxrGl4qBQeaZYkJubCbEnPBdjocnITojRhRDxf0JMHBYPObR3h9gd9tQioXoQFseHdyI-3fc3u9KXncd8p9fd8nrutqPud8pVe12WZLV0ulheqZVay0V7Wa5Xa0srS3alGOJUOVw6ydDivIi0nL6YOnOq2XNbTrNYse3Bsl0U4-u1rl9ridHhC9g3SqaIdhTtMtoVdAX9P1IfkLqC8SHGVYwbGN-QvUn2PuYIZhTzEOZxzL_I6yy8Rf4s4iAxn9gOCY25y8x_RdojfZL0Gyy4WPcQFdTPSKrMXEBbJLVOboHcLawZrBewPmYyyuQFYgViT6IExEP9EZJnSH7KzHfoHvrX6H9iTpBLkGuS2yF3CesJooeJ3kd7H2UXNYbaRJWoX5Lsowfo10k_x_4DZH4k84DMvxgTGFMY-8j-gfkO5iuY1zCvk_sNK4n1CNYq1k8o51F-IOEx9Qmpc8z1SV0l8T3TZ5lpo72O9jmzd5h7DeNlrBNYL2LtIvaw9zaTzzLZI_ooUUn0HNHbxBRiH6GcRHkT5VviCokGySPob5P6hfku6UtkrmE8TvYBZhb1IPoa-qukxzDvEJsnfpfEXdRx1HdR30P9Fe2L8JM3HG_bDSPYcbygfjTot9yt_EtuK2jXK_bKcr7tuBvtoF62q6W83Oy2ZT3w-07-tOw4vqw3nl8tHWo2muWmbdt56YVRD9wwavV8xwlkSwZy2_F74aRemo6E4v8B4IOXyjIDAAA.png\"}"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/?bycarlinegroup=nuvolari",
+  "path": "language-masters/de/neuwagen/nuvolari",
+  "timestamp": "2026-10-27T20:16:53.952Z",
+  "title": "Modelle | Audi Deutschland",
+  "template": "neuwagen-finder",
+  "blocks": [
+    "fragment",
+    "cards-model"
+  ],
+  "livechatWidgetsRemoved": 1,
+  "damAssets": "{\"cards/audi-nuvolari.png\":\"https://mediaservice.audi.com/media/fast/v3_1vzloG1tIiBKdppzWfxH2wcIQ-YGBgqChgYGLYwMBfkpTMCWSlMnJm5iemp-kC-uFRBUX5KaXJJSmpJYmZOsX5afooulM3PyIcqyQ7UzMjDEBjWe-dDzqpFyy9ofdnj-Hin56m76xmYGRjYGxgYWCwYQIBPuLQopyCxKDFXryi1uCA_rzizLFVQw4BIIMzu4hri6OkTDAD_J8cizwAAAA\"}"
+}

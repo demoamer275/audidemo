@@ -22,7 +22,13 @@ export async function loadFragment(path) {
   if (path && path.startsWith('/') && !path.startsWith('//')) {
     // eslint-disable-next-line no-param-reassign
     path = path.replace(/(\.plain)?\.html/, '');
-    const resp = await fetch(`${path}.plain.html`);
+    let resp = await fetch(`${path}.plain.html`);
+    // local preview serves pages under /content/ (EDS serves them at the site root)
+    if (!resp.ok && window.location.pathname.startsWith('/content/') && !path.startsWith('/content/')) {
+      // eslint-disable-next-line no-param-reassign
+      path = `/content${path}`;
+      resp = await fetch(`${path}.plain.html`);
+    }
     if (resp.ok) {
       const main = document.createElement('main');
       main.innerHTML = await resp.text();

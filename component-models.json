@@ -144,8 +144,45 @@
           {
             "name": "Dark",
             "value": "dark"
+          },
+          {
+            "name": "Filter Rail",
+            "value": "filter-rail"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "cards-carline-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Bild",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alternativtext",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (Titel als H2, Modellanzahl als Link)",
+        "value": ""
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "electric",
+        "label": "Elektromodell",
+        "value": false
       }
     ]
   },
@@ -211,6 +248,39 @@
         "valueType": "string",
         "name": "disclaimer",
         "label": "Verbrauchs- und Emissionsangaben",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-model-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Bild",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alternativtext",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (Badges als Liste, Modellname als H2, Preis, Links)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "consumption",
+        "label": "Verbrauchsangaben",
         "value": ""
       }
     ]
@@ -530,6 +600,25 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "model-filter-group",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Gruppenbezeichnung",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "buttons",
+        "label": "Buttons (Liste, ein Eintrag pro Button) oder Links",
+        "value": ""
       }
     ]
   }

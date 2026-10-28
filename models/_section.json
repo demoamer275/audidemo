@@ -41,6 +41,10 @@
             {
               "name": "Dark",
               "value": "dark"
+            },
+            {
+              "name": "Filter Rail",
+              "value": "filter-rail"
             }
           ]
         }
@@ -65,7 +69,10 @@
         "cards-stats",
         "carousel-cards",
         "columns-gallery",
-        "fragment"
+        "fragment",
+        "model-filter",
+        "cards-carline",
+        "cards-model"
       ]
     }
   ]

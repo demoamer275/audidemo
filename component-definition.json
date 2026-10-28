@@ -83,6 +83,36 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Cards Carline",
+          "id": "cards-carline",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Cards Carline",
+                  "filter": "cards-carline"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Cards Carline Card",
+          "id": "cards-carline-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Cards Carline Card",
+                  "model": "cards-carline-card"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Cards Image Overlay",
           "id": "cards-image-overlay",
           "plugins": {
@@ -107,6 +137,36 @@
                 "template": {
                   "name": "Cards Image Overlay Card",
                   "model": "cards-image-overlay-card"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Cards Model",
+          "id": "cards-model",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Cards Model",
+                  "filter": "cards-model"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Cards Model Card",
+          "id": "cards-model-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Cards Model Card",
+                  "model": "cards-model-card"
                 }
               }
             }
@@ -321,6 +381,36 @@
                 "template": {
                   "name": "Hero",
                   "model": "hero"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Model Filter",
+          "id": "model-filter",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Model Filter",
+                  "filter": "model-filter"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Model Filter Group",
+          "id": "model-filter-group",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Model Filter Group",
+                  "model": "model-filter-group"
                 }
               }
             }

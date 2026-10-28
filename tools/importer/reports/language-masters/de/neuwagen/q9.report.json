@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/?bycarlinegroup=q9",
+  "path": "language-masters/de/neuwagen/q9",
+  "timestamp": "2026-10-27T20:16:45.012Z",
+  "title": "Modelle | Audi Deutschland",
+  "template": "neuwagen-finder",
+  "blocks": [
+    "fragment",
+    "cards-model"
+  ],
+  "livechatWidgetsRemoved": 1,
+  "damAssets": "{\"cards/q9-suv.png\":\"https://mediaservice.audi.com/media/fast/v3_1vzloG1tIiBKdppzWfxH2wcIQ-YGBgqChgYGE4wMBfkpTMCWSlMnJm5iemp-kC-OH9aTmV-aUmxvpGBkbluoSU_IztUhB2olJGH4dPkY46s-6KbtFgT_-lEnzY4KnLkFAMryJzrQILZFUjw6wAJjnYGMAmSiQYRxSA-kxEzAwNrBZARyQACfHylRTkFiUWJuXopqUml6YIaBkQCYXYX1xBHT59gAGx0n1DjAAAA\"}"
+}

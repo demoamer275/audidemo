@@ -34,11 +34,29 @@ function toDamPath(url, assets) {
   return `${DAM_FOLDER}/${safe}`;
 }
 
+/**
+ * Images without a file name (e.g. mediaservice.audi.com renders) that a parser tagged with
+ * data-dam-name="<folder>/<name>" (folder relative to DAM_FOLDER, e.g. "cards/audi-a3").
+ * The extension follows the source format (png unless the URL says otherwise).
+ */
+function toNamedDamPath(img, assets) {
+  const name = img.getAttribute('data-dam-name');
+  if (!name) return null;
+  img.removeAttribute('data-dam-name');
+  const src = (img.getAttribute('src') || '').trim();
+  if (!/^https?:/i.test(src)) return null;
+  const ext = (src.split('?')[0].match(/\.(png|jpe?g|webp|gif|svg)$/i) || [null, 'png'])[1].toLowerCase();
+  const safe = name.split('/').map((part) => part.replace(/[^A-Za-z0-9._-]+/g, '-')).join('/');
+  const key = `${safe}.${ext}`;
+  assets[key] = src;
+  return `${DAM_FOLDER}/${key}`;
+}
+
 function rewrite(root, document, origin) {
   const report = document.excatCleanupReport || {};
   const assets = report.damAssets || {};
   root.querySelectorAll('img[src]').forEach((img) => {
-    const dam = toDamPath(img.getAttribute('src'), assets);
+    const dam = toNamedDamPath(img, assets) || toDamPath(img.getAttribute('src'), assets);
     if (dam) img.setAttribute('src', dam);
   });
   root.querySelectorAll('source[srcset], img[srcset]').forEach((el) => {

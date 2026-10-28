@@ -1,0 +1,38 @@
+{
+  "variantName": "model-filter",
+  "baseBlock": "model-filter",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Statische Filterleiste des Modellfinders: beschriftete Gruppen von Pill-Buttons (Antriebstyp, Modelle, Fahrzeugtyp) und eine Linkzeile",
+    "layout": "vertical stack in a ~230px left rail (filter-rail section), full width on mobile",
+    "behaviour": "non-functional: pills render as <button type=\"button\" aria-disabled=\"true\">, no filtering, no selected state",
+    "icon": "optional :charging: icon before a pill label"
+  },
+  "contentPattern": {
+    "structure": "group item: cell 1 label (text), cell 2 buttons (richtext ul, one li per pill); links item: one richtext cell with plain links",
+    "itemCount": "3 groups + 1 links item",
+    "authoredIn": "shared fragment /language-masters/de/fragments/model-filter, included via the fragment block"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "/language-masters/de/fragments/model-filter"
+    ],
+    "reuseCount": 0,
+    "lastUsed": "2026-10-27",
+    "instances": [
+      {
+        "url": "https://www.audi.de/de/neuwagen/",
+        "section": "Modellfinder (Filterleiste)",
+        "items": 4
+      },
+      {
+        "url": "https://www.audi.de/de/neuwagen/?bycarlinegroup=a3",
+        "section": "Modellfinder (Filterleiste)",
+        "items": 4
+      }
+    ]
+  },
+  "reuseGuidance": "Author once in the shared fragment; place the fragment in a section with style filter-rail. Not a working filter."
+}

@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/?excat-fragment=model-filter",
+  "path": "language-masters/de/neuwagen/fragments/model-filter",
+  "timestamp": "2026-10-27T20:22:42.327Z",
+  "title": "model-filter fragment",
+  "template": "neuwagen-finder",
+  "blocks": [
+    "model-filter"
+  ],
+  "livechatWidgetsRemoved": 0,
+  "damAssets": "{}"
+}

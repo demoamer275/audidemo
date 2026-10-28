@@ -1,0 +1,32 @@
+{
+  "variantName": "cards-model",
+  "baseBlock": "cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "purpose": "Modell-Kacheln: Badges, Fahrzeugbild, Modellname, Preis, Konfigurieren (primär), Entdecken (sekundär), Börsen-Links, Verbrauchsangaben",
+    "layout": "1 / 2 / 3 columns (mobile / 600px / 1200px)",
+    "image": "car cut-out, linked to the Entdecken target",
+    "extras": "WLTP consumption text with footnote <sup>"
+  },
+  "contentPattern": {
+    "structure": "cell 1: image (+ alt); cell 2: richtext ul badges, h2 name, price p with <sup>, **Konfigurieren** link, *Entdecken* link, plain stock links; cell 3: consumption richtext. Every part optional.",
+    "itemCount": "1..10 per carline page"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "/language-masters/de/neuwagen/a3"
+    ],
+    "reuseCount": 0,
+    "lastUsed": "2026-10-27",
+    "instances": [
+      {
+        "url": "https://www.audi.de/de/neuwagen/?bycarlinegroup=a3",
+        "section": "Modellfinder (Ergebnisse)",
+        "items": 9
+      }
+    ]
+  },
+  "reuseGuidance": "Use for purchasable model tiles on carline result pages; no compare checkbox."
+}

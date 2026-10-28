@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/q5/q5-sportback/",
+  "path": "language-masters/de/neuwagen/q5/q5-sportback",
+  "timestamp": "2026-10-27T17:22:04.513Z",
+  "title": "Q5 Sportback Highlights | Audi Deutschland",
+  "template": "neuwagen-model",
+  "blocks": [
+    "hero-video",
+    "cards-stats",
+    "carousel-cards",
+    "columns-gallery",
+    "columns-media-text",
+    "cards-teaser"
+  ],
+  "livechatWidgetsRemoved": 1,
+  "damAssets": "{\"Q5_2024_7162_2_withoutcast-S.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:f6d6f556-eda1-4088-a36b-94417d0caa3c/original/as/Q5_2024_7162_2_withoutcast-S.jpg\",\"Q5_2024_7168_2-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:32cc0ba3-c955-4ef4-96d8-3c664058971c/original/as/Q5_2024_7168_2-L.jpg\",\"Q5_2024_7163_V2-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:5abcedb3-0e67-4c09-bde1-c79ccb768eac/original/as/Q5_2024_7163_V2-L.jpg\",\"Q5_2024_7176_2_DE-S-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:f37c40c6-619d-4ae0-bc96-5b3dedf7cf72/original/as/Q5_2024_7176_2_DE-S-L.jpg\",\"Q5_2024_7190_2_DE-S-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:882da86e-425f-46d8-b034-fb9c22954c14/original/as/Q5_2024_7190_2_DE-S-L.jpg\",\"Q5_2024_7168_2-S-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:2377205a-d5ad-4993-a7d0-143f36f0a9df/original/as/Q5_2024_7168_2-S-L.jpg\",\"Q5_2024_7192-S-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:50ae1705-8f31-43d6-83bd-2f644ebe46f9/original/as/Q5_2024_7192-S-L.jpg\",\"Q5_2024_7162_2_withoutcast-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:295f94f9-97f6-4851-b84f-3e5de96dd542/original/as/Q5_2024_7162_2_withoutcast-L.jpg\",\"Q5_2024_7176_2_DE-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:b82281c7-1a94-4236-9cf1-2916e267bed6/original/as/Q5_2024_7176_2_DE-L.jpg\",\"ADM_as_2025_7857-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:e0b7d047-a645-4cec-9d03-3e2d90f06e5c/original/as/ADM_as_2025_7857-L.jpg\",\"Q3_SB_2025_8112-S-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:e2f18ce2-2d3d-4c5c-8937-c71a002dd0a7/original/as/Q3_SB_2025_8112-S-L.jpg\",\"Q4_e_tron_PA_SB_AU316_Alpha_A_3_000_V6V6_Light-L.png\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:2731c7f1-f7f8-451d-b3e7-d6be9c96c08c/original/as/Q4_e_tron_PA_SB_AU316_Alpha_A_3_000_V6V6_Light-L.png\",\"Q8_2023_5476_1-L-2.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:a8537579-2c45-42dc-b99a-95dc5f1b25fd/original/as/Q8_2023_5476_1-L-2.jpg\",\"Q5_2024_7168_1-L.jpg\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:39700376-e363-4113-9a49-fc6d00009c94/original/as/Q5_2024_7168_1-L.jpg\",\"20251103_Q5_SB_EU-Headeranimation.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:2f9fbe4a-e1a4-4291-8b41-93f5be45fc26/original/as/20251103_Q5_SB_EU-Headeranimation.mp4\",\"Q5_Sportback_Rearprojection_1920x1920.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:66180091-d4cd-448c-a93d-7a928b1cc579/original/as/Q5_Sportback_Rearprojection_1920x1920.mp4\",\"Q5_Sportback_Light_Signature_1920x1920.mp4\":\"https://emea-dam.audi.com/adobe/assets/urn:aaid:aem:9e2912d9-9f6d-4f9e-8d11-419c098eb00a/original/as/Q5_Sportback_Light_Signature_1920x1920.mp4\"}"
+}
