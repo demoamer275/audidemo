@@ -273,7 +273,8 @@ export default {
     const rawPath = new URL(params.originalURL).pathname
       .replace(/\/$/, '')
       .replace(/\.html?$/, '');
-    const path = WebImporter.FileUtils.sanitizePath(rawPath === '' ? '/index' : rawPath);
+    // pages live under the AEM language root: /content/audidemo/language-masters/<source path>
+    const path = WebImporter.FileUtils.sanitizePath(`/language-masters${rawPath === '' ? '/index' : rawPath}`);
 
     const cleanupReport = document.excatCleanupReport || {};
     const livechatWidgetsRemoved = cleanupReport.livechatWidgetsRemoved

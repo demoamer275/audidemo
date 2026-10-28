@@ -1,0 +1,140 @@
+/* cards-carline: carline tiles, whole tile links to the carline page (base layout only) */
+.cards-carline > ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-carline > ul > li {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    'title badge'
+    'image image'
+    'count count';
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  margin: 0;
+  padding: 16px;
+  border-radius: 20px;
+  background: linear-gradient(#232a34 0%, #181d25 100%);
+  box-shadow: inset 0 0 0 1px #2c343f;
+  transition: box-shadow 0.25s ease;
+}
+
+.cards-carline > ul > li:hover {
+  box-shadow: inset 0 0 0 1px #4c5361;
+}
+
+/* body cell: its title and count link become items of the tile grid */
+.cards-carline .cards-carline-body {
+  display: contents;
+}
+
+.cards-carline .cards-carline-badge {
+  grid-area: badge;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background-color: rgb(154 163 177 / 10%);
+  line-height: 0;
+}
+
+.cards-carline .cards-carline-badge .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.cards-carline .cards-carline-image {
+  grid-area: image;
+  line-height: 0;
+}
+
+.cards-carline .cards-carline-image p {
+  margin: 0;
+}
+
+.cards-carline .cards-carline-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 7 / 3;
+  object-fit: contain;
+}
+
+.cards-carline .cards-carline-body h2,
+.cards-carline .cards-carline-body h3 {
+  grid-area: title;
+  margin: 0;
+  padding: 2px 8px;
+  color: var(--text-color-secondary);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: normal;
+}
+
+.cards-carline .cards-carline-body p {
+  grid-area: count;
+  margin: 0;
+  padding: 12px 8px 0;
+  color: var(--text-color-secondary);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.cards-carline a.cards-carline-link:any-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color-secondary);
+  text-decoration: none;
+}
+
+/* stretched link: the count link covers the whole tile */
+.cards-carline a.cards-carline-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.cards-carline a.cards-carline-link:focus-visible {
+  outline: none;
+}
+
+.cards-carline > ul > li:has(a.cards-carline-link:focus-visible) {
+  outline: 2px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+.cards-carline a.cards-carline-link .icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  color: var(--text-color);
+}
+
+@media (width >= 600px) {
+  .cards-carline > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .cards-carline > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 1200px) {
+  .cards-carline > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

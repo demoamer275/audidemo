@@ -1,0 +1,33 @@
+{
+  "variantName": "cards-carline",
+  "baseBlock": "cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "purpose": "Modellreihen-Kacheln: Fahrzeugbild, Titel, Modellanzahl als Link zur Modellreihen-Seite",
+    "layout": "1 / 2 / 3 columns (mobile / 600px / 1200px)",
+    "image": "car cut-out, contain",
+    "interaction": "whole tile clickable via the count link (stretched link), decorative chevron",
+    "badge": "charging icon (aria-label Elektromodell) when electric is true"
+  },
+  "contentPattern": {
+    "structure": "cell 1: image (+ alt); cell 2: richtext h2 title + paragraph with count link; cell 3: electric boolean",
+    "itemCount": "1..n (15 on the overview)"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "/language-masters/de/neuwagen"
+    ],
+    "reuseCount": 0,
+    "lastUsed": "2026-10-27",
+    "instances": [
+      {
+        "url": "https://www.audi.de/de/neuwagen/",
+        "section": "Modellfinder (Ergebnisse)",
+        "items": 15
+      }
+    ]
+  },
+  "reuseGuidance": "Use for carline/category tiles that each link to one detail page; for model tiles with price and CTAs use cards-model."
+}

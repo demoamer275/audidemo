@@ -22,13 +22,28 @@
       "cards-stats",
       "carousel-cards",
       "columns-gallery",
-      "fragment"
+      "fragment",
+      "model-filter",
+      "cards-carline",
+      "cards-model"
+    ]
+  },
+  {
+    "id": "cards-carline",
+    "components": [
+      "cards-carline-card"
     ]
   },
   {
     "id": "cards-image-overlay",
     "components": [
       "cards-image-overlay-card"
+    ]
+  },
+  {
+    "id": "cards-model",
+    "components": [
+      "cards-model-card"
     ]
   },
   {
@@ -80,6 +95,12 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "model-filter",
+    "components": [
+      "model-filter-group"
     ]
   }
 ]

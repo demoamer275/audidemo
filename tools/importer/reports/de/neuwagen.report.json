@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "url": "https://www.audi.de/de/neuwagen/?excat-fragment=model-filter",
+  "path": "de/neuwagen",
+  "timestamp": "2026-10-27T20:19:55.089Z",
+  "error": "CustomImportScript.default not found after 10s. The bundled script may not have loaded correctly. Check browser console for errors.",
+  "errorStack": "Error: CustomImportScript.default not found after 10s. The bundled script may not have loaded correctly. Check browser console for errors.\n    at processUrl (file:///home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:665:13)\n    at async main (file:///home/node/.excat-marketplaces/excat-marketplace/excat/skills/excat-content-import/scripts/run-bulk-import.js:957:22)"
+}

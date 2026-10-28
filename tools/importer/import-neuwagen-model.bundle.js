@@ -765,8 +765,18 @@ var CustomImportScript = (() => {
   var SOURCE_ORIGIN = "https://www.audi.de";
   var AUDI_HOSTS = ["www.audi.de", "audi.de"];
   var MIGRATED_PATHS = [
-    "/de/elektromobilitaet/"
+    "/de/elektromobilitaet/",
+    "/de/neuwagen/a3/a3-limousine/",
+    "/de/neuwagen/a3/a3-allstreet/",
+    "/de/neuwagen/a3/a3-sportback-e-hybrid/",
+    "/de/neuwagen/a3/a3-sportback/",
+    "/de/neuwagen/a2-e-tron/a2-e-tron/",
+    "/de/neuwagen/q5/q5-suv/",
+    "/de/neuwagen/q5/q5-suv-e-hybrid/",
+    "/de/neuwagen/q5/q5-sportback/",
+    "/de/neuwagen/q5/q5-sportback-e-hybrid/"
   ];
+  var CONTENT_ROOT = "/language-masters";
   var CONFIGURATOR_PATH_RE = /(konfigurator|configurator|configure)/i;
   var CONFIGURATOR_HOST_RE = /^(configurator|konfigurator)\./i;
   var TRACKING_HOST_RE = /(googlesyndication|doubleclick|facebook\.com\/tr|facebook\.net|connect\.facebook|google-analytics|googletagmanager|googleadservices|adservice\.google|bat\.bing|analytics\.|pixel\.|adnxs|krxd|everesttech|mathtag|demdex|omtrdc|linkedin\.com\/px|ads\.linkedin|t\.co\/i|analytics\.twitter|criteo|taboola|outbrain|hotjar|scorecardresearch)/i;
@@ -823,7 +833,7 @@ var CustomImportScript = (() => {
       if (!isAudi) return;
       const migrated = MIGRATED_PATHS.some((p) => normalizePath(url.pathname) === normalizePath(p));
       if (migrated) {
-        a.setAttribute("href", `${url.pathname}${url.search}${url.hash}`);
+        a.setAttribute("href", `${SOURCE_ORIGIN}${CONTENT_ROOT}${url.pathname}${url.search}${url.hash}`);
       } else {
         a.setAttribute("href", `${SOURCE_ORIGIN}${url.pathname}${url.search}${url.hash}`);
       }
@@ -1381,7 +1391,7 @@ var CustomImportScript = (() => {
         console.error("DAM asset transformer failed:", e);
       }
       const rawPath = new URL(params.originalURL).pathname.replace(/\/$/, "").replace(/\.html?$/, "");
-      const path = WebImporter.FileUtils.sanitizePath(rawPath === "" ? "/index" : rawPath);
+      const path = WebImporter.FileUtils.sanitizePath(`/language-masters${rawPath === "" ? "/index" : rawPath}`);
       const cleanupReport = document.excatCleanupReport || {};
       const livechatWidgetsRemoved = (_b = (_a = cleanupReport.livechatWidgetsRemoved) != null ? _a : params && params.livechatWidgetsRemoved) != null ? _b : 0;
       return [{

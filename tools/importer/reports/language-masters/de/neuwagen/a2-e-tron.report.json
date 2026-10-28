@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/?bycarlinegroup=a2etron",
+  "path": "language-masters/de/neuwagen/a2-e-tron",
+  "timestamp": "2026-10-27T20:40:13.643Z",
+  "title": "Modelle | Audi Deutschland",
+  "template": "neuwagen-finder",
+  "blocks": [
+    "fragment",
+    "cards-model"
+  ],
+  "livechatWidgetsRemoved": 1,
+  "damAssets": "{\"cards/a2-e-tron.png\":\"https://mediaservice.audi.com/media/fast/v3_x2TW4gbdRSH_37Zdre57syy0006TZadSVhH0k4uZjeVgCkqVKFWe_PykE6S2c3UTTZMJjFVoVgURFsQqfUGWltB0K0ofbBSKaLimyIoKEXQ9klwRanQegFx4svHOYfzO_w4nLP2q9jQdwUP71z7Y_OfGyf2_YQQw64QgZ0i0O0s3ySEaLLJaVvL9nY_3zxr5bL20Mtag-72vJlfyFb3F3LDbM7cnbVWVrLVfEyM-xqxwVci-xiL-IiqPiaOif85mnlqhDdHOfmA3z30gwdHOhGd6rsrXcu12ttcu9dd7fScgS3N22WrbOVz5aJdr9cXF0v1smUu1QvlJdMsFXNmwS6Um43GrQ3ZH_GOCDTtvpg8XK_1nKZdyxVNc1gyc2Jjq9GxHFeMjZxjPMvWK0w_j7IX5SWU8xhPEf-XRJXESRJrJC5gHEB9ldQ5UhdJfY3xHHPX0cA4jnYY7TfSf5N5gUwdcTvGLsIu4deIvE1MIbbAzJNs-QK1g1ondRvpXaRvIOKIB5A-Rp5i-iRKkcQSqow6ix5AN9Avk_6A4DjBtwiXiBYxHkc6iryKfAbjPuKPEL-GHkN_A_1L0iVCdxO6jrSOcpbIe0QuIe1AqiF9hvQV8r3IfaZPEP8IdTfzt5C8TPIGyX9ITZCaJDWL8RBzv6Al0E6heWiX0Pej_05aJq2T_pHIaSLniXWY_JCbTxNbZKbHzCsYh4ifIXGQxEUS36A2SH5C8lNi3zP_NMozGMeYu0L6c8Q44ijGnWy6SvB-gm2CrxM8S_AHQocIHSF0lXCYsO__BJFviUaI3kP0INEu0ePEqhjvE3-RLV3Ud0ntIDVg7i-0eaS7kCPE_c0cwdiK9jPRdWLrSGNIL2M8gfIYynf-aSzbnYHjrnbadser7PX6TWc186jT9FqVolkuZVq2s9zyKgVzIZ-xVrotq-K5fTvTsNq2a1WqB_bk76hVa4WaaZoZq-N_hef4B1rJtG3PalqeNbDdnl-p5KcCfvN_25OpJF0DAAA.png\"}"
+}

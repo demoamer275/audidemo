@@ -14,6 +14,10 @@
  *    each name; a different asset with a taken name gets a short asset-id suffix
  *    (<name>-<id8>.<ext>) and the page's references are rewritten to it.
  *
+ * 4. Page links: links between migrated pages are emitted as
+ *    `https://www.audi.de/language-masters/...`; restore the root-relative
+ *    `/language-masters/...` form.
+ *
  * Usage: node tools/importer/post-import-dam.mjs <report.json> [<report.json> ...]
  */
 import fs from 'node:fs';
@@ -22,6 +26,7 @@ import path from 'node:path';
 const ROOT = process.cwd();
 const DAM_DIR = path.join(ROOT, 'content', 'content', 'dam', 'audidemo');
 const ABS_DAM = /https?:\/\/(?:www\.)?audi\.de(\/content\/dam\/audidemo\/)/g;
+const ABS_PAGE = /https?:\/\/(?:www\.)?audi\.de(\/language-masters\/)/g;
 const REGISTRY = path.join(ROOT, 'tools', 'importer', 'dam-assets-registry.json');
 const registry = fs.existsSync(REGISTRY) ? JSON.parse(fs.readFileSync(REGISTRY, 'utf8')) : {};
 
@@ -63,8 +68,9 @@ for (const reportPath of reports) {
   const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
   const page = path.join(ROOT, 'content', `${report.path}.plain.html`);
   const html = fs.readFileSync(page, 'utf8');
-  let fixed = html.replace(ABS_DAM, '$1');
+  let fixed = html.replace(ABS_DAM, '$1').replace(ABS_PAGE, '$1');
   const fixedCount = (html.match(ABS_DAM) || []).length;
+  const pageLinks = (html.match(ABS_PAGE) || []).length;
 
   const assets = typeof report.damAssets === 'string' ? JSON.parse(report.damAssets || '{}') : (report.damAssets || {});
   const renamed = [];
@@ -78,11 +84,13 @@ for (const reportPath of reports) {
     }
   }
   if (fixed !== html) fs.writeFileSync(page, fixed);
-  console.log(`${report.path}: ${fixedCount} DAM link(s) restored${renamed.length ? `, renamed: ${renamed.join(', ')}` : ''}`);
+  console.log(`${report.path}: ${fixedCount} DAM link(s), ${pageLinks} page link(s) restored${renamed.length ? `, renamed: ${renamed.join(', ')}` : ''}`);
 
   for (const [file, url] of Object.entries(assets)) {
     try {
-      const res = await download(url, path.join(DAM_DIR, file));
+      const dest = path.join(DAM_DIR, file);
+      fs.mkdirSync(path.dirname(dest), { recursive: true }); // e.g. cards/<name>.png
+      const res = await download(url, dest);
       console.log(`  ✓ ${file} (${res})`);
     } catch (e) {
       failures += 1;

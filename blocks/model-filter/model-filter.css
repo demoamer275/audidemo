@@ -1,0 +1,72 @@
+/* model-filter: static pill groups + links (base layout only) */
+.model-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.model-filter .model-filter-label {
+  margin: 0 0 8px;
+  color: var(--text-color-secondary);
+  font-size: var(--body-font-size-xs);
+  line-height: 20px;
+}
+
+.model-filter .model-filter-label p {
+  margin: 0;
+}
+
+.model-filter .model-filter-buttons > p {
+  margin: 0;
+}
+
+.model-filter ul.model-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.model-filter ul.model-filter-pills > li {
+  margin: 0;
+}
+
+.model-filter .model-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 4px 12px;
+  border: 1px solid var(--light-color);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  line-height: 20px;
+  cursor: default;
+}
+
+.model-filter .model-filter-pill .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.model-filter .model-filter-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.model-filter .model-filter-links p {
+  margin: 0;
+}
+
+.model-filter .model-filter-links a:any-link {
+  color: var(--link-color);
+  font-size: var(--body-font-size-s);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}

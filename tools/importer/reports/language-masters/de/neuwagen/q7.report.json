@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://www.audi.de/de/neuwagen/?bycarlinegroup=q7",
+  "path": "language-masters/de/neuwagen/q7",
+  "timestamp": "2026-10-27T20:16:35.520Z",
+  "title": "Modelle | Audi Deutschland",
+  "template": "neuwagen-finder",
+  "blocks": [
+    "fragment",
+    "cards-model"
+  ],
+  "livechatWidgetsRemoved": 1,
+  "damAssets": "{\"cards/q7-suv.png\":\"https://mediaservice.audi.com/media/fast/v3_1vzloG1tIiBKdppzWfxH2wcIQ-YGBgqChgYGE4wMBfkpTMCWSlMnJm5iemp-kC-OH9aTmV-aUmxvpGBkbluoTk_IztUhB2olJGH4Wdzv6Sh50eFh52zTiU5L5xc0nYhn4EVaA6jOJBgjgASfEeABEcnA5gE2ZABIvJBfCZjZgYG1gogI5IBBPj4SotyChKLEnP1UlKTStMFNQyIBMLsLq4hjp4-wQBRTCXI4wAAAA\"}"
+}

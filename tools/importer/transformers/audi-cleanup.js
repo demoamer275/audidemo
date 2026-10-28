@@ -39,7 +39,22 @@ const AUDI_HOSTS = ['www.audi.de', 'audi.de'];
  */
 const MIGRATED_PATHS = [
   '/de/elektromobilitaet/',
+  '/de/neuwagen/a3/a3-limousine/',
+  '/de/neuwagen/a3/a3-allstreet/',
+  '/de/neuwagen/a3/a3-sportback-e-hybrid/',
+  '/de/neuwagen/a3/a3-sportback/',
+  '/de/neuwagen/a2-e-tron/a2-e-tron/',
+  '/de/neuwagen/q5/q5-suv/',
+  '/de/neuwagen/q5/q5-suv-e-hybrid/',
+  '/de/neuwagen/q5/q5-sportback/',
+  '/de/neuwagen/q5/q5-sportback-e-hybrid/',
 ];
+
+/**
+ * Migrated pages live under the AEM language root (/content/audidemo/language-masters/...),
+ * so links between them are rewritten to /language-masters/<source path>.
+ */
+const CONTENT_ROOT = '/language-masters';
 
 const CONFIGURATOR_PATH_RE = /(konfigurator|configurator|configure)/i;
 const CONFIGURATOR_HOST_RE = /^(configurator|konfigurator)\./i;
@@ -111,7 +126,10 @@ function rewriteLinks(root) {
 
     const migrated = MIGRATED_PATHS.some((p) => normalizePath(url.pathname) === normalizePath(p));
     if (migrated) {
-      a.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+      // The importer absolutizes root-relative hrefs after laying out block tables (which
+      // can break them); emit the absolute form up front, post-import-dam.mjs restores
+      // /language-masters/... afterwards.
+      a.setAttribute('href', `${SOURCE_ORIGIN}${CONTENT_ROOT}${url.pathname}${url.search}${url.hash}`);
     } else {
       a.setAttribute('href', `${SOURCE_ORIGIN}${url.pathname}${url.search}${url.hash}`);
     }

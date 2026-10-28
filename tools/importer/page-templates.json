@@ -281,6 +281,100 @@
           ]
         }
       ]
+    },
+    {
+      "name": "neuwagen-finder",
+      "urls": [
+        "https://www.audi.de/de/neuwagen/",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=a2etron",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=a3",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=a5",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=a6",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=a6etron",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=q3",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=q4",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=q5",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=q6",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=q7",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=q8",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=q9",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=etrongt",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=nuvolari",
+        "https://www.audi.de/de/neuwagen/?bycarlinegroup=f1"
+      ],
+      "representativeUrl": "https://www.audi.de/de/neuwagen/",
+      "description": "Audi model finder: overview of model lines and one filtered page per model line (bycarlinegroup); shared static filter rail fragment",
+      "urlPattern": "/de/neuwagen/",
+      "blocks": [
+        {
+          "name": "fragment",
+          "instances": [
+            "[class*='FeatureApp__FilterWrapperDesktop']"
+          ]
+        },
+        {
+          "name": "cards-carline",
+          "instances": [
+            "[class*='Results__GroupCardGrid']"
+          ]
+        },
+        {
+          "name": "cards-model",
+          "instances": [
+            "[class*='CardList__CardListWrapper']"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Modellfinder (Filterleiste + Ergebnisse)",
+          "selector": [
+            "feature-app[base-url*='fa-model-selector']",
+            "#main-content"
+          ],
+          "style": "filter-rail",
+          "blocks": [
+            "fragment",
+            "cards-carline",
+            "cards-model"
+          ],
+          "defaultContent": [
+            "[class*='ResultCountHeader__CountWrapper']",
+            "[class*='Disclaimer__StyledDisclaimer']"
+          ]
+        },
+        {
+          "id": "section-2",
+          "name": "Fußnoten",
+          "selector": [
+            ".audi-footnote-engine",
+            "feature-app:has(.audi-footnote-engine)"
+          ],
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": [
+            ".audi-footnote-engine ul"
+          ]
+        }
+      ],
+      "carlineGroups": {
+        "Audi A2 e-tron": "a2etron",
+        "Audi A3": "a3",
+        "Audi A5": "a5",
+        "Audi A6": "a6",
+        "Audi A6 e-tron": "a6etron",
+        "Audi Q3": "q3",
+        "Audi Q4 e-tron": "q4",
+        "Audi Q5": "q5",
+        "Audi Q6 e-tron": "q6",
+        "Audi Q7": "q7",
+        "Audi Q8": "q8",
+        "Audi Q9": "q9",
+        "Audi e-tron GT": "etrongt",
+        "Audi Nuvolari": "nuvolari",
+        "Audi F1": "f1"
+      }
     }
   ]
 }

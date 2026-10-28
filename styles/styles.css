@@ -337,3 +337,85 @@ main .section.highlight {
     padding-bottom: 56px;
   }
 }
+
+/* section style: filter-rail (fragment rail left, results right; stacked on mobile) */
+main > .section.filter-rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  padding-left: var(--page-padding);
+  padding-right: var(--page-padding);
+}
+
+main > .section.filter-rail > div {
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+main > .section.filter-rail > .fragment-wrapper {
+  margin-bottom: 32px;
+}
+
+main > .section.filter-rail > .fragment-wrapper .section {
+  padding: 0;
+}
+
+main > .section.filter-rail > .fragment-wrapper .section > div {
+  margin: 0;
+  padding: 0;
+}
+
+/* result count line: "Alle Modelle (61)" (h1 kept for semantics, styled as a small label) */
+main > .section.filter-rail > .default-content-wrapper:has(h1) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+  padding-bottom: 16px;
+}
+
+main > .section.filter-rail > .default-content-wrapper:has(h1) > h1,
+main > .section.filter-rail > .default-content-wrapper:has(h1) > p {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: normal;
+}
+
+main > .section.filter-rail > div:not(.fragment-wrapper) + div:not(.fragment-wrapper) {
+  margin-top: 24px;
+}
+
+main > .section.filter-rail > .default-content-wrapper:has(h1) + div:not(.fragment-wrapper) {
+  margin-top: 0;
+}
+
+@media (width >= 900px) {
+  /* trailing 1fr row absorbs the extra height when the rail is taller than the results */
+  main > .section.filter-rail {
+    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-rows: repeat(6, auto) 1fr;
+    column-gap: 32px;
+  }
+
+  main > .section.filter-rail > .fragment-wrapper {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    margin-bottom: 0;
+  }
+
+  main > .section.filter-rail > div:not(.fragment-wrapper) {
+    grid-column: 2;
+  }
+}
+
+@media (width >= 1200px) {
+  main > .section.filter-rail {
+    grid-template-columns: 230px minmax(0, 1fr);
+    column-gap: 40px;
+  }
+}
