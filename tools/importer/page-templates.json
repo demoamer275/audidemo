@@ -244,7 +244,7 @@
           "selector": [
             "feature-app[id^='fa9786fe']"
           ],
-          "style": null,
+          "style": "split",
           "blocks": [],
           "defaultContent": [
             "feature-app[id^='fa9786fe'] img",
@@ -375,6 +375,157 @@
         "Audi Nuvolari": "nuvolari",
         "Audi F1": "f1"
       }
+    },
+    {
+      "name": "home",
+      "urls": [
+        "https://www.audi.de/de/"
+      ],
+      "representativeUrl": "https://www.audi.de/de/",
+      "description": "Audi Germany home page (/de/): stages, model line slider, offers carousel, content tiles, stock teaser, topic teasers",
+      "blocks": [
+        {
+          "name": "hero-video",
+          "instances": [
+            "[class*='StageContainer__StageContainerWrap']"
+          ]
+        },
+        {
+          "name": "carline-slider",
+          "instances": [
+            "feature-app[id^='a23eb832']"
+          ]
+        },
+        {
+          "name": "carousel-cards",
+          "instances": [
+            ".faCarousel"
+          ]
+        },
+        {
+          "name": "cards-image-overlay",
+          "instances": [
+            "feature-app:has([class*='StyledContentTileContainer'])",
+            "[class*='styles__Container']:has(> [class*='StyledContentTileContainer'])"
+          ]
+        },
+        {
+          "name": "cards-teaser",
+          "instances": [
+            "feature-app:has([class*='EditorialTeaserContainer'])",
+            "[class*='EditorialTeaserContainer']"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Stage Leasingangebote",
+          "selector": [
+            "feature-app[id='5d9c657e-4f06-4861-829e-752bfd4d9b7f-1']"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-video"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Modellreihen (Carline Slider)",
+          "selector": [
+            "feature-app[id^='a23eb832']"
+          ],
+          "style": null,
+          "blocks": [
+            "carline-slider"
+          ],
+          "defaultContent": [
+            "[class*='ExploreCompareButtons__ButtonWrapper'] a"
+          ]
+        },
+        {
+          "id": "section-3",
+          "name": "Neueste Modelle und Angebote",
+          "selector": [
+            "feature-app[id^='3f189a36']"
+          ],
+          "style": null,
+          "blocks": [
+            "carousel-cards"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-4",
+          "name": "Jetzt kaufen oder leasen",
+          "selector": [
+            "feature-app[data-heading-for='27fb1208']",
+            "feature-app[id^='27fb1208']"
+          ],
+          "style": "centered",
+          "blocks": [
+            "cards-image-overlay"
+          ],
+          "defaultContent": [
+            "feature-app[data-heading-for='27fb1208'] h2"
+          ]
+        },
+        {
+          "id": "section-5",
+          "name": "Stage A6 allroad",
+          "selector": [
+            "feature-app[id='5d9c657e-4f06-4861-829e-752bfd4d9b7f-2']"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-video"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-6",
+          "name": "Direkt verfügbare Fahrzeuge (Vehicle Stock Teaser)",
+          "selector": [
+            "feature-app[id^='fa9786fe']"
+          ],
+          "style": "split",
+          "blocks": [],
+          "defaultContent": [
+            "feature-app[id^='fa9786fe'] img",
+            "feature-app[id^='fa9786fe'] h2",
+            "feature-app[id^='fa9786fe'] a"
+          ]
+        },
+        {
+          "id": "section-7",
+          "name": "Aktuelle Themen",
+          "selector": [
+            "feature-app[data-heading-for='a68d1551']",
+            "feature-app[id^='a68d1551']"
+          ],
+          "style": "centered",
+          "blocks": [
+            "cards-teaser"
+          ],
+          "defaultContent": [
+            "feature-app[data-heading-for='a68d1551'] h2"
+          ]
+        },
+        {
+          "id": "section-8",
+          "name": "Fußnoten",
+          "selector": [
+            ".audi-footnote-engine",
+            "feature-app:has(.audi-footnote-engine)"
+          ],
+          "style": "dark",
+          "blocks": [],
+          "defaultContent": [
+            ".audi-footnote-engine ul"
+          ]
+        }
+      ]
     }
   ]
 }

@@ -204,3 +204,61 @@ main .hero-video .hero-video-actions a.button:any-link:focus-visible {
     padding-bottom: 32px;
   }
 }
+
+/* variant "top" (Textposition: oben links, source appearanceContentPosition TopLeft):
+ * copy at the top left with a top-down shader; the home page stages use it */
+.hero-video.top .hero-video-text {
+  align-self: start;
+  padding-top: 24px;
+  padding-bottom: 32px;
+}
+
+.hero-video.top .hero-video-text h1,
+.hero-video.top .hero-video-text h2 {
+  margin: 0 0 8px;
+  color: var(--text-color);
+  font-family: var(--heading-font-family);
+  font-size: 28px;
+  font-stretch: var(--heading-font-stretch);
+  font-weight: 400;
+  line-height: 40px;
+}
+
+@media (width >= 600px) {
+  .hero-video.top .hero-video-text {
+    background: linear-gradient(rgb(0 0 0 / 40%) 0%, rgb(0 0 0 / 30%) 50%, rgb(255 255 255 / 0%) 100%);
+  }
+}
+
+@media (width >= 900px) {
+  /* source "Small" stage: 640px high at 1440px */
+  .hero-video.top .hero-video-media {
+    height: auto;
+    min-height: 568px;
+    aspect-ratio: 9 / 4;
+  }
+
+  .hero-video.top .hero-video-text h1,
+  .hero-video.top .hero-video-text h2 {
+    font-size: 36px;
+    line-height: 52px;
+  }
+}
+
+@media (width >= 1200px) {
+  .hero-video.top .hero-video-text {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .hero-video.top .hero-video-text > * {
+    max-width: 641px;
+  }
+
+  .hero-video.top .hero-video-text h1,
+  .hero-video.top .hero-video-text h2 {
+    margin: 0 0 16px;
+    font-size: 40px;
+    line-height: 60px;
+  }
+}

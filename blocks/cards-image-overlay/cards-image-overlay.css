@@ -115,15 +115,15 @@
 }
 
 @media (width >= 900px) {
+  /* three tiles per row; more tiles wrap into further rows (home page: 2 x 3) */
   .cards-image-overlay > ul {
-    flex-wrap: nowrap;
-    gap: 32px;
+    gap: 0 32px;
     margin: 0;
     padding: 28px 16px 0;
   }
 
   .cards-image-overlay > ul > li {
-    flex: 1 1 0;
+    flex: 0 0 calc((100% - 64px) / 3);
     width: auto;
     min-width: 0;
   }

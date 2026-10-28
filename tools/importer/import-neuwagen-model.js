@@ -154,7 +154,7 @@ const PAGE_TEMPLATE = {
       "selector": [
         "feature-app[id^='fa9786fe']"
       ],
-      "style": null,
+      "style": "split",
       "blocks": [],
       "defaultContent": [
         "feature-app[id^='fa9786fe'] img",

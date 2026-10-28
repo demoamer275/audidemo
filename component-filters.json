@@ -25,6 +25,7 @@
       "fragment",
       "model-filter",
       "cards-carline",
+      "carline-slider",
       "cards-model"
     ]
   },
@@ -62,6 +63,12 @@
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carline-slider",
+    "components": [
+      "carline-slider-card"
     ]
   },
   {

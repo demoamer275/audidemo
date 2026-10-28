@@ -45,6 +45,10 @@
             {
               "name": "Filter Rail",
               "value": "filter-rail"
+            },
+            {
+              "name": "Split (Text links, Bild rechts)",
+              "value": "split"
             }
           ]
         }
@@ -72,6 +76,7 @@
         "fragment",
         "model-filter",
         "cards-carline",
+        "carline-slider",
         "cards-model"
       ]
     }

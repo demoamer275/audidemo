@@ -148,6 +148,10 @@
           {
             "name": "Filter Rail",
             "value": "filter-rail"
+          },
+          {
+            "name": "Split (Text links, Bild rechts)",
+            "value": "split"
           }
         ]
       }
@@ -411,6 +415,58 @@
     ]
   },
   {
+    "id": "carline-slider",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "filters",
+        "label": "Filter-Buttons (Liste, ein Eintrag pro Button; statisch)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "count",
+        "label": "Ergebnisanzahl (z. B. 61 Modelle)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "carline-slider-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Bild",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alternativtext",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (Titel als H3, Modellanzahl als Link)",
+        "value": ""
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "electric",
+        "label": "Elektromodell",
+        "value": false
+      }
+    ]
+  },
+  {
     "id": "carousel-cards-slide",
     "fields": [
       {
@@ -574,6 +630,24 @@
         "name": "disclaimer",
         "label": "Verbrauchs- und Emissionsangaben",
         "value": ""
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "value": "",
+        "label": "Textposition",
+        "description": "Position von Überschrift, Text und Buttons auf der Bühne",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Unten links",
+            "value": ""
+          },
+          {
+            "name": "Oben links",
+            "value": "top"
+          }
+        ]
       }
     ]
   },

@@ -38,6 +38,8 @@ const AUDI_HOSTS = ['www.audi.de', 'audi.de'];
  * Extend this list as more pages are migrated (always with trailing slash).
  */
 const MIGRATED_PATHS = [
+  '/de/',
+  '/de/neuwagen/',
   '/de/elektromobilitaet/',
   '/de/neuwagen/a3/a3-limousine/',
   '/de/neuwagen/a3/a3-allstreet/',
@@ -124,7 +126,9 @@ function rewriteLinks(root) {
     const isAudi = isRootRelative || AUDI_HOSTS.includes(url.hostname.toLowerCase());
     if (!isAudi) return;
 
-    const migrated = MIGRATED_PATHS.some((p) => normalizePath(url.pathname) === normalizePath(p));
+    // a query string selects source-side state (e.g. ?byvehicletype=BEV) the migrated page lacks
+    const migrated = !url.search
+      && MIGRATED_PATHS.some((p) => normalizePath(url.pathname) === normalizePath(p));
     if (migrated) {
       // The importer absolutizes root-relative hrefs after laying out block tables (which
       // can break them); emit the absolute form up front, post-import-dam.mjs restores

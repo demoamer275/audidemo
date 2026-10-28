@@ -176,6 +176,10 @@ export default function parse(element, { document }) {
   }
 
   const cells = [[videoCell], [imageCell], [textCell], [disclaimerCell]];
-  const block = WebImporter.Blocks.createBlock(document, { name: 'hero-video', cells });
+  // text position (field "classes"): source appearanceContentPosition "TopLeft" -> variant top;
+  // "BottomLeft" (car pages) is the default layout
+  const position = String(fields.appearanceContentPosition || '');
+  const name = /^top/i.test(position) ? 'hero-video (top)' : 'hero-video';
+  const block = WebImporter.Blocks.createBlock(document, { name, cells });
   element.replaceWith(block);
 }

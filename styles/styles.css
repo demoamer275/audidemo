@@ -419,3 +419,56 @@ main > .section.filter-rail > .default-content-wrapper:has(h1) + div:not(.fragme
     column-gap: 40px;
   }
 }
+
+/* section style: split (stock teaser) - heading and buttons left, image right;
+ * stacked on mobile. Values from the audi.de vehicle stock teaser (1440px: 491px text,
+ * 56px gap, 701px image, 7:3, radius 20px) */
+main > .section.split > .default-content-wrapper > p:has(> picture) {
+  margin: 0 0 24px;
+}
+
+main > .section.split > .default-content-wrapper > p > picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 7 / 3;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  main > .section.split > .default-content-wrapper {
+    display: grid;
+
+    /* image column = 701/1248 of the content width + the 56px gap */
+    grid-template-columns: max-content max-content minmax(0, 1fr) calc(56.17% + 56px);
+    align-items: center;
+  }
+
+  main > .section.split > .default-content-wrapper > p:has(> picture) {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+    margin: 0 0 0 56px;
+  }
+
+  main > .section.split > .default-content-wrapper > h2 {
+    grid-column: 1 / 4;
+    grid-row: 1;
+    align-self: end;
+    margin: 0 0 24px;
+  }
+
+  main > .section.split > .default-content-wrapper > h2 + p {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    margin: 0 8px 0 0;
+  }
+
+  main > .section.split > .default-content-wrapper > h2 + p + p {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    margin: 0;
+  }
+}

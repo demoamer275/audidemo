@@ -12,6 +12,10 @@
  *                                                       rendered client-side, so the DOM is empty)
  *     .faCarousel__slideTitle (bold lead-in)          -> content_title as <h3>
  *     .faCarousel__slideDescription p                 -> content_text (keeps <sup>)
+ *     [data-testid$="-item-cta"] a (slide link)          -> content_text, link paragraph
+ *     [data-testid$="-item-wltp"] (consumption line)     -> content_text, last paragraph
+ *   carousel title (h2 inside the carousel)            -> <h2> before the block, unless a
+ *     separate headline app is tagged for this carousel (data-heading-for, car pages)
  *
  * Row per slide (model carousel-cards-slide): image | video | content_title + content_text
  * Media URLs are NOT rewritten here (the audi-dam-assets transformer does that).
@@ -158,6 +162,23 @@ export default function parse(element, { document }) {
     const textNodes = paras.length
       ? paras.map((p) => inline(p, 'p', document))
       : (desc && cleanText(desc.textContent) ? [inline(desc, 'p', document)] : []);
+    // slide link ("Audi Q9 entdecken und konfigurieren") and consumption line
+    const cta = li.querySelector('a[data-testid$="-item-cta"]');
+    if (cta && cleanText(cta.textContent) && cta.getAttribute('href')) {
+      const p = document.createElement('p');
+      const a = document.createElement('a');
+      a.setAttribute('href', cta.getAttribute('href'));
+      a.textContent = cleanText(cta.textContent);
+      p.appendChild(a);
+      textNodes.push(p);
+    }
+    const wltp = li.querySelector('[data-testid$="-item-wltp"]');
+    if (wltp && cleanText(wltp.textContent)) {
+      const line = inline(wltp, 'p', document);
+      // the source separates the values with spans: "…km;CO₂" -> "…km; CO₂"
+      line.innerHTML = line.innerHTML.replace(/;(?!\s|$)/g, '; ');
+      textNodes.push(line);
+    }
     if (textNodes.length) content.push(hinted(document, 'content_text', textNodes));
 
     const row = [imageCell, videoCell, content.length ? content : ''];
@@ -165,5 +186,17 @@ export default function parse(element, { document }) {
   });
 
   const block = WebImporter.Blocks.createBlock(document, { name: 'carousel-cards', cells });
-  element.replaceWith(block);
+
+  // carousel title: keep it as default content before the block (home page); car pages
+  // already carry it in a separate headline app tagged with data-heading-for
+  const app = element.closest('feature-app[id]');
+  const tagged = app && document.querySelector(`feature-app[data-heading-for="${app.id.slice(0, 8)}"]`);
+  const titleEl = [...element.querySelectorAll('h2')].find((h) => !h.closest('li'));
+  if (titleEl && !tagged && cleanText(titleEl.textContent)) {
+    const h2 = document.createElement('h2');
+    h2.textContent = cleanText(titleEl.textContent);
+    element.replaceWith(h2, block);
+  } else {
+    element.replaceWith(block);
+  }
 }

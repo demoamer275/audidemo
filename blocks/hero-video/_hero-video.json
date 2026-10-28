@@ -54,6 +54,24 @@
           "name": "disclaimer",
           "label": "Verbrauchs- und Emissionsangaben",
           "value": ""
+        },
+        {
+          "component": "select",
+          "name": "classes",
+          "value": "",
+          "label": "Textposition",
+          "description": "Position von Überschrift, Text und Buttons auf der Bühne",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Unten links",
+              "value": ""
+            },
+            {
+              "name": "Oben links",
+              "value": "top"
+            }
+          ]
         }
       ]
     }
