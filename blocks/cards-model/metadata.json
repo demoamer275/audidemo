@@ -16,10 +16,11 @@
   "memberVariantIds": [],
   "usage": {
     "pagesUsing": [
-      "/language-masters/de/neuwagen/a3"
+      "/language-masters/de/neuwagen/a3",
+      "/en/audi-q5-59"
     ],
-    "reuseCount": 0,
-    "lastUsed": "2026-10-27",
+    "reuseCount": 1,
+    "lastUsed": "2026-11-09",
     "instances": [
       {
         "url": "https://www.audi.de/de/neuwagen/?bycarlinegroup=a3",

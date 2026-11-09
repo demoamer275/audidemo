@@ -26,7 +26,11 @@
       "model-filter",
       "cards-carline",
       "carline-slider",
-      "cards-model"
+      "cards-model",
+      "cards-list",
+      "columns-panels",
+      "cards-gallery",
+      "table-datasheet"
     ]
   },
   {
@@ -36,9 +40,21 @@
     ]
   },
   {
+    "id": "cards-gallery",
+    "components": [
+      "cards-gallery-item"
+    ]
+  },
+  {
     "id": "cards-image-overlay",
     "components": [
       "cards-image-overlay-card"
+    ]
+  },
+  {
+    "id": "cards-list",
+    "components": [
+      "cards-list-item"
     ]
   },
   {
@@ -90,6 +106,12 @@
     ]
   },
   {
+    "id": "columns-panels",
+    "components": [
+      "column"
+    ]
+  },
+  {
     "id": "columns",
     "components": [
       "column"
@@ -108,6 +130,12 @@
     "id": "model-filter",
     "components": [
       "model-filter-group"
+    ]
+  },
+  {
+    "id": "table-datasheet",
+    "components": [
+      "table-datasheet-row"
     ]
   }
 ]

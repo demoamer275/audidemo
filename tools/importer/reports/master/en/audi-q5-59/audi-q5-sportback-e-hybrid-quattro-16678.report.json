@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "url": "https://www.audi.com/en/audi-q5-sportback-e-hybrid-quattro-16678",
+  "path": "master/en/audi-q5-59/audi-q5-sportback-e-hybrid-quattro-16678",
+  "timestamp": "2026-11-09T16:41:46.228Z",
+  "title": "Audi Q5 Sportback e-hybrid quattro | audi.com",
+  "template": "audicom-model",
+  "blocks": [
+    "cards-list",
+    "cards-gallery",
+    "table-datasheet",
+    "columns-panels"
+  ],
+  "audicomChromeRemoved": 30,
+  "audicomPageLinks": 0,
+  "damAssets": "{\"q5/A250648_web_2880.jpeg\":\"https://uploads.audi.com/system/production/media/127752/images/f050c33c8fefbf4c10050c5bb06c609a077bdbbf/A250648_web_2880.jpeg?1747302620\",\"q5/A250641_web_2880.jpg\":\"https://uploads.audi.com/system/production/media/127745/images/fbadbec9e9c832e7469cd152e9fb001214c87d5c/A250641_web_2880.jpg?1749213885\",\"q5/A260395_web_2880.jpg\":\"https://uploads.audi.com/system/production/media/129638/images/d15e2eae66099b10761fed4ce5065c74ce0ba4a0/A260395_web_2880.jpg?1772089226\",\"q5/A250651_web_2880.jpeg\":\"https://uploads.audi.com/system/production/media/127755/images/62a2e3b604b329248d16be27acfe5ae65de765b3/A250651_web_2880.jpeg?1747302619\",\"q5/A250650_web_2880.jpeg\":\"https://uploads.audi.com/system/production/media/127754/images/26c1631ae43f29244eacb03ea30923c94ae49c11/A250650_web_2880.jpeg?1747302621\",\"q5/A250652_web_2880.jpeg\":\"https://uploads.audi.com/system/production/media/127756/images/8f3ee477a40a988e308a77d93f8112f08b022dcc/A250652_web_2880.jpeg?1747302617\",\"q5/A250649_web_2880.jpeg\":\"https://uploads.audi.com/system/production/media/127753/images/f680d1cb286f72e8f2d65a014467367f4f2aef5d/A250649_web_2880.jpeg?1747302609\",\"q5/A250912_web_2880.jpg\":\"https://uploads.audi.com/system/production/media/128016/images/dc9123e7505025dc5053ea43a1cfafa3412f5af0/A250912_web_2880.jpg?1749563298\",\"q5/A250919_web_2880.jpg\":\"https://uploads.audi.com/system/production/media/128023/images/76b7ac0780e9027984564ec29e56a7d4f88f6259/A250919_web_2880.jpg?1749628104\",\"q5/A250924_web_2880.jpg\":\"https://uploads.audi.com/system/production/media/128028/images/4323c92d2bf2065915b5f22aae9293dfcef656f3/A250924_web_2880.jpg?1749628072\",\"q5/A250918_web_2880.jpg\":\"https://uploads.audi.com/system/production/media/128022/images/a7ac59eb2e57aee939f0be32e17f92210ecd2406/A250918_web_2880.jpg?1749628113\",\"q5/m_7879_en_web_2880.jpeg\":\"https://uploads.audi.com/system/production/media_videos/7879/thumbnail_file_en/7280cd0854c4fe72f4a5162a97d79d07e65b306f/m_7879_en_web_2880.jpeg?1749632946\",\"q5/public_Marcel_Hardetzki.jpg\":\"https://uploads.audi.com/system/production/media_contacts/727/photos/48260f454d815af3e51c82be67bd236dfaa97b70/public_Marcel_Hardetzki.jpg?1709634406\",\"q5/A250648_blog.jpeg\":\"https://uploads.audi.com/system/production/media/127752/images/f050c33c8fefbf4c10050c5bb06c609a077bdbbf/A250648_blog.jpeg?1747302620\"}"
+}

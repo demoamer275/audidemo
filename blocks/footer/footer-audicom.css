@@ -1,0 +1,158 @@
+/* audi.com footer (pages under /master/en), built by footer-audicom.js. Mobile first. */
+footer .footer.audicom {
+  --acf-bg: rgb(2 2 3);
+  --acf-text: rgb(252 252 253);
+  --acf-text-muted: rgb(252 252 253 / 70%);
+  --acf-easing: cubic-bezier(0.4, 0, 0.2, 1);
+
+  background-color: var(--acf-bg);
+  color: var(--acf-text-muted);
+}
+
+footer .footer.audicom .acf {
+  padding: 24px 28px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-stretch: var(--body-font-stretch);
+  line-height: 24px;
+}
+
+footer .footer.audicom .acf ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer .footer.audicom .acf li {
+  margin: 0;
+}
+
+footer .footer.audicom .acf p {
+  margin: 0;
+}
+
+footer .footer.audicom .acf a:any-link {
+  color: var(--acf-text);
+  text-decoration: none;
+  transition: color 0.25s var(--acf-easing);
+}
+
+footer .footer.audicom .acf a:hover {
+  color: var(--acf-text-muted);
+}
+
+footer .footer.audicom .acf a:focus-visible {
+  outline: 2px solid var(--acf-text);
+  outline-offset: 2px;
+}
+
+/* legal link row with a 2px divider below */
+footer .footer.audicom .acf-links {
+  position: relative;
+  margin-bottom: 1px;
+  padding-bottom: 24px;
+}
+
+footer .footer.audicom .acf-links::before {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background-color: rgb(252 252 253 / 20%);
+  content: '';
+}
+
+footer .footer.audicom .acf-link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+}
+
+footer .footer.audicom .acf-link-list a:any-link {
+  display: block;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+/* meta row: copyright left, language buttons right */
+footer .footer.audicom .acf-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+footer .footer.audicom .acf-copyright strong {
+  display: block;
+  font-weight: 700;
+}
+
+footer .footer.audicom .acf-lang {
+  display: flex;
+  gap: 8px;
+}
+
+footer .footer.audicom .acf .acf-lang-link:any-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 108px;
+  height: 46px;
+  padding: 12px 24px;
+  border: 1px solid rgb(44 52 63);
+  border-radius: 999px;
+  background-color: rgb(24 29 37);
+  color: var(--acf-text);
+  font-size: 14px;
+  line-height: 20px;
+  transition: background-color 0.35s var(--acf-easing), border-color 0.35s var(--acf-easing);
+}
+
+footer .footer.audicom .acf .acf-lang-link.is-active {
+  border-color: rgb(219 223 230 / 20%);
+  background-color: rgb(64 74 89);
+}
+
+footer .footer.audicom .acf .acf-lang-link:hover {
+  background-color: rgb(44 52 63);
+  color: var(--acf-text);
+}
+
+/* WLTP emissions disclaimer */
+footer .footer.audicom .acf-disclaimer {
+  font-size: 12px;
+  line-height: 20px;
+}
+
+footer .footer.audicom .acf-disclaimer a:any-link {
+  font-size: 12px;
+}
+
+/* side gutters follow audi.com: 28px, then 40/60/96px */
+
+/* breakpoint-exception: audi.com widens the footer gutters at 768px */
+@media (width >= 768px) {
+  footer .footer.audicom .acf {
+    padding: 24px 40px;
+  }
+}
+
+/* breakpoint-exception: audi.com widens the footer gutters at 1024px */
+@media (width >= 1024px) {
+  footer .footer.audicom .acf {
+    padding: 24px 60px;
+  }
+}
+
+/* breakpoint-exception: audi.com uses the 96px page gutter from 1440px */
+@media (width >= 1440px) {
+  footer .footer.audicom .acf {
+    padding: 24px 96px;
+  }
+}

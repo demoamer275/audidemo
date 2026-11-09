@@ -1,0 +1,83 @@
+{
+  "definitions": [
+    {
+      "title": "Table Datasheet",
+      "id": "table-datasheet",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Table Datasheet",
+              "model": "table-datasheet",
+              "filter": "table-datasheet"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Table Datasheet Row",
+      "id": "table-datasheet-row",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Table Datasheet Row",
+              "model": "table-datasheet-row"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "table-datasheet",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "value": "",
+          "label": "Options",
+          "description": "Header row: the first row is the column header row (summary layout with Data sheet column)",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Header row",
+              "value": "header"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "table-datasheet-row",
+      "fields": [
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "label",
+          "label": "Label (motorization name and consumption, or spec label)",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "value",
+          "label": "Value (data sheet Download link, or spec value)",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "table-datasheet",
+      "components": [
+        "table-datasheet-row"
+      ]
+    }
+  ]
+}
