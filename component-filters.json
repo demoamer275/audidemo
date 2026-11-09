@@ -25,7 +25,12 @@
       "fragment",
       "model-filter",
       "cards-carline",
-      "cards-model"
+      "carline-slider",
+      "cards-model",
+      "cards-list",
+      "columns-panels",
+      "cards-gallery",
+      "table-datasheet"
     ]
   },
   {
@@ -35,9 +40,21 @@
     ]
   },
   {
+    "id": "cards-gallery",
+    "components": [
+      "cards-gallery-item"
+    ]
+  },
+  {
     "id": "cards-image-overlay",
     "components": [
       "cards-image-overlay-card"
+    ]
+  },
+  {
+    "id": "cards-list",
+    "components": [
+      "cards-list-item"
     ]
   },
   {
@@ -65,6 +82,12 @@
     ]
   },
   {
+    "id": "carline-slider",
+    "components": [
+      "carline-slider-card"
+    ]
+  },
+  {
     "id": "carousel-cards",
     "components": [
       "carousel-cards-slide"
@@ -78,6 +101,12 @@
   },
   {
     "id": "columns-media-text",
+    "components": [
+      "column"
+    ]
+  },
+  {
+    "id": "columns-panels",
     "components": [
       "column"
     ]
@@ -101,6 +130,12 @@
     "id": "model-filter",
     "components": [
       "model-filter-group"
+    ]
+  },
+  {
+    "id": "table-datasheet",
+    "components": [
+      "table-datasheet-row"
     ]
   }
 ]

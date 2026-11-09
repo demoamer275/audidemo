@@ -1,0 +1,265 @@
+/* carline-slider: static filter chips, result count + arrows, horizontally scrolling model line cards */
+.carline-slider {
+  --carline-slider-card-width: 220px;
+  --carline-slider-bleed: max(0px, calc((100vw - 100%) / 2));
+}
+
+/* filter chips (static, non-functional) */
+.carline-slider .carline-slider-filters {
+  margin: 0 0 16px;
+}
+
+.carline-slider .carline-slider-filters ul {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.carline-slider .carline-slider-filters ul::-webkit-scrollbar {
+  display: none;
+}
+
+.carline-slider .carline-slider-filters li {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.carline-slider .carline-slider-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #181d25;
+  box-shadow: inset 0 0 0 1px #2c343f;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.carline-slider .carline-slider-chip.is-selected {
+  background-color: #404a59;
+  box-shadow: inset 0 0 0 1px rgb(219 223 230 / 20%);
+}
+
+.carline-slider .carline-slider-chip .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* count + arrows */
+.carline-slider .carline-slider-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 48px;
+  margin-bottom: 8px;
+}
+
+.carline-slider .carline-slider-count p,
+.carline-slider .carline-slider-count {
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.carline-slider .carline-slider-nav {
+  display: none;
+  margin-left: auto;
+}
+
+.carline-slider .carline-slider-nav[hidden] {
+  display: none;
+}
+
+.carline-slider .carline-slider-nav button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.carline-slider .carline-slider-nav button:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+/* icons are images (fixed stroke color): dim the whole disabled arrow */
+.carline-slider .carline-slider-nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.carline-slider .carline-slider-nav button:hover:not(:disabled) {
+  border-color: rgb(219 223 230 / 40%);
+}
+
+.carline-slider .carline-slider-nav .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.carline-slider .carline-slider-prev .icon {
+  transform: rotate(180deg);
+}
+
+/* card track: scrolls to the viewport edges, first card aligned with the content */
+.carline-slider .carline-slider-track {
+  display: flex;
+  gap: 8px;
+  margin: 0 calc(-1 * var(--carline-slider-bleed));
+  padding: 0 var(--carline-slider-bleed);
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.carline-slider .carline-slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carline-slider .carline-slider-track:focus-visible {
+  outline: 2px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+.carline-slider .carline-slider-card {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+    'title badge'
+    'image image'
+    'count count';
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  box-sizing: border-box;
+  flex: 0 0 var(--carline-slider-card-width);
+  margin: 0;
+  padding: 16px;
+  border-radius: 20px;
+  background: linear-gradient(#232a34 0%, #181d25 100%);
+  box-shadow: inset 0 0 0 1px #2c343f;
+  transition: box-shadow 0.25s ease;
+}
+
+.carline-slider .carline-slider-card:hover {
+  box-shadow: inset 0 0 0 1px #4c5361;
+}
+
+.carline-slider .carline-slider-card:has(a.carline-slider-link:focus-visible) {
+  outline: 2px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+/* body cell: title and count link become items of the card grid */
+.carline-slider .carline-slider-body {
+  display: contents;
+}
+
+.carline-slider .carline-slider-body h2,
+.carline-slider .carline-slider-body h3 {
+  grid-area: title;
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.carline-slider .carline-slider-badge {
+  grid-area: badge;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background-color: rgb(154 163 177 / 10%);
+  line-height: 0;
+}
+
+.carline-slider .carline-slider-badge .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.carline-slider .carline-slider-image {
+  grid-area: image;
+  padding-bottom: 12px;
+  line-height: 0;
+}
+
+.carline-slider .carline-slider-image p {
+  margin: 0;
+}
+
+.carline-slider .carline-slider-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 188 / 81;
+  object-fit: contain;
+}
+
+.carline-slider .carline-slider-body p {
+  grid-area: count;
+  margin: 0;
+  color: var(--text-color-secondary);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.carline-slider a.carline-slider-link:any-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-color-secondary);
+  text-decoration: none;
+}
+
+.carline-slider a.carline-slider-link:focus-visible {
+  outline: none;
+}
+
+/* stretched link: the count link covers the whole card */
+.carline-slider a.carline-slider-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.carline-slider a.carline-slider-link .icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 12px;
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .carline-slider .carline-slider-nav {
+    display: flex;
+  }
+}

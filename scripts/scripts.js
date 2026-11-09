@@ -148,6 +148,10 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  // audi.com pages (own header/footer design): lets the global styles reserve the breadcrumb bar
+  if (/^\/(content\/)?master\/en(\/|$)/.test(window.location.pathname)) {
+    document.body.classList.add('audicom');
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

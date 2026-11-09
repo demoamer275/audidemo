@@ -161,7 +161,9 @@ function buildCard(tile, document) {
   if (href) {
     const a = document.createElement('a');
     a.setAttribute('href', href);
-    a.textContent = title || href;
+    // button label of the tile ("Jetzt suchen"); tiles without a CTA element use the title
+    const cta = tile.querySelector('[data-testid="content-tile-cta"]');
+    a.textContent = (cta && cleanText(cta.textContent)) || title || href;
     const p = document.createElement('p');
     p.appendChild(a);
     contentNodes.push(hinted(document, 'content_link', [p]));

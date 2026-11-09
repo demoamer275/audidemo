@@ -1,0 +1,597 @@
+/*
+ * audi.com header (pages under /master/en), built by header-audicom.js. Mobile first.
+ * Layout steps follow audi.com: 768px (tablet bar + side-by-side drawer), 1024px (wider
+ * gutters), 1440px (logo left, inline search, drawer a third of the viewport).
+ */
+header .header.audicom {
+  --acn-bg: rgb(2 2 3);
+  --acn-text: rgb(252 252 253);
+  --acn-text-muted: rgb(252 252 253 / 70%);
+  --acn-hover-bg: rgb(44 52 63);
+  --acn-hover-border: rgb(219 223 230 / 20%);
+  --acn-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --acn-layer-width: 100%;
+
+  box-sizing: border-box;
+  padding: 0 16px;
+  background-color: var(--acn-bg);
+  color: var(--acn-text-muted);
+}
+
+header .header.audicom .acn {
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+header .header.audicom .acn ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* bar: menu button left, logo centred, search icon right */
+header .header.audicom .acn-bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  box-sizing: border-box;
+  height: var(--nav-height);
+}
+
+header .header.audicom .acn-menu-button {
+  grid-area: 1 / 1;
+  justify-self: start;
+  width: 50px;
+}
+
+header .header.audicom .acn-brand {
+  display: block;
+  grid-area: 1 / 2;
+  width: 47px;
+  height: 16px;
+  color: var(--acn-text);
+}
+
+/* the logo has no hover effect (overrides the global link hover colour) */
+header .header.audicom .acn-brand:hover {
+  color: var(--acn-text);
+}
+
+header .header.audicom .acn-brand img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+header .header.audicom .acn-search-link {
+  grid-area: 1 / 3;
+  justify-self: end;
+}
+
+/* icons are single-colour shapes painted with currentColor */
+header .header.audicom .acn-icon {
+  display: inline-block;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: var(--acn-icon) center / 24px 24px no-repeat;
+}
+
+header .header.audicom .acn-icon-forward {
+  --acn-icon: url('../../icons/audicom-forward.svg');
+
+  margin-left: auto;
+  color: var(--acn-text-muted);
+}
+
+header .header.audicom .acn-icon-back {
+  --acn-icon: url('../../icons/audicom-back.svg');
+
+  color: var(--acn-text-muted);
+}
+
+/* pill buttons: menu, close, search icon, quick actions */
+header .header.audicom .acn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 50px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--acn-text);
+  font: inherit;
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.35s var(--acn-easing), border-color 0.35s var(--acn-easing);
+}
+
+header .header.audicom .acn-pill:hover {
+  border-color: var(--acn-hover-border);
+  background-color: var(--acn-hover-bg);
+  color: var(--acn-text);
+  transition-duration: 0.07s;
+}
+
+header .header.audicom .acn-pill-label {
+  display: none;
+}
+
+header .header.audicom .acn-icon-button {
+  width: 50px;
+}
+
+/* inline search form: wide screens only */
+header .header.audicom .acn-search {
+  position: relative;
+  display: none;
+  align-items: center;
+  width: 500px;
+  margin: 0 8px 0 auto;
+}
+
+header .header.audicom .acn-search input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 46px;
+  margin: 0;
+  padding: 12px 48px 12px 16px;
+  border: 1px solid rgb(219 223 230 / 60%);
+  border-radius: 999px;
+  background-color: rgb(24 29 37 / 60%);
+  color: var(--acn-text);
+  font: inherit;
+  font-size: 16px;
+  line-height: 20px;
+  appearance: none;
+  transition: background-color 0.25s var(--acn-easing), border-color 0.25s var(--acn-easing);
+}
+
+header .header.audicom .acn-search input::placeholder {
+  color: var(--acn-text-muted);
+  opacity: 1;
+}
+
+header .header.audicom .acn-search input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+header .header.audicom .acn-search input:hover {
+  background-color: rgb(44 52 63 / 60%);
+}
+
+header .header.audicom .acn-search input:focus {
+  border-color: rgb(219 223 230);
+  background-color: rgb(44 52 63 / 60%);
+  outline: 4px solid rgb(9 137 255);
+}
+
+header .header.audicom .acn-search-submit {
+  position: absolute;
+  top: 50%;
+  right: 17px;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--acn-text);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+/* drawer: fixed full-viewport overlay; on mobile the layers slide in from the right */
+header .header.audicom .acn-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  visibility: hidden;
+  transition: visibility 0s linear 0.4s;
+}
+
+header .header.audicom .acn-menu.is-open {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+header .header.audicom .acn-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(2 2 3 / 80%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+header .header.audicom .acn-menu.is-open .acn-backdrop {
+  opacity: 1;
+}
+
+header .header.audicom .acn-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: var(--acn-layer-width);
+  height: 100%;
+  padding: 0 24px 24px;
+  background-image: linear-gradient(rgb(44 52 63) 0%, rgb(35 42 52) 100%);
+  box-shadow: rgb(0 0 0 / 15%) 0 1px 4px 0, rgb(0 0 0 / 25%) 0 2px 8px 0;
+  transform: translateX(100%);
+  transition: transform 0.4s;
+}
+
+header .header.audicom .acn-menu.is-open .acn-layer-root {
+  transform: none;
+}
+
+/* mobile: the sub layer slides over the root layer */
+header .header.audicom .acn-layer-sub {
+  z-index: 1;
+  background-image: linear-gradient(rgb(55 64 78), rgb(44 52 63));
+  visibility: hidden;
+  transition: transform 0.4s, visibility 0s linear 0.4s;
+}
+
+header .header.audicom .acn-menu.is-open .acn-layer-sub.is-open {
+  visibility: visible;
+  transform: none;
+  transition: transform 0.4s, visibility 0s;
+}
+
+header .header.audicom .acn-layer-top {
+  display: flex;
+  flex: none;
+  align-items: center;
+  height: 72px;
+}
+
+header .header.audicom .acn-close {
+  margin-left: -20px;
+  padding: 12px 24px;
+}
+
+header .header.audicom .acn-close .acn-pill-label {
+  display: inline;
+  margin-left: 12px;
+}
+
+/* back row: parent label with a divider below (mobile only) */
+header .header.audicom .acn-back-row {
+  flex: none;
+  margin-top: 24px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgb(252 252 253 / 20%);
+}
+
+header .header.audicom .acn-back {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 50px;
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: none;
+  color: var(--acn-text-muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.25s var(--acn-easing), border-color 0.25s var(--acn-easing), color 0.25s var(--acn-easing);
+}
+
+header .header.audicom .acn-back:hover {
+  border-color: var(--acn-hover-border);
+  background-color: var(--acn-hover-bg);
+  color: var(--acn-text);
+}
+
+/* scrolling list area; the side gutters leave room for the scrollbar like the source */
+header .header.audicom .acn-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 42px -16px 0 -24px;
+  padding: 0 12px 0 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+header .header.audicom .acn-back-row + .acn-scroll {
+  margin-top: 8px;
+}
+
+header .header.audicom .acn-links a {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 50px;
+  padding: 12px 16px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--acn-text-muted);
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: none;
+  transition: background-color 0.25s var(--acn-easing), border-color 0.25s var(--acn-easing), color 0.25s var(--acn-easing);
+}
+
+header .header.audicom .acn-links a:hover,
+header .header.audicom .acn-links a.is-active {
+  border-color: var(--acn-hover-border);
+  background-color: var(--acn-hover-bg);
+  color: var(--acn-text);
+}
+
+header .header.audicom ul.acn-extra {
+  flex: none;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 2px solid rgb(252 252 253 / 20%);
+}
+
+header .header.audicom .acn-bottom {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+header .header.audicom .acn-quick {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header .header.audicom .acn-lang {
+  display: flex;
+  gap: 16px;
+}
+
+header .header.audicom .acn-lang-link {
+  display: inline-block;
+  color: var(--acn-text);
+  font-size: 14px;
+  line-height: 24px;
+  text-decoration: none;
+  transition: color 0.25s var(--acn-easing);
+}
+
+header .header.audicom .acn-lang-link:hover,
+header .header.audicom .acn-lang-link.is-active {
+  text-decoration: underline;
+  text-underline-offset: 7px;
+}
+
+header .header.audicom .acn-pill:focus-visible,
+header .header.audicom .acn-links a:focus-visible,
+header .header.audicom .acn-back:focus-visible,
+header .header.audicom .acn-lang-link:focus-visible {
+  outline: 2px solid var(--acn-text);
+  outline-offset: 2px;
+}
+
+/* breadcrumb bar below the header bar: hidden on mobile like audi.com */
+header .header.audicom .acn-breadcrumb {
+  display: none;
+  box-sizing: border-box;
+  height: 40px;
+  background-color: rgb(16 19 25);
+  color: var(--acn-text-muted);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  line-height: 24px;
+}
+
+header .header.audicom .acn-breadcrumb ol,
+header .header.audicom .acn-breadcrumb ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header .header.audicom .acn-breadcrumb li {
+  margin: 0;
+}
+
+header .header.audicom .acn-crumbs {
+  display: flex;
+  gap: 12px;
+  min-width: 0;
+}
+
+header .header.audicom .acn-crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 -4px;
+  padding: 0 4px;
+  color: var(--acn-text-muted);
+  text-decoration: none;
+  transition: color 0.25s var(--acn-easing);
+}
+
+header .header.audicom a.acn-crumb:hover {
+  color: var(--acn-text);
+}
+
+header .header.audicom .acn-crumb.is-current {
+  color: var(--acn-text);
+}
+
+header .header.audicom .acn-crumb-label {
+  display: block;
+  overflow: hidden;
+  min-width: 18px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+header .header.audicom .acn-crumb-icon {
+  --acn-icon: url('../../icons/audicom-forward.svg');
+
+  width: 20px;
+  height: 20px;
+  margin: -1px;
+  mask-size: 20px 20px;
+}
+
+header .header.audicom .acn-crumb-lang {
+  gap: 16px;
+  margin-left: auto;
+}
+
+/* in the bar the inactive language dims on hover; the active one stays underlined */
+header .header.audicom .acn-crumb-lang .acn-lang-link:hover {
+  color: var(--acn-text-muted);
+  text-decoration: none;
+}
+
+header .header.audicom .acn-crumb-lang .acn-lang-link.is-active {
+  color: var(--acn-text);
+  text-decoration: underline;
+}
+
+body.acn-scroll-lock {
+  overflow: hidden;
+}
+
+/* breakpoint-exception: audi.com switches to the tablet header and side-by-side drawer at 768px */
+@media (width >= 768px) {
+  header .header.audicom {
+    --acn-layer-width: 50%;
+
+    padding: 0 28px 0 16px;
+  }
+
+  header .header.audicom .acn-menu-button {
+    width: auto;
+    padding: 12px 24px;
+  }
+
+  header .header.audicom .acn-menu-button .acn-pill-label {
+    display: inline;
+    margin-left: 12px;
+  }
+
+  header .header.audicom .acn-brand {
+    width: 69px;
+    height: 24px;
+  }
+
+  /* drawer from the left; the sub layer slides out from behind it */
+  header .header.audicom .acn-backdrop {
+    z-index: -2;
+  }
+
+  header .header.audicom .acn-layer {
+    padding: 24px;
+    transform: translateX(-100%);
+  }
+
+  header .header.audicom .acn-layer-root {
+    z-index: 0;
+  }
+
+  header .header.audicom .acn-layer-sub {
+    left: var(--acn-layer-width);
+    z-index: -1;
+    visibility: inherit;
+    transition: transform 0.4s;
+  }
+
+  header .header.audicom .acn-menu.is-open .acn-layer-sub.is-open {
+    transition: transform 0.4s;
+  }
+
+  /* the open sub layer continues the drawer without a shadow edge between them */
+  header .header.audicom .acn-layer-root.has-sub-open {
+    box-shadow: none;
+  }
+
+  header .header.audicom .acn-layer-sub .acn-layer-top {
+    visibility: hidden;
+  }
+
+  header .header.audicom .acn-back-row {
+    display: none;
+  }
+
+  header .header.audicom .acn-close {
+    margin-left: 0;
+  }
+
+  header .header.audicom .acn-scroll,
+  header .header.audicom .acn-back-row + .acn-scroll {
+    margin-top: 24px;
+  }
+
+  header .header.audicom .acn-links a {
+    height: 58px;
+    padding: 16px 24px;
+  }
+
+  /* full-width bar: undo the header gutters and use the breadcrumb's own */
+  header .header.audicom .acn-breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 -28px 0 -16px;
+    padding: 8px 40px;
+  }
+}
+
+/* breakpoint-exception: audi.com widens the header gutters at 1024px */
+@media (width >= 1024px) {
+  header .header.audicom {
+    padding: 0 48px 0 36px;
+  }
+
+  header .header.audicom .acn-breadcrumb {
+    margin: 0 -48px 0 -36px;
+    padding: 8px 60px;
+  }
+}
+
+/* breakpoint-exception: audi.com shows the logo left, the inline search and a narrower drawer at 1440px */
+@media (width >= 1440px) {
+  header .header.audicom {
+    --acn-layer-width: 33.3%;
+
+    padding: 0 84px 0 96px;
+  }
+
+  header .header.audicom .acn-bar {
+    display: flex;
+  }
+
+  header .header.audicom .acn-brand {
+    margin-right: 24px;
+  }
+
+  header .header.audicom .acn-search-link {
+    display: none;
+  }
+
+  header .header.audicom .acn-search {
+    display: flex;
+  }
+
+  header .header.audicom .acn-breadcrumb {
+    margin: 0 -84px 0 -96px;
+    padding: 8px 96px;
+  }
+}

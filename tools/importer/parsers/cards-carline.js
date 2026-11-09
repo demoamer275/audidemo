@@ -54,6 +54,15 @@ export function carlinePageName(value) {
   return PAGE_NAMES[value] || value;
 }
 
+/**
+ * bycarlinegroup value of a model line title ("Audi A3" -> "a3"), shared with other parsers.
+ * @param {string} title
+ * @returns {string} '' when unknown
+ */
+export function carlineGroupValue(title) {
+  return CARLINE_GROUPS[(title || '').replace(/\s+/g, ' ').trim()] || '';
+}
+
 function cleanText(text) {
   return (text || '').replace(/\s+/g, ' ').trim();
 }

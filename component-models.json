@@ -148,6 +148,10 @@
           {
             "name": "Filter Rail",
             "value": "filter-rail"
+          },
+          {
+            "name": "Split (Text links, Bild rechts)",
+            "value": "split"
           }
         ]
       }
@@ -183,6 +187,32 @@
         "name": "electric",
         "label": "Elektromodell",
         "value": false
+      }
+    ]
+  },
+  {
+    "id": "cards-gallery-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image (photo or video poster)",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (category label, title linked to the detail or video page)",
+        "value": ""
       }
     ]
   },
@@ -248,6 +278,32 @@
         "valueType": "string",
         "name": "disclaimer",
         "label": "Verbrauchs- und Emissionsangaben",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-list-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (meta line, linked heading, optional description)",
         "value": ""
       }
     ]
@@ -411,6 +467,58 @@
     ]
   },
   {
+    "id": "carline-slider",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "filters",
+        "label": "Filter-Buttons (Liste, ein Eintrag pro Button; statisch)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "count",
+        "label": "Ergebnisanzahl (z. B. 61 Modelle)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "carline-slider-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Bild",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alternativtext",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (Titel als H3, Modellanzahl als Link)",
+        "value": ""
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "electric",
+        "label": "Elektromodell",
+        "value": false
+      }
+    ]
+  },
+  {
     "id": "carousel-cards-slide",
     "fields": [
       {
@@ -509,6 +617,25 @@
     ]
   },
   {
+    "id": "columns-panels",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "columns",
+        "value": "",
+        "label": "Columns"
+      },
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "rows",
+        "value": "",
+        "label": "Rows"
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {
@@ -574,6 +701,24 @@
         "name": "disclaimer",
         "label": "Verbrauchs- und Emissionsangaben",
         "value": ""
+      },
+      {
+        "component": "select",
+        "name": "classes",
+        "value": "",
+        "label": "Textposition",
+        "description": "Position von Überschrift, Text und Buttons auf der Bühne",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Unten links",
+            "value": ""
+          },
+          {
+            "name": "Oben links",
+            "value": "top"
+          }
+        ]
       }
     ]
   },
@@ -618,6 +763,44 @@
         "valueType": "string",
         "name": "buttons",
         "label": "Buttons (Liste, ein Eintrag pro Button) oder Links",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "table-datasheet",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "value": "",
+        "label": "Options",
+        "description": "Header row: the first row is the column header row (summary layout with Data sheet column)",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Header row",
+            "value": "header"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table-datasheet-row",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label (motorization name and consumption, or spec label)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "value",
+        "label": "Value (data sheet Download link, or spec value)",
         "value": ""
       }
     ]

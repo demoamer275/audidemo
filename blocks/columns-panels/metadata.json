@@ -1,0 +1,32 @@
+{
+  "variantName": "columns-panels",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Fixed pair of different content panels side by side, e.g. media contact and customer-service teaser",
+    "layout": "2 columns from 900px, stacked on mobile; each column is a rounded panel",
+    "image": "round portrait image inside a panel",
+    "cta": "trailing link/button sits at the bottom of the panel"
+  },
+  "contentPattern": {
+    "structure": "1 row x 2 columns. Each column: heading (h3), optional portrait image, text (name link, role, tel: and mailto: links or a paragraph), trailing link/button. In Universal Editor each column holds title, image, text and button components."
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "/en/audi-q5-59",
+      "/en/audi-q5-suv-12871"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-11-09",
+    "instances": [
+      {
+        "url": "https://www.audi.com/en/audi-q5-59",
+        "section": "Media contacts / customer service",
+        "items": 2
+      }
+    ]
+  },
+  "reuseGuidance": "Use for a small fixed set of differing content panels shown side by side; for an image/text pair use columns-media-text, for repeating items use a cards variant."
+}

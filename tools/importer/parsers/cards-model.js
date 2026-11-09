@@ -18,6 +18,15 @@
  *   "Vergleichen" checkbox                 -> dropped
  * Every part is optional (S6/RS 6, Nuvolari, R26: no price / no Konfigurieren / disabled stock links).
  *
+ * audi.com variant (model pages, e.g. /en/audi-q5-59), detected by a.overview-car-tile:
+ * Source: .cars-overview-list > a.overview-car-tile[href]
+ *   .cars-overview-tile-content--type-badge .tag    -> badges (Petrol / Diesel / Plug-in hybrid)
+ *   .cars-overview-tile-content--image img          -> image (src kept as resolved by
+ *                                                      audicom-cleanup; no data-dam-name)
+ *   .cars-overview-tile-content-body--header h4     -> model name as <h4>, linked to the tile href
+ *   .cars-overview-tile-content-body--consumption-data p -> consumption (keeps <sub>)
+ * No price and no CTAs on audi.com tiles: those parts are left out of the text cell.
+ *
  * Row per card (model cards-model-card):
  *   cell 1: field:image       (imageAlt collapsed into alt; data-dam-name="cards/<slug of model name>")
  *   cell 2: field:text        (ul badges, h2 name, p price, p strong a Konfigurieren,
@@ -26,6 +35,7 @@
  */
 
 const ORIGIN = 'https://www.audi.de';
+const AUDICOM_ORIGIN = 'https://www.audi.com';
 
 function cleanText(text) {
   return (text || '').replace(/\s+/g, ' ').trim();
@@ -225,8 +235,85 @@ function buildCard(card, document) {
   return [imageCell, textCell, consumptionCell];
 }
 
+function absolutizeAudiCom(href) {
+  const h = (href || '').trim();
+  if (!h || h.startsWith('#')) return '';
+  try { return new URL(h, AUDICOM_ORIGIN).href; } catch (e) { return h; }
+}
+
+/** audi.com tile (a.overview-car-tile): badges, image, linked H4 name, consumption. */
+function buildAudiComTile(tile, document) {
+  const titleEl = tile.querySelector('.cars-overview-tile-content-body--header h4, h4, h3, h2');
+  const title = cleanText(titleEl ? titleEl.textContent : '');
+  const href = absolutizeAudiCom(tile.getAttribute('href'));
+
+  let imageCell = '';
+  const srcImg = tile.querySelector('.cars-overview-tile-content--image img') || tile.querySelector('img');
+  const src = srcImg ? (srcImg.getAttribute('src') || '').trim() : '';
+  if (src) {
+    const img = document.createElement('img');
+    img.setAttribute('src', src);
+    img.setAttribute('alt', cleanText(srcImg.getAttribute('alt')) || title);
+    imageCell = hinted(document, 'image', [img]);
+  }
+
+  const textNodes = [];
+  const badges = [...tile.querySelectorAll('.cars-overview-tile-content--type-badge .tag')]
+    .map((b) => cleanText(b.textContent)).filter(Boolean);
+  if (badges.length) {
+    const ul = document.createElement('ul');
+    badges.forEach((b) => {
+      const li = document.createElement('li');
+      li.textContent = b;
+      ul.appendChild(li);
+    });
+    textNodes.push(ul);
+  }
+  if (title) {
+    const h4 = document.createElement('h4');
+    if (href) {
+      const a = document.createElement('a');
+      a.setAttribute('href', href);
+      a.textContent = title;
+      h4.appendChild(a);
+    } else {
+      h4.textContent = title;
+    }
+    textNodes.push(h4);
+  }
+  const textCell = textNodes.length ? hinted(document, 'text', textNodes) : '';
+
+  let consumptionCell = '';
+  const consumption = tile.querySelector('.cars-overview-tile-content-body--consumption-data');
+  if (consumption) {
+    let paras = [...consumption.querySelectorAll('p')];
+    if (!paras.length) paras = [consumption];
+    const out = paras
+      .map((el) => trimEdges(appendInline(el, document.createElement('p'), document)))
+      .filter((p) => cleanText(p.textContent));
+    if (out.length) consumptionCell = hinted(document, 'consumption', out);
+  }
+
+  if (!imageCell && !textCell && !consumptionCell) return null;
+  return [imageCell, textCell, consumptionCell];
+}
+
 export default function parse(element, { document }) {
   const cells = [];
+
+  const audiComTiles = element.matches('a.overview-car-tile')
+    ? [element]
+    : [...element.querySelectorAll('a.overview-car-tile')];
+  if (audiComTiles.length) {
+    audiComTiles.forEach((tile) => {
+      const row = buildAudiComTile(tile, document);
+      if (row) cells.push(row);
+    });
+    const block = WebImporter.Blocks.createBlock(document, { name: 'cards-model', cells });
+    element.replaceWith(block);
+    return;
+  }
+
   getCards(element).forEach((card) => {
     const row = buildCard(card, document);
     if (row) cells.push(row);

@@ -441,6 +441,8 @@ var CustomImportScript = (() => {
   var SOURCE_ORIGIN = "https://www.audi.de";
   var AUDI_HOSTS = ["www.audi.de", "audi.de"];
   var MIGRATED_PATHS = [
+    "/de/",
+    "/de/neuwagen/",
     "/de/elektromobilitaet/",
     "/de/neuwagen/a3/a3-limousine/",
     "/de/neuwagen/a3/a3-allstreet/",
@@ -507,7 +509,7 @@ var CustomImportScript = (() => {
       }
       const isAudi = isRootRelative || AUDI_HOSTS.includes(url.hostname.toLowerCase());
       if (!isAudi) return;
-      const migrated = MIGRATED_PATHS.some((p) => normalizePath(url.pathname) === normalizePath(p));
+      const migrated = !url.search && MIGRATED_PATHS.some((p) => normalizePath(url.pathname) === normalizePath(p));
       if (migrated) {
         a.setAttribute("href", `${SOURCE_ORIGIN}${CONTENT_ROOT2}${url.pathname}${url.search}${url.hash}`);
       } else {
@@ -999,6 +1001,11 @@ var CustomImportScript = (() => {
         }
       });
       executeTransformers("afterTransform", main, payload);
+      main.querySelectorAll('a[href^="https://www.audi.de/language-masters/"]').forEach((a) => {
+        const href = a.getAttribute("href");
+        const [path2, rest = ""] = href.split(/(?=[?#])/);
+        if (path2.length > "https://www.audi.de/".length && path2.endsWith("/")) a.setAttribute("href", path2.replace(/\/+$/, "") + rest);
+      });
       main.appendChild(document.createElement("hr"));
       WebImporter.rules.createMetadata(main, document);
       WebImporter.rules.transformBackgroundImages(main, document);

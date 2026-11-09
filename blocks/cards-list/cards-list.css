@@ -1,0 +1,83 @@
+/* cards-list: vertical list of detail-page teasers, image left (base layout only) */
+.cards-list > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-list > ul > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin: 0;
+}
+
+.cards-list .cards-list-image {
+  line-height: 0;
+}
+
+.cards-list .cards-list-image p {
+  margin: 0;
+}
+
+.cards-list .cards-list-image a,
+.cards-list .cards-list-image picture {
+  display: block;
+}
+
+.cards-list .cards-list-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.cards-list .cards-list-body > :first-child {
+  margin-top: 0;
+}
+
+.cards-list .cards-list-body > :last-child {
+  margin-bottom: 0;
+}
+
+.cards-list .cards-list-meta {
+  margin: 0;
+  font-size: var(--body-font-size-xs);
+}
+
+.cards-list .cards-list-title {
+  margin: 8px 0 0;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.cards-list .cards-list-title a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards-list .cards-list-title a:any-link:hover,
+.cards-list .cards-list-title a:any-link:focus-visible {
+  text-decoration: underline;
+}
+
+.cards-list .cards-list-description {
+  margin: 8px 0 0;
+}
+
+@media (width >= 600px) {
+  .cards-list > ul > li {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  /* no image: body spans the full row */
+  .cards-list > ul > li > .cards-list-body:only-child {
+    grid-column: 1 / -1;
+  }
+}

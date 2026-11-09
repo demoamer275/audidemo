@@ -14,9 +14,14 @@
  *    each name; a different asset with a taken name gets a short asset-id suffix
  *    (<name>-<id8>.<ext>) and the page's references are rewritten to it.
  *
+ * 3b. Reuse: when another name in the same folder already belongs to the same source
+ *    asset (e.g. cards/a3-limousine.png for the home page card "Audi A3"), the page is
+ *    pointed at that file instead of downloading a copy.
+ *
  * 4. Page links: links between migrated pages are emitted as
  *    `https://www.audi.de/language-masters/...`; restore the root-relative
- *    `/language-masters/...` form.
+ *    `/language-masters/...` form. audi.com pages (transformers/audicom-page-links.js) emit
+ *    `https://www.audi.com/master/...`; restore `/master/...` the same way (audi.com only).
  *
  * Usage: node tools/importer/post-import-dam.mjs <report.json> [<report.json> ...]
  */
@@ -25,22 +30,41 @@ import path from 'node:path';
 
 const ROOT = process.cwd();
 const DAM_DIR = path.join(ROOT, 'content', 'content', 'dam', 'audidemo');
-const ABS_DAM = /https?:\/\/(?:www\.)?audi\.de(\/content\/dam\/audidemo\/)/g;
-const ABS_PAGE = /https?:\/\/(?:www\.)?audi\.de(\/language-masters\/)/g;
+// www.audi.de and www.audi.com (audi.com assets: uploads.audi.com originals, e.g. q5/<file>)
+const ABS_DAM = /https?:\/\/(?:www\.)?audi\.(?:de|com)(\/content\/dam\/audidemo\/)/g;
+const ABS_PAGE = /https?:\/\/(?:www\.)?audi\.(?:de|com)(\/language-masters\/)/g;
+// audi.com pages migrated under the AEM master root (transformers/audicom-page-links.js)
+const ABS_MASTER_PAGE = /https?:\/\/(?:www\.)?audi\.com(\/master\/)/g;
 const REGISTRY = path.join(ROOT, 'tools', 'importer', 'dam-assets-registry.json');
 const registry = fs.existsSync(REGISTRY) ? JSON.parse(fs.readFileSync(REGISTRY, 'utf8')) : {};
 
-/** source asset id (urn) of an original URL */
+/**
+ * source asset id of an original URL: the urn part for AEM Assets delivery URLs; any other
+ * URL (e.g. uploads.audi.com/.../<sha1>/web_1440_Q5_SUV.png?1794232588) is its own id
+ */
 const assetKey = (url) => url.split('/original/')[0];
+/** short id for collision suffixes: urn id, else the 40-hex upload hash in the path */
+const shortId = (url) => (assetKey(url).match(/urn:aaid:aem:([0-9a-f]{8})/)
+  || assetKey(url).match(/\/([0-9a-f]{8})[0-9a-f]{32}\//) || [])[1] || 'x';
+/** same source asset: ignores size/format query and the image file extension (renders) */
+const sameAsset = (a, b) => {
+  const norm = (u) => assetKey(u || '').split('?')[0].replace(/\.(png|jpe?g|webp|gif)$/i, '');
+  return norm(a) === norm(b);
+};
 
 /** unique DAM file name for this source asset */
 function claimName(file, url) {
   const owner = registry[file];
-  if (!owner || owner === assetKey(url)) {
+  if (!owner || !sameAsset(owner, url)) {
+    const dir = path.posix.dirname(file);
+    const same = Object.keys(registry).find((k) => sameAsset(registry[k], url) && path.posix.dirname(k) === dir);
+    if (same) return same;
+  }
+  if (!owner || sameAsset(owner, url)) {
     registry[file] = assetKey(url);
     return file;
   }
-  const id = (assetKey(url).match(/urn:aaid:aem:([0-9a-f]{8})/) || [])[1] || 'x';
+  const id = shortId(url);
   const dot = file.lastIndexOf('.');
   const alt = dot > 0 ? `${file.slice(0, dot)}-${id}${file.slice(dot)}` : `${file}-${id}`;
   registry[alt] = assetKey(url);
@@ -68,9 +92,9 @@ for (const reportPath of reports) {
   const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
   const page = path.join(ROOT, 'content', `${report.path}.plain.html`);
   const html = fs.readFileSync(page, 'utf8');
-  let fixed = html.replace(ABS_DAM, '$1').replace(ABS_PAGE, '$1');
+  let fixed = html.replace(ABS_DAM, '$1').replace(ABS_PAGE, '$1').replace(ABS_MASTER_PAGE, '$1');
   const fixedCount = (html.match(ABS_DAM) || []).length;
-  const pageLinks = (html.match(ABS_PAGE) || []).length;
+  const pageLinks = (html.match(ABS_PAGE) || []).length + (html.match(ABS_MASTER_PAGE) || []).length;
 
   const assets = typeof report.damAssets === 'string' ? JSON.parse(report.damAssets || '{}') : (report.damAssets || {});
   const renamed = [];

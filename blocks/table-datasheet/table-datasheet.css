@@ -1,0 +1,60 @@
+/* table-datasheet: two-column data table (base layout only) */
+.table-datasheet {
+  overflow-x: auto;
+}
+
+.table-datasheet table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.table-datasheet th,
+.table-datasheet td {
+  padding: 16px 8px;
+  border-bottom: 1px solid currentcolor;
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-datasheet tbody th {
+  font-weight: inherit;
+}
+
+.table-datasheet thead th,
+.table-datasheet thead td {
+  font-weight: 700;
+}
+
+/* value column: as narrow as its content (Download link, spec value) */
+.table-datasheet tr > :last-child:not(:first-child) {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.table-datasheet th > :first-child,
+.table-datasheet td > :first-child {
+  margin-top: 0;
+}
+
+.table-datasheet th > :last-child,
+.table-datasheet td > :last-child {
+  margin-bottom: 0;
+}
+
+.table-datasheet th p,
+.table-datasheet td p {
+  margin: 8px 0;
+}
+
+.table-datasheet sub,
+.table-datasheet sup {
+  line-height: 0;
+}
+
+@media (width >= 900px) {
+  .table-datasheet th,
+  .table-datasheet td {
+    padding: 16px;
+  }
+}

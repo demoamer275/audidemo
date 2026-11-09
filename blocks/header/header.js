@@ -7,14 +7,31 @@ const isWide = window.matchMedia('(width >= 1200px)');
 const subLayerOpeners = new WeakMap();
 
 /**
+ * Language roots with their own nav fragment and header design (module header-<design>.js).
+ * Pages outside these roots use the default (audi.de) nav at the site root.
+ */
+const LOCALE_NAVS = [{
+  pattern: /^\/(content\/)?master\/en(\/|$)/,
+  paths: ['/content/master/en/nav.plain.html', '/master/en/nav.plain.html'],
+  design: 'audicom',
+}];
+
+/**
  * Fetches the nav fragment. Metadata-independent: /content first (local preview),
  * then the site root (Edge Delivery). Relative image paths are resolved against
  * the fragment URL so they work from any page depth.
+ * @param {object} [locale] entry of LOCALE_NAVS for pages under a language root
  * @returns {Promise<HTMLElement|null>} container holding the fragment sections
  */
-async function fetchNav() {
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) resp = await fetch('/nav.plain.html');
+async function fetchNav(locale) {
+  let resp;
+  if (locale) {
+    resp = await fetch(locale.paths[0]);
+    if (!resp.ok) resp = await fetch(locale.paths[1]);
+  } else {
+    resp = await fetch('/content/nav.plain.html');
+    if (!resp.ok) resp = await fetch('/nav.plain.html');
+  }
   if (!resp.ok) return null;
   const container = document.createElement('div');
   container.innerHTML = await resp.text();
@@ -247,9 +264,15 @@ function buildPopover(li) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  const fragment = await fetchNav();
+  const locale = LOCALE_NAVS.find((l) => l.pattern.test(window.location.pathname));
+  const fragment = await fetchNav(locale);
   block.textContent = '';
   if (!fragment) return;
+  if (locale) {
+    const { default: decorateLocale } = await import(`./header-${locale.design}.js`);
+    await decorateLocale(block, fragment);
+    return;
+  }
   const [brandSection, menuSection, toolsSection] = [...fragment.children];
 
   const nav = el('nav', { id: 'nav', 'aria-label': 'Hauptnavigation' });

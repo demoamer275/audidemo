@@ -178,7 +178,9 @@ var CustomImportScript = (() => {
       }));
     }
     const cells = [[videoCell], [imageCell], [textCell2], [disclaimerCell]];
-    const block = WebImporter.Blocks.createBlock(document, { name: "hero-video", cells });
+    const position = String(fields.appearanceContentPosition || "");
+    const name = /^top/i.test(position) ? "hero-video (top)" : "hero-video";
+    const block = WebImporter.Blocks.createBlock(document, { name, cells });
     element.replaceWith(block);
   }
 
@@ -363,8 +365,8 @@ var CustomImportScript = (() => {
     const slides = [...element.querySelectorAll("li.splide__slide")].filter((li) => !li.classList.contains("splide__slide--clone"));
     const cells = [];
     slides.forEach((li, index) => {
-      const titleEl = li.querySelector(".faCarousel__slideTitle");
-      const title = titleEl ? cleanText3(titleEl.textContent) : "";
+      const titleEl2 = li.querySelector(".faCarousel__slideTitle");
+      const title = titleEl2 ? cleanText3(titleEl2.textContent) : "";
       const data = slideData.find((d) => cleanText3(d.slideTitle) === title) || slideData[index];
       let imageCell = "";
       const img = [...li.querySelectorAll("img[src]")].find((i) => !isPlaceholder(i.getAttribute("src"), i.getAttribute("alt")));
@@ -392,12 +394,36 @@ var CustomImportScript = (() => {
       const desc = li.querySelector(".faCarousel__slideDescription");
       const paras = desc ? [...desc.querySelectorAll("p")].filter((p) => cleanText3(p.textContent)) : [];
       const textNodes = paras.length ? paras.map((p) => inline3(p, "p", document)) : desc && cleanText3(desc.textContent) ? [inline3(desc, "p", document)] : [];
+      const cta = li.querySelector('a[data-testid$="-item-cta"]');
+      if (cta && cleanText3(cta.textContent) && cta.getAttribute("href")) {
+        const p = document.createElement("p");
+        const a = document.createElement("a");
+        a.setAttribute("href", cta.getAttribute("href"));
+        a.textContent = cleanText3(cta.textContent);
+        p.appendChild(a);
+        textNodes.push(p);
+      }
+      const wltp = li.querySelector('[data-testid$="-item-wltp"]');
+      if (wltp && cleanText3(wltp.textContent)) {
+        const line = inline3(wltp, "p", document);
+        line.innerHTML = line.innerHTML.replace(/;(?!\s|$)/g, "; ");
+        textNodes.push(line);
+      }
       if (textNodes.length) content.push(hinted3(document, "content_text", textNodes));
       const row = [imageCell, videoCell, content.length ? content : ""];
       if (row.some((c) => c !== "")) cells.push(row);
     });
     const block = WebImporter.Blocks.createBlock(document, { name: "carousel-cards", cells });
-    element.replaceWith(block);
+    const app = element.closest("feature-app[id]");
+    const tagged = app && document.querySelector(`feature-app[data-heading-for="${app.id.slice(0, 8)}"]`);
+    const titleEl = [...element.querySelectorAll("h2")].find((h) => !h.closest("li"));
+    if (titleEl && !tagged && cleanText3(titleEl.textContent)) {
+      const h2 = document.createElement("h2");
+      h2.textContent = cleanText3(titleEl.textContent);
+      element.replaceWith(h2, block);
+    } else {
+      element.replaceWith(block);
+    }
   }
 
   // tools/importer/parsers/columns-gallery.js
@@ -765,6 +791,8 @@ var CustomImportScript = (() => {
   var SOURCE_ORIGIN = "https://www.audi.de";
   var AUDI_HOSTS = ["www.audi.de", "audi.de"];
   var MIGRATED_PATHS = [
+    "/de/",
+    "/de/neuwagen/",
     "/de/elektromobilitaet/",
     "/de/neuwagen/a3/a3-limousine/",
     "/de/neuwagen/a3/a3-allstreet/",
@@ -831,7 +859,7 @@ var CustomImportScript = (() => {
       }
       const isAudi = isRootRelative || AUDI_HOSTS.includes(url.hostname.toLowerCase());
       if (!isAudi) return;
-      const migrated = MIGRATED_PATHS.some((p) => normalizePath(url.pathname) === normalizePath(p));
+      const migrated = !url.search && MIGRATED_PATHS.some((p) => normalizePath(url.pathname) === normalizePath(p));
       if (migrated) {
         a.setAttribute("href", `${SOURCE_ORIGIN}${CONTENT_ROOT}${url.pathname}${url.search}${url.hash}`);
       } else {
@@ -1096,11 +1124,23 @@ var CustomImportScript = (() => {
     assets[safe] = `${m[1]}/original/as/${m[2]}`;
     return `${DAM_FOLDER}/${safe}`;
   }
+  function toNamedDamPath(img, assets) {
+    const name = img.getAttribute("data-dam-name");
+    if (!name) return null;
+    img.removeAttribute("data-dam-name");
+    const src = (img.getAttribute("src") || "").trim();
+    if (!/^https?:/i.test(src)) return null;
+    const ext = (src.split("?")[0].match(/\.(png|jpe?g|webp|gif|svg)$/i) || [null, "png"])[1].toLowerCase();
+    const safe = name.split("/").map((part) => part.replace(/[^A-Za-z0-9._-]+/g, "-")).join("/");
+    const key = `${safe}.${ext}`;
+    assets[key] = src;
+    return `${DAM_FOLDER}/${key}`;
+  }
   function rewrite(root, document, origin) {
     const report = document.excatCleanupReport || {};
     const assets = report.damAssets || {};
     root.querySelectorAll("img[src]").forEach((img) => {
-      const dam = toDamPath(img.getAttribute("src"), assets);
+      const dam = toNamedDamPath(img, assets) || toDamPath(img.getAttribute("src"), assets);
       if (dam) img.setAttribute("src", dam);
     });
     root.querySelectorAll("source[srcset], img[srcset]").forEach((el) => {
@@ -1282,7 +1322,7 @@ var CustomImportScript = (() => {
         "selector": [
           "feature-app[id^='fa9786fe']"
         ],
-        "style": null,
+        "style": "split",
         "blocks": [],
         "defaultContent": [
           "feature-app[id^='fa9786fe'] img",

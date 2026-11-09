@@ -16,10 +16,12 @@
   "memberVariantIds": [],
   "usage": {
     "pagesUsing": [
-      "/de/neuwagen/a3/a3-limousine/index"
+      "/de/neuwagen/a3/a3-limousine/index",
+      "/en/audi-q5-59",
+      "/en/audi-q5-suv-12871"
     ],
-    "reuseCount": 0,
-    "lastUsed": "2026-10-26",
+    "reuseCount": 2,
+    "lastUsed": "2026-11-09",
     "instances": [
       {
         "url": "https://www.audi.de/de/neuwagen/a3/a3-limousine/",
