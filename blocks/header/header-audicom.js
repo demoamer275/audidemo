@@ -6,10 +6,12 @@ import { loadCSS } from '../../scripts/aem.js';
  *
  * Fragment sections (content/master/en/nav.plain.html):
  *   1. brand: linked logo image
- *   2. menu: "Menu" label, "Close menu" label (each with an icon image), main link list
- *      (nested lists become the second layer)
+ *   2. menu: list of labels without links ("Menu", "Close menu", each with an icon image),
+ *      then the main link list (nested lists become the second layer)
  *   3. extra links (Sign in, Legal)
- *   4. tools: search link (href = form action, text = placeholder) + quick action icon links
+ *   4. tools: search link with icon (href = form action, text = placeholder) + quick action
+ *      icon links (links without text)
+ * Labels and links sit in lists: the AEM conversion empties paragraph links that hold images.
  *   5. languages: one link per language
  *   6. breadcrumb start: links placed before the page trail (e.g. Home, Models)
  */
@@ -34,9 +36,23 @@ function icon(img, extraClass = '') {
   return span;
 }
 
-/** label paragraph of the menu section: its text and its icon image */
-function labelOf(p) {
-  return { text: p ? p.textContent.trim() : '', img: p && p.querySelector('img') };
+/**
+ * Labels of the menu section ("Menu", "Close menu"): list items or paragraphs without links.
+ * An icon is taken from the label itself or, when the conversion split text and image into
+ * separate paragraphs, from the image-only node at the same position.
+ */
+function labelsOf(section) {
+  if (!section) return [];
+  const nodes = [...section.querySelectorAll(':scope > ul > li, :scope > p')]
+    .filter((n) => !n.querySelector('a'));
+  const texts = nodes.filter((n) => n.textContent.trim());
+  const imgs = nodes.filter((n) => !n.textContent.trim()).map((n) => n.querySelector('img')).filter(Boolean);
+  return texts.map((n, i) => ({ text: n.textContent.trim(), img: n.querySelector('img') || imgs[i] }));
+}
+
+/** links of a section with or without visible text */
+function linksOf(section, withText) {
+  return section ? [...section.querySelectorAll('a')].filter((a) => !!a.textContent.trim() === withText) : [];
 }
 
 /** two-letter language of the current page, taken from the language root in the path */
@@ -46,7 +62,7 @@ function pageLanguage() {
 }
 
 function buildSearch(section) {
-  const link = section && section.querySelector(':scope > p a');
+  const [link] = linksOf(section, true);
   if (!link) return null;
   const placeholder = link.textContent.trim();
   const img = link.querySelector('img');
@@ -163,8 +179,7 @@ export default async function decorate(block, fragment) {
   const [brandSection, menuSection, extraSection, toolsSection, langSection, crumbSection] = [
     ...fragment.children,
   ];
-  const labels = menuSection ? [...menuSection.querySelectorAll(':scope > p')] : [];
-  const [menuLabel, closeLabel] = labels.map(labelOf);
+  const [menuLabel, closeLabel] = labelsOf(menuSection);
 
   const nav = el('nav', { class: 'acn', 'aria-label': 'Main navigation' });
   const bar = el('div', { class: 'acn-bar' });
@@ -219,7 +234,8 @@ export default async function decorate(block, fragment) {
     root.classList.remove('has-sub-open');
   };
 
-  const mainList = menuSection && menuSection.querySelector(':scope > ul');
+  const mainList = menuSection && [...menuSection.querySelectorAll(':scope > ul')]
+    .find((ul) => ul.querySelector('a'));
   const links = mainList ? buildLinkList(mainList, (a, sub) => {
     // chevron and back arrow are design icons (icons/), not fragment content
     a.append(el('span', { class: 'acn-icon acn-icon-forward', 'aria-hidden': 'true' }));
@@ -256,14 +272,13 @@ export default async function decorate(block, fragment) {
 
   const extra = extraSection && extraSection.querySelector('ul');
   const bottom = el('div', { class: 'acn-bottom' });
-  const quick = toolsSection && toolsSection.querySelector(':scope > ul');
-  if (quick) {
+  // quick actions: the icon-only links of the tools section
+  const quick = linksOf(toolsSection, false);
+  if (quick.length) {
     const quickList = el('ul', { class: 'acn-quick' });
-    [...quick.children].forEach((li) => {
-      const link = li.querySelector('a');
-      if (!link) return;
+    quick.forEach((link) => {
       const img = link.querySelector('img');
-      quickList.append(el('li', {}, el('a', { class: 'acn-pill acn-icon-button', href: link.href, 'aria-label': (img && img.alt) || link.textContent.trim() }, icon(img))));
+      quickList.append(el('li', {}, el('a', { class: 'acn-pill acn-icon-button', href: link.href, 'aria-label': (img && img.alt) || link.title || link.href }, icon(img))));
     });
     bottom.append(quickList);
   }

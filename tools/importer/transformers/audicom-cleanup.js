@@ -289,6 +289,14 @@ export default function transform(hookName, element, payload) {
       el.append(p);
     });
 
+    // key visual: the image is wrapped in a link to the audi.com image detail page; the AEM
+    // conversion turns an image-only link into an empty button and drops the image, so keep
+    // the image without the link
+    element.querySelectorAll('.page-item--image a').forEach((a) => {
+      if (a.textContent.trim() || !a.querySelector('img')) return;
+      a.replaceWith(...a.childNodes);
+    });
+
     mergeIntoHeadlineRows(element);
     resolveImages(element);
     rewriteLinks(element);

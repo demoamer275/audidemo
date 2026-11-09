@@ -879,6 +879,10 @@ var CustomImportScript = (() => {
         while (el.firstChild) p.append(el.firstChild);
         el.append(p);
       });
+      element.querySelectorAll(".page-item--image a").forEach((a) => {
+        if (a.textContent.trim() || !a.querySelector("img")) return;
+        a.replaceWith(...a.childNodes);
+      });
       mergeIntoHeadlineRows(element);
       resolveImages(element);
       rewriteLinks(element);
