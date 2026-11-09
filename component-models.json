@@ -191,6 +191,32 @@
     ]
   },
   {
+    "id": "cards-gallery-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image (photo or video poster)",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (category label, title linked to the detail or video page)",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "cards-image-overlay-card",
     "fields": [
       {
@@ -252,6 +278,32 @@
         "valueType": "string",
         "name": "disclaimer",
         "label": "Verbrauchs- und Emissionsangaben",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-list-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text (meta line, linked heading, optional description)",
         "value": ""
       }
     ]
@@ -565,6 +617,25 @@
     ]
   },
   {
+    "id": "columns-panels",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "columns",
+        "value": "",
+        "label": "Columns"
+      },
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "rows",
+        "value": "",
+        "label": "Rows"
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {
@@ -692,6 +763,44 @@
         "valueType": "string",
         "name": "buttons",
         "label": "Buttons (Liste, ein Eintrag pro Button) oder Links",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "table-datasheet",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "value": "",
+        "label": "Options",
+        "description": "Header row: the first row is the column header row (summary layout with Data sheet column)",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Header row",
+            "value": "header"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table-datasheet-row",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label (motorization name and consumption, or spec label)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "value",
+        "label": "Value (data sheet Download link, or spec value)",
         "value": ""
       }
     ]

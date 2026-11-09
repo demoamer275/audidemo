@@ -19,7 +19,21 @@
  *
  * Row per slide (model carousel-cards-slide): image | video | content_title + content_text
  * Media URLs are NOT rewritten here (the audi-dam-assets transformer does that).
+ *
+ * audi.com variant (media-release slider, e.g. /en/audi-q5-59), detected by .teaser-card:
+ * Source: .page-list.-teaser > .page-list--items (.splide)
+ *   .splide__slide (div or li; .splide__slide--clone skipped) .teaser-card -> one slide (row)
+ *     .teaser-card--image img                       -> image (src kept as resolved by
+ *                                                      audicom-cleanup; badge overlay dropped)
+ *     .teaser-card--tags .tag ("Archived content")  -> content_text, first paragraph
+ *     .teaser-card--meta .meta--item (date, category) -> content_text, "date · category"
+ *     .teaser-card--title a                         -> content_text, <h3> linked to the release
+ *   The linked title goes into the richtext content_text (content_title is a plain text
+ *   field and would drop the link). Video cell is empty. The list title (.page-list--title)
+ *   sits outside the block element and stays default content.
  */
+
+const AUDICOM_ORIGIN = 'https://www.audi.com';
 
 const PLACEHOLDER_RE = /\/PH-[^/]*\.(jpe?g|png|webp)$/i;
 
@@ -116,7 +130,85 @@ function videoUrlOf(data) {
   return '';
 }
 
+function absolutizeAudiCom(href) {
+  const h = (href || '').trim();
+  if (!h || h.startsWith('#')) return '';
+  try { return new URL(h, AUDICOM_ORIGIN).href; } catch (e) { return h; }
+}
+
+/** audi.com .teaser-card slide -> [image, video (empty), content_text]. */
+function buildAudiComSlide(card, document) {
+  let imageCell = '';
+  const img = card.querySelector('.teaser-card--image img') || card.querySelector('img');
+  const src = img ? (img.getAttribute('src') || '').trim() : '';
+  if (src) {
+    const out = document.createElement('img');
+    out.setAttribute('src', src);
+    out.setAttribute('alt', cleanText(img.getAttribute('alt')));
+    imageCell = hinted(document, 'image', [out]);
+  }
+
+  const textNodes = [];
+  [...card.querySelectorAll('.teaser-card--tags .tag')]
+    .map((t) => cleanText(t.textContent)).filter(Boolean)
+    .forEach((t) => {
+      const p = document.createElement('p');
+      p.textContent = t;
+      textNodes.push(p);
+    });
+  const meta = [...card.querySelectorAll('.teaser-card--meta .meta--item')]
+    .map((m) => cleanText(m.textContent)).filter(Boolean);
+  if (meta.length) {
+    const p = document.createElement('p');
+    p.textContent = meta.join(' · ');
+    textNodes.push(p);
+  }
+  const titleEl = card.querySelector('.teaser-card--title');
+  const title = cleanText(titleEl ? titleEl.textContent : '');
+  if (title) {
+    const link = (titleEl.querySelector('a[href]')) || card.querySelector('.teaser-card--image a[href]');
+    const href = link ? absolutizeAudiCom(link.getAttribute('href')) : '';
+    const h3 = document.createElement('h3');
+    if (href) {
+      const a = document.createElement('a');
+      a.setAttribute('href', href);
+      a.textContent = title;
+      h3.appendChild(a);
+    } else {
+      h3.textContent = title;
+    }
+    textNodes.push(h3);
+  }
+  const contentCell = textNodes.length ? hinted(document, 'content_text', textNodes) : '';
+
+  if (!imageCell && !contentCell) return null;
+  return [imageCell, '', contentCell];
+}
+
 export default function parse(element, { document }) {
+  const teaserCards = element.querySelectorAll('.teaser-card');
+  if (teaserCards.length) {
+    const cells = [];
+    [...element.querySelectorAll('.splide__slide')]
+      .filter((slide) => !slide.classList.contains('splide__slide--clone'))
+      .map((slide) => slide.querySelector('.teaser-card'))
+      .filter(Boolean)
+      .forEach((card) => {
+        const row = buildAudiComSlide(card, document);
+        if (row) cells.push(row);
+      });
+    // slider markup without splide slides: take the cards directly
+    if (!cells.length) {
+      [...teaserCards].forEach((card) => {
+        const row = buildAudiComSlide(card, document);
+        if (row) cells.push(row);
+      });
+    }
+    const block = WebImporter.Blocks.createBlock(document, { name: 'carousel-cards', cells });
+    element.replaceWith(block);
+    return;
+  }
+
   const slideData = readSlideData(element);
   const slides = [...element.querySelectorAll('li.splide__slide')]
     .filter((li) => !li.classList.contains('splide__slide--clone'));

@@ -77,7 +77,11 @@
         "model-filter",
         "cards-carline",
         "carline-slider",
-        "cards-model"
+        "cards-model",
+        "cards-list",
+        "columns-panels",
+        "cards-gallery",
+        "table-datasheet"
       ]
     }
   ]

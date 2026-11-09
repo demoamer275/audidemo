@@ -2,14 +2,31 @@
 const isDesktop = window.matchMedia('(width >= 900px)');
 
 /**
+ * Language roots with their own footer fragment and design (module footer-<design>.js).
+ * Pages outside these roots use the default (audi.de) footer at the site root.
+ */
+const LOCALE_FOOTERS = [{
+  pattern: /^\/(content\/)?master\/en(\/|$)/,
+  paths: ['/content/master/en/footer.plain.html', '/master/en/footer.plain.html'],
+  design: 'audicom',
+}];
+
+/**
  * Fetches the footer fragment. Metadata-independent: /content first (local preview),
  * then the site root (Edge Delivery). Relative image paths are resolved against
  * the fragment URL so they work from any page depth.
+ * @param {object} [locale] entry of LOCALE_FOOTERS for pages under a language root
  * @returns {Promise<HTMLElement|null>} container holding the fragment sections
  */
-async function fetchFooter() {
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) resp = await fetch('/footer.plain.html');
+async function fetchFooter(locale) {
+  let resp;
+  if (locale) {
+    resp = await fetch(locale.paths[0]);
+    if (!resp.ok) resp = await fetch(locale.paths[1]);
+  } else {
+    resp = await fetch('/content/footer.plain.html');
+    if (!resp.ok) resp = await fetch('/footer.plain.html');
+  }
   if (!resp.ok) return null;
   const container = document.createElement('div');
   container.innerHTML = await resp.text();
@@ -108,9 +125,15 @@ function decorateLegal(section) {
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  const fragment = await fetchFooter();
+  const locale = LOCALE_FOOTERS.find((l) => l.pattern.test(window.location.pathname));
+  const fragment = await fetchFooter(locale);
   block.textContent = '';
   if (!fragment) return;
+  if (locale) {
+    const { default: decorateLocale } = await import(`./footer-${locale.design}.js`);
+    await decorateLocale(block, fragment);
+    return;
+  }
 
   const footer = document.createElement('div');
   footer.className = 'footer-inner';

@@ -1,0 +1,37 @@
+{
+  "variantName": "cards-gallery",
+  "baseBlock": "cards",
+  "canonicalModel": "collection",
+  "visualCharacteristics": {
+    "purpose": "Media grid of image and video tiles from an audi.com model gallery (images gallery, videos gallery); each tile links to its audi.com detail or video page",
+    "layout": "1 / 2 / 4 columns (mobile / 600px / 900px)",
+    "image": "4:3 cropped photo, illustration, sketch or video poster",
+    "extras": "play indicator on tiles whose link points to a /videos/ page; the whole tile is clickable through the title link; no category tabs, no Load more, videos are not embedded"
+  },
+  "contentPattern": {
+    "structure": "one row per gallery item. cell 1: image (+ alt), a photo or the video poster; cell 2: richtext with the category label paragraph (Photos, Illustrations, Sketches, Footage, Animation, Trailer) and a paragraph with the title link to the audi.com detail page (/en/images/detail/...) or video page (/en/videos/video/...). Every part optional.",
+    "itemCount": "first 8 images or first 4 videos per gallery (user decision)"
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": {
+    "pagesUsing": [
+      "/en/audi-q5-suv-12871"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-11-09",
+    "instances": [
+      {
+        "url": "https://www.audi.com/en/audi-q5-suv-12871",
+        "section": "Images",
+        "items": 8
+      },
+      {
+        "url": "https://www.audi.com/en/audi-q5-suv-12871",
+        "section": "Videos",
+        "items": 4
+      }
+    ]
+  },
+  "reuseGuidance": "Use for image/video gallery grids whose tiles link to a detail page; for teasers with date and description use cards-list, for purchasable model tiles use cards-model."
+}
