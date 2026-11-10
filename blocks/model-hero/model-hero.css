@@ -1,0 +1,16 @@
+main .model-hero-wrapper {
+  max-width: 1100px;
+}
+
+main .model-hero {
+  text-align: center;
+}
+
+main .model-hero picture {
+  display: block;
+}
+
+main .model-hero img {
+  width: 100%;
+  height: auto;
+}

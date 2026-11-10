@@ -81,7 +81,8 @@
         "cards-list",
         "columns-panels",
         "cards-gallery",
-        "table-datasheet"
+        "table-datasheet",
+        "model-hero"
       ]
     }
   ]

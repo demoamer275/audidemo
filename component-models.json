@@ -768,6 +768,32 @@
     ]
   },
   {
+    "id": "model-hero",
+    "fields": [
+      {
+        "component": "aem-content-fragment",
+        "valueType": "string",
+        "name": "reference",
+        "label": "Car Model Content Fragment",
+        "validation": {
+          "rootPath": "/content/dam/audidemo/models-cf"
+        }
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Link Text"
+      }
+    ]
+  },
+  {
     "id": "table-datasheet",
     "fields": [
       {
