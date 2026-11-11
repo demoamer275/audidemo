@@ -14,3 +14,8 @@ main .model-hero img {
   width: 100%;
   height: auto;
 }
+
+main .model-hero p:first-of-type {
+  border-radius: 20px;
+  overflow: hidden;
+}

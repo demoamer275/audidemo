@@ -54,7 +54,7 @@ export default async function decorate(block) {
   }
 
   // eslint-disable-next-line no-underscore-dangle
-  const imgUrl = item.image?._publishUrl;
+  const imgUrl = item.heroImage?._publishUrl;
   if (imgUrl) {
     const p = document.createElement('p');
     const picture = document.createElement('picture');
