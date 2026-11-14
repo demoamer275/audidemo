@@ -3,14 +3,12 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 const GRAPHQL_ENDPOINT = 'https://publish-p182083-e1919654.adobeaemcloud.com/graphql/execute.json/audidemo/getcarmodel';
 
-const ACTIONS = [
-  { label: 'Jetzt konfigurieren', href: '#', variant: 'primary' },
-  { label: 'Mehr erfahren', href: '#', variant: 'secondary' },
-];
+const VARIANTS = ['primary', 'secondary'];
 
-function getCfPath(block) {
-  const a = block.querySelector('a[href]');
-  const raw = (a ? a.getAttribute('href') : block.textContent).trim();
+function getCfPath(cell) {
+  if (!cell) return '';
+  const a = cell.querySelector('a[href]');
+  const raw = (a ? a.getAttribute('href') : cell.textContent).trim();
   if (!raw) return '';
   try {
     return new URL(raw, window.location.origin).pathname.replace(/\.html$/, '');
@@ -59,16 +57,17 @@ function buildVideo(url, reducedMotion) {
   return video;
 }
 
-function buildActions() {
+function buildActions(labels) {
   const group = document.createElement('div');
   group.className = 'hero-video-actions';
-  ACTIONS.forEach(({ label, href, variant }) => {
+  labels.forEach((label, i) => {
+    if (!label) return;
     const p = document.createElement('p');
     p.className = 'hero-video-cta';
     const a = document.createElement('a');
-    a.href = href;
+    a.href = '#';
     a.textContent = label;
-    a.className = `button ${variant}`;
+    a.className = `button ${VARIANTS[i]}`;
     p.append(a);
     group.append(p);
   });
@@ -77,18 +76,20 @@ function buildActions() {
 
 /**
  * loads and decorates the block
- * Single authored row: reference to a car model content fragment.
+ * Rows: content fragment reference | primary button text | secondary button text.
  * @param {Element} block The block element
  */
 export default async function decorate(block) {
-  const path = getCfPath(block);
+  const [refRow, ...labelRows] = [...block.children];
+  const path = getCfPath(refRow?.firstElementChild);
+  const labels = labelRows.slice(0, 2).map((row) => row.textContent.trim());
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const media = document.createElement('div');
   media.className = 'hero-video-media';
   const content = document.createElement('div');
   content.className = 'hero-video-content';
-  moveInstrumentation(block.firstElementChild, content);
+  moveInstrumentation(refRow, content);
   block.replaceChildren();
 
   if (!path) return;
@@ -128,7 +129,8 @@ export default async function decorate(block) {
   const text = document.createElement('div');
   text.className = 'hero-video-text';
   text.innerHTML = item.description?.html || '';
-  text.append(buildActions());
+  const actions = buildActions(labels);
+  if (actions.childElementCount) text.append(actions);
   content.append(text);
 
   if (item.stats?.html) {

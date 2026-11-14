@@ -30,6 +30,20 @@
           }
         },
         {
+          "component": "text",
+          "valueType": "string",
+          "name": "primaryLabel",
+          "label": "Button 1 Text (primär)",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "secondaryLabel",
+          "label": "Button 2 Text (sekundär)",
+          "value": ""
+        },
+        {
           "component": "select",
           "name": "classes",
           "value": "",
