@@ -1,30 +1,43 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
-import { moveInstrumentation, getDamAssetUrl } from '../../scripts/scripts.js';
+/* eslint-disable no-underscore-dangle */
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
-const VIDEO_PATTERN = /\.(mp4|webm|mov|m4v)(\?|#|$)/i;
+const GRAPHQL_ENDPOINT = 'https://publish-p182083-e1919654.adobeaemcloud.com/graphql/execute.json/audidemo/getcarmodel';
 
-/**
- * Returns the video link of a cell when the cell only holds a link to a video file.
- * @param {Element} cell
- * @returns {HTMLAnchorElement|null}
- */
-function getVideoLink(cell) {
-  const links = [...cell.querySelectorAll('a[href]')];
-  if (links.length !== 1 || cell.querySelector('picture, h1, h2, h3')) return null;
-  return VIDEO_PATTERN.test(links[0].getAttribute('href')) ? links[0] : null;
+const ACTIONS = [
+  { label: 'Jetzt konfigurieren', href: '#', variant: 'primary' },
+  { label: 'Mehr erfahren', href: '#', variant: 'secondary' },
+];
+
+function getCfPath(block) {
+  const a = block.querySelector('a[href]');
+  const raw = (a ? a.getAttribute('href') : block.textContent).trim();
+  if (!raw) return '';
+  try {
+    return new URL(raw, window.location.origin).pathname.replace(/\.html$/, '');
+  } catch {
+    return raw;
+  }
 }
 
-function isPictureOnly(cell) {
-  return cell.querySelector('picture') && cell.textContent.trim() === '';
+async function fetchCarModel(path) {
+  const resp = await fetch(`${GRAPHQL_ENDPOINT};path=${path};variation=master`);
+  if (!resp.ok) throw new Error(`GraphQL request failed: ${resp.status}`);
+  const json = await resp.json();
+  return json?.data?.carModelByPath?.item;
 }
 
-/**
- * Builds the background video element from an authored link.
- * @param {HTMLAnchorElement} link
- * @param {boolean} reducedMotion
- * @returns {HTMLVideoElement}
- */
-function buildVideo(link, reducedMotion) {
+function buildPoster(url, alt) {
+  const picture = document.createElement('picture');
+  const img = document.createElement('img');
+  img.src = url;
+  img.alt = alt;
+  img.loading = 'eager';
+  img.fetchPriority = 'high';
+  picture.append(img);
+  return picture;
+}
+
+function buildVideo(url, reducedMotion) {
   const video = document.createElement('video');
   video.className = 'hero-video-video';
   video.muted = true;
@@ -40,97 +53,70 @@ function buildVideo(link, reducedMotion) {
     video.setAttribute('autoplay', '');
   }
   const source = document.createElement('source');
-  source.src = getDamAssetUrl(link.href);
+  source.src = url;
   source.type = 'video/mp4';
   video.append(source);
-  moveInstrumentation(link, video);
   return video;
 }
 
-/**
- * Groups consecutive link-only paragraphs into a CTA container.
- * @param {Element} content
- */
-function decorateCtas(content) {
-  const ctaParagraphs = [...content.querySelectorAll('p')].filter((p) => {
-    const links = p.querySelectorAll('a[href]');
-    if (!links.length || p.querySelector('img')) return false;
-    const linkText = [...links].map((a) => a.textContent).join('').replace(/\s+/g, '');
-    return linkText === p.textContent.replace(/\s+/g, '');
-  });
-  if (!ctaParagraphs.length) return;
-
-  let group = null;
-  ctaParagraphs.forEach((p) => {
-    p.querySelectorAll('a[href]').forEach((a) => {
-      a.classList.add('button');
-      if (!a.classList.contains('secondary') && !a.classList.contains('accent')) {
-        a.classList.add('primary');
-      }
-    });
-    p.classList.add('hero-video-cta');
-    const prev = p.previousElementSibling;
-    if (!group || prev !== group) {
-      group = document.createElement('div');
-      group.className = 'hero-video-actions';
-      p.before(group);
-    }
+function buildActions() {
+  const group = document.createElement('div');
+  group.className = 'hero-video-actions';
+  ACTIONS.forEach(({ label, href, variant }) => {
+    const p = document.createElement('p');
+    p.className = 'hero-video-cta';
+    const a = document.createElement('a');
+    a.href = href;
+    a.textContent = label;
+    a.className = `button ${variant}`;
+    p.append(a);
     group.append(p);
   });
+  return group;
 }
 
 /**
  * loads and decorates the block
- * Expected rows (one cell each): video link | poster image | text (h1, price, CTAs) | disclaimer.
- * Rows are detected by content, so missing or reordered rows degrade gracefully.
+ * Single authored row: reference to a car model content fragment.
  * @param {Element} block The block element
  */
-export default function decorate(block) {
+export default async function decorate(block) {
+  const path = getCfPath(block);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const media = document.createElement('div');
   media.className = 'hero-video-media';
   const content = document.createElement('div');
   content.className = 'hero-video-content';
+  moveInstrumentation(block.firstElementChild, content);
+  block.replaceChildren();
 
-  let videoLink = null;
-  let pictureCell = null;
-  const textCells = [];
+  if (!path) return;
 
-  [...block.children].forEach((row) => {
-    [...row.children].forEach((cell) => {
-      if (!videoLink && getVideoLink(cell)) {
-        videoLink = getVideoLink(cell);
-      } else if (!pictureCell && isPictureOnly(cell)) {
-        pictureCell = cell;
-      } else if (cell.textContent.trim() !== '' || cell.querySelector('img')) {
-        textCells.push(cell);
-      }
-    });
-  });
+  let item;
+  try {
+    item = await fetchCarModel(path);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('hero-video:', e);
+  }
+  if (!item) return;
 
-  if (pictureCell) {
-    const picture = pictureCell.querySelector('picture');
-    const img = picture.querySelector('img');
-    const optimized = createOptimizedPicture(img.src, img.alt, true, [
-      { media: '(min-width: 900px)', width: '2000' },
-      { width: '900' },
-    ]);
-    moveInstrumentation(img, optimized.querySelector('img'));
-    moveInstrumentation(pictureCell, media);
-    optimized.classList.add('hero-video-poster');
-    media.append(optimized);
+  const posterUrl = item.heroImage?._publishUrl;
+  if (posterUrl) {
+    const poster = buildPoster(posterUrl, item.title || '');
+    poster.classList.add('hero-video-poster');
+    media.append(poster);
   }
 
-  if (videoLink) {
-    const video = buildVideo(videoLink, reducedMotion);
+  const videoUrl = item.heroVideo?._publishUrl;
+  if (videoUrl) {
+    const video = buildVideo(videoUrl, reducedMotion);
     media.append(video);
     if (!reducedMotion) {
       video.addEventListener('playing', () => block.classList.add('is-playing'), { once: true });
-      const playPromise = video.play();
-      if (playPromise) playPromise.catch(() => { /* autoplay blocked: poster stays visible */ });
-    } else if (!pictureCell) {
-      // no poster available: show the first frame instead of an empty stage
+      video.play()?.catch(() => { /* autoplay blocked: poster stays visible */ });
+    } else if (!posterUrl) {
       video.preload = 'metadata';
     }
     window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
@@ -139,20 +125,18 @@ export default function decorate(block) {
     });
   }
 
-  textCells.forEach((cell, index) => {
-    const part = document.createElement('div');
-    moveInstrumentation(cell, part);
-    while (cell.firstChild) part.append(cell.firstChild);
-    const isDisclaimer = index === textCells.length - 1 && index > 0
-      && !part.querySelector('h1, h2, h3, a.button');
-    part.className = isDisclaimer ? 'hero-video-disclaimer' : 'hero-video-text';
-    content.append(part);
-  });
+  const text = document.createElement('div');
+  text.className = 'hero-video-text';
+  text.innerHTML = item.description?.html || '';
+  text.append(buildActions());
+  content.append(text);
 
-  content.querySelectorAll('.hero-video-text').forEach(decorateCtas);
+  if (item.stats?.html) {
+    const disclaimer = document.createElement('div');
+    disclaimer.className = 'hero-video-disclaimer';
+    disclaimer.innerHTML = item.stats.html;
+    content.append(disclaimer);
+  }
 
-  const children = [];
-  if (media.childElementCount) children.push(media);
-  if (content.childElementCount) children.push(content);
-  block.replaceChildren(...children);
+  block.replaceChildren(...[media, content].filter((el) => el.childElementCount));
 }
